@@ -12,13 +12,17 @@
 <body>
   <!-- Navigation -->
   <nav>
-    <ul>
-      <li><a href="index.html#skills">Skills</a></li>
-      <li><a href="index.html#experience">Experience</a></li>
-      <li><a href="index.html#education">Education</a></li>
-      <li><a href="projects.html" class="active">Projects</a></li>
-      <li><a href="index.html#about">About</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
+    <button class="nav-toggle" onclick="toggleMobileMenu()">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+    <ul class="nav-menu">
+      <li><a href="index.html#about" onclick="closeMobileMenu()">About</a></li>
+      <li><a href="index.html#skills" onclick="closeMobileMenu()">Skills</a></li>
+      <li><a href="index.html#experience" onclick="closeMobileMenu()">Experience</a></li>
+      <li><a href="index.html#education" onclick="closeMobileMenu()">Education</a></li>
+      <li><a href="projects.html" class="active" onclick="closeMobileMenu()">Projects</a></li>
     </ul>
   </nav>
 

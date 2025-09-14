@@ -10,12 +10,17 @@
 </head>
 <body>
   <nav>
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#projects">Projects</a></li>
+    <button class="nav-toggle" onclick="toggleMobileMenu()">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+    <ul class="nav-menu">
+      <li><a href="#about" onclick="closeMobileMenu()">About</a></li>
+      <li><a href="#skills" onclick="closeMobileMenu()">Skills</a></li>
+      <li><a href="#experience" onclick="closeMobileMenu()">Experience</a></li>
+      <li><a href="#education" onclick="closeMobileMenu()">Education</a></li>
+      <li><a href="#projects" onclick="closeMobileMenu()">Projects</a></li>
     </ul>
   </nav>
 
@@ -31,7 +36,7 @@
       </div>
       
       <div class="contact-links">
-        <a href="mailto:ahmed.babay.personal@gmail.com" class="contact-link" title="Email">
+        <a href="#" onclick="window.open('https://mail.google.com/mail/?view=cm&to=ahmed.babay.personal@gmail.com&su=Job%20Opportunity%20-%20Contact%20from%20CV%20Website', '_blank'); return false;" class="contact-link" title="Email">
           <i class="fas fa-envelope"></i>
           <span>ahmed.babay.personal@gmail.com</span>
         </a>
