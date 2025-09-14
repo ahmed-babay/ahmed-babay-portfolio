@@ -640,3 +640,47 @@ body.dark-mode .back-link {
 body.dark-mode .back-link:hover {
   background: linear-gradient(135deg, #8b7355, #6b5b3f);
 }
+
+/* Mobile Navigation Overrides for Projects Page */
+@media (max-width: 768px) {
+  .nav-toggle {
+    z-index: 1001;
+  }
+  
+  .nav-menu.active {
+    z-index: 1000;
+  }
+  
+  .projects-header {
+    padding-top: 80px; /* Account for fixed nav menu */
+  }
+}
+
+/* Active menu item styling for projects page */
+.nav-menu a.active {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #d1b89d, #b59e7c) !important;
+  border-radius: 6px;
+  padding: 8px 16px;
+  margin: 0 4px;
+  box-shadow: 0 2px 8px rgba(209, 184, 157, 0.3);
+  transform: translateY(-1px);
+  transition: all 0.3s ease;
+}
+
+.nav-menu a.active:hover {
+  background: linear-gradient(135deg, #b59e7c, #9d8660) !important;
+  box-shadow: 0 4px 12px rgba(209, 184, 157, 0.4);
+  transform: translateY(-2px);
+}
+
+body.dark-mode .nav-menu a.active {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #d1b89d, #b59e7c) !important;
+  box-shadow: 0 2px 8px rgba(209, 184, 157, 0.4);
+}
+
+body.dark-mode .nav-menu a.active:hover {
+  background: linear-gradient(135deg, #e2c5a0, #d1b89d) !important;
+  box-shadow: 0 4px 12px rgba(209, 184, 157, 0.5);
+}

@@ -238,3 +238,31 @@ window.addEventListener("scroll", () => {
     }
   }
 });
+
+// Mobile Navigation Functions
+function toggleMobileMenu() {
+  const navMenu = document.querySelector('.nav-menu');
+  const navToggle = document.querySelector('.nav-toggle');
+  
+  navMenu.classList.toggle('active');
+  navToggle.classList.toggle('active');
+}
+
+function closeMobileMenu() {
+  const navMenu = document.querySelector('.nav-menu');
+  const navToggle = document.querySelector('.nav-toggle');
+  
+  navMenu.classList.remove('active');
+  navToggle.classList.remove('active');
+}
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', function(event) {
+  const navMenu = document.querySelector('.nav-menu');
+  const navToggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('nav');
+  
+  if (!nav.contains(event.target) && navMenu.classList.contains('active')) {
+    closeMobileMenu();
+  }
+});
