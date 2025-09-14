@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ahmed Babay - Projects</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="projects.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="index.html#skills">Skills</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="index.html#education">Education</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <header class="projects-header">
+    <div class="header-content">
+      <div class="back-button">
+        <a href="index.html" class="back-link">
+          <i class="fas fa-arrow-left"></i>
+          <span>Back to CV</span>
+        </a>
+      </div>
+      
+      <div class="projects-title">
+        <h1>My Projects</h1>
+        <p>Exploring the intersection of creativity and technology</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Projects Section -->
+  <section class="projects-container">
+
+    <div class="project-card" data-aos="fade-up" data-aos-delay="400">
+      <div class="project-header">
+        <h2>HealthFlow</h2>
+        <div class="project-links">
+          <a href="https://github.com/ahmed-babay/patient-service" target="_blank" class="github-link">
+            <i class="fab fa-github"></i>
+            View Code
+          </a>
+        </div>
+      </div>
+      
+      <div class="project-content">
+        <div class="project-left">
+          <div class="project-description">
+            <p>Developed a production-ready Spring Boot microservice for hospital and healthcare management systems with JWT authentication, Redis caching, and comprehensive medical data validation for patient management. Implemented enterprise-grade security with role-based access control, intelligent performance optimization through cache strategies, and complex data modeling for medical records, prescriptions, and allergies. Architected for high-frequency healthcare workflows with comprehensive API testing, custom validators ensuring medical safety compliance, and scalable architecture optimized for mission-critical healthcare operations.</p>
+          </div>
+          
+          <div class="project-tech">
+            <h3>Technologies Used</h3>
+            <div class="tech-bubbles">
+              <div class="tech-bubble">
+                <div class="tech-icon">🚀</div>
+                <div class="tech-name">Spring Boot</div>
+              </div>
+              <div class="tech-bubble">
+                <div class="tech-icon">🔐</div>
+                <div class="tech-name">JWT</div>
+              </div>
+              <div class="tech-bubble">
+                <div class="tech-icon">🔴</div>
+                <div class="tech-name">Redis</div>
+              </div>
+              <div class="tech-bubble">
+                <div class="tech-icon">🛡️</div>
+                <div class="tech-name">Enterprise Security</div>
+              </div>
+              <div class="tech-bubble">
+                <div class="tech-icon">⚡</div>
+                <div class="tech-name">Performance Optimization</div>
+              </div>
+              <div class="tech-bubble">
+                <div class="tech-icon">🏥</div>
+                <div class="tech-name">Healthcare APIs</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-snapshots">
+          <h3>Project Snapshots</h3>
+          <div class="snapshot-carousel">
+            <div class="snapshot-container">
+              <div class="snapshot active">
+                <img src="./metadata/HealthFlow1.png" alt="Task Dashboard" />                
+              </div>
+              <div class="snapshot">
+                <img src="./metadata/HealthFlow2.png" alt="Kanban Board" />
+              </div>
+              <div class="snapshot">
+                <img src="./metadata/HealthFlow3.png" alt="Reports View" />
+              </div>
+            </div>
+            <div class="carousel-controls">
+              <button class="carousel-btn prev-btn" onclick="changeSnapshot(this, -1)">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <div class="carousel-indicators">
+                <span class="indicator active" onclick="goToSnapshot(this, 0)"></span>
+                <span class="indicator" onclick="goToSnapshot(this, 1)"></span>
+                <span class="indicator" onclick="goToSnapshot(this, 2)"></span>
+              </div>
+              <button class="carousel-btn next-btn" onclick="changeSnapshot(this, 1)">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- Project 1 -->
+    <div class="project-card" data-aos="fade-up">
+      <div class="project-header">
+        <h2>Modern AI Chatbot</h2>
+        <div class="project-links">
+          <a href="https://github.com/ahmed-babay/chat-bot" target="_blank" class="github-link">
+            <i class="fab fa-github"></i>
+            View Code
+          </a>
+        </div>
+      </div>
+      
+      <div class="project-content">
+        <div class="project-left">
+          <div class="project-description">
+            <p>Developed a full-stack AI chatbot application integrating Hugging Face's open-source LLM APIs with advanced conversation management. Implemented secure backend architecture using Node.js and Express with CORS and Helmet security middleware. Built responsive React frontend with TypeScript for enhanced code maintainability and Tailwind CSS for modern UI design. Features include persistent message history, real-time communication, and robust error handling.</p>
+          </div>
+          
+          <div class="project-tech">
+            <h3>Technologies Used</h3>
+            <div class="tech-bubbles">
+              <div class="tech-bubble">
+                <div class="tech-icon">⚛️</div>
+                <div class="tech-name">React</div>
+              </div>
+              <div class="tech-bubble">
+                <div class="tech-icon">🟢</div>
+                <div class="tech-name">Node.js</div>
+              </div>
+              <div class="tech-bubble">
+                <div class="tech-icon">🚂</div>
+                <div class="tech-name">Express</div>
+              </div>
+              <div class="tech-bubble">
+                <div class="tech-icon">💎</div>
+                <div class="tech-name">TypeScript</div>
+              </div>
+              <div class="tech-bubble">
+                <div class="tech-icon">🎨</div>
+                <div class="tech-name">Tailwind CSS</div>
+              </div>
+              <div class="tech-bubble">
+                <div class="tech-icon">🤗</div>
+                <div class="tech-name">Huggingface</div>
+              </div>
+              <div class="tech-bubble">
+                <div class="tech-icon">🔒</div>
+                <div class="tech-name">CORS & Helmet</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-snapshots">
+          <h3>Project Snapshots</h3>
+          <div class="snapshot-carousel">
+            <div class="snapshot-container">
+              <div class="snapshot active">
+                <img src="./metadata/AIbot1.png" alt="Screenshot 1" />
+              </div>
+              <div class="snapshot">
+                <img src="./metadata/AIbot2.png" alt="Screenshot 2" />
+              </div>
+            </div>
+            <div class="carousel-controls">
+              <button class="carousel-btn prev-btn" onclick="changeSnapshot(this, -1)">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <div class="carousel-indicators">
+                <span class="indicator active" onclick="goToSnapshot(this, 0)"></span>
+                <span class="indicator" onclick="goToSnapshot(this, 1)"></span>
+              </div>
+              <button class="carousel-btn next-btn" onclick="changeSnapshot(this, 1)">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+      <div class="project-header">
+        <h2>AI Dataset Generator</h2>
+        <div class="project-links">
+          <a href="https://github.com/ahmed-babay/mBERT_Project" target="_blank" class="github-link">
+            <i class="fab fa-github"></i>
+            View Code
+          </a>
+        </div>
+      </div>
+      
+      <div class="project-content">
+        <div class="project-left">
+          <div class="project-description">
+            <p>Engineered an intelligent dataset generation platform leveraging fine-tuned multilingual BERT models for privacy policy analysis. Developed automated web scraping and text segmentation algorithms to process privacy policies at scale. Implemented machine learning pipeline with GPU-accelerated training using Python, resulting in accurate percentage-based classification suggestions. Built interactive Vue.js interface for manual annotation and validation, with automated YML export functionality for seamless dataset integration across research applications.</p>
+          </div>
+          
+          <div class="project-tech">
+            <h3>Technologies Used</h3>
+            <div class="tech-bubbles">
+              <div class="tech-bubble">
+                <div class="tech-icon">🐍</div>
+                <div class="tech-name">Python</div>
+              </div>
+              <div class="tech-bubble">
+                <div class="tech-icon">🚂</div>
+                <div class="tech-name">Express</div>
+              </div>
+              <div class="tech-bubble">
+                <div class="tech-icon">💚</div>
+                <div class="tech-name">Vue.js</div>
+              </div>
+              <div class="tech-bubble">
+                <div class="tech-icon">🤖</div>
+                <div class="tech-name">mBERT</div>
+              </div>
+              <div class="tech-bubble">
+                <div class="tech-icon">🚀</div>
+                <div class="tech-name">GPU Fine-tuning</div>
+              </div>
+              <div class="tech-bubble">
+                <div class="tech-icon">📄</div>
+                <div class="tech-name">YML Dataset</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-snapshots">
+          <h3>Project Snapshots</h3>
+          <div class="snapshot-carousel">
+            <div class="snapshot-container">
+              <div class="snapshot active">
+                <img src="./metadata/mBERT2.png" alt="Screenshot 1" />
+              </div>
+              <div class="snapshot">
+                <img src="./metadata/mBERT1.png" alt="Screenshot 2" />
+              </div>
+              <div class="snapshot">
+                <img src="./metadata/mBERT3.png" alt="Screenshot 3" />
+              </div>
+            </div>
+            <div class="carousel-controls">
+              <button class="carousel-btn prev-btn" onclick="changeSnapshot(this, -1)">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <div class="carousel-indicators">
+                <span class="indicator active" onclick="goToSnapshot(this, 0)"></span>
+                <span class="indicator" onclick="goToSnapshot(this, 1)"></span>
+                <span class="indicator" onclick="goToSnapshot(this, 2)"></span>
+              </div>
+              <button class="carousel-btn next-btn" onclick="changeSnapshot(this, 1)">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+    
+    </div>
+
+    
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© Ahmed Babay – Projects Portfolio</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+    
+    // Carousel functionality for project snapshots
+    function changeSnapshot(button, direction) {
+      const carousel = button.closest('.snapshot-carousel');
+      const container = carousel.querySelector('.snapshot-container');
+      const snapshots = container.querySelectorAll('.snapshot');
+      const indicators = carousel.querySelectorAll('.indicator');
+      
+      // Find current active snapshot
+      let currentIndex = 0;
+      snapshots.forEach((snapshot, index) => {
+        if (snapshot.classList.contains('active')) {
+          currentIndex = index;
+        }
+      });
+      
+      // Calculate new index
+      let newIndex = currentIndex + direction;
+      if (newIndex < 0) newIndex = snapshots.length - 1;
+      if (newIndex >= snapshots.length) newIndex = 0;
+      
+      // Update active states
+      snapshots[currentIndex].classList.remove('active');
+      snapshots[newIndex].classList.add('active');
+      indicators[currentIndex].classList.remove('active');
+      indicators[newIndex].classList.add('active');
+    }
+    
+    function goToSnapshot(indicator, index) {
+      const carousel = indicator.closest('.snapshot-carousel');
+      const container = carousel.querySelector('.snapshot-container');
+      const snapshots = container.querySelectorAll('.snapshot');
+      const indicators = carousel.querySelectorAll('.indicator');
+      
+      // Remove active class from all snapshots and indicators
+      snapshots.forEach(snapshot => snapshot.classList.remove('active'));
+      indicators.forEach(ind => ind.classList.remove('active'));
+      
+      // Add active class to selected snapshot and indicator
+      snapshots[index].classList.add('active');
+      indicator.classList.add('active');
+    }
+    
+    // Auto-advance carousels every 4 seconds
+    function autoAdvanceCarousels() {
+      const carousels = document.querySelectorAll('.snapshot-carousel');
+      carousels.forEach(carousel => {
+        const nextBtn = carousel.querySelector('.next-btn');
+        if (nextBtn) {
+          changeSnapshot(nextBtn, 1);
+        }
+      });
+    }
+    
+    // Start auto-advance after page loads
+    setTimeout(() => {
+      setInterval(autoAdvanceCarousels, 4000);
+    }, 2000);
+  </script>
+</body>
+</html>
+

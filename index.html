@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ahmed Babay - CV</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#projects">Projects</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <div class="header-content">
+      <div class="profile-section">
+        <img src="./metadata/AhmedBabay.jpeg" alt="Ahmed Babay" class="profile-pic" />
+        <div class="profile-info">
+          <h1>Ahmed Babay</h1>
+          <p class="title"><span id="typewriter">Computer Scientist</span></p>
+          <p class="location"><i class="fas fa-map-marker-alt"></i> Darmstadt, Germany</p>
+        </div>
+      </div>
+      
+      <div class="contact-links">
+        <a href="mailto:ahmed.babay.personal@gmail.com" class="contact-link" title="Email">
+          <i class="fas fa-envelope"></i>
+          <span>ahmed.babay.personal@gmail.com</span>
+        </a>
+        <a href="https://www.linkedin.com/in/ahmed-babay-0a6a9b1b1/" target="_blank" class="contact-link" title="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+          <span>LinkedIn</span>
+        </a>
+        <a href="https://github.com/ahmed-babay" target="_blank" class="contact-link" title="GitHub">
+          <i class="fab fa-github"></i>
+          <span>GitHub</span>
+        </a>
+      </div>
+      
+      <div class="download_button">
+        <a href="./metadata/Ahmed_Babay_CV.pdf" download class="btn download-btn">
+          <i class="fas fa-download"></i>
+          Download CV
+        </a>
+      </div>
+      
+      <div class="theme-toggle-container">
+        <button id="theme-toggle" class="theme-toggle-btn" title="Toggle Theme" aria-label="Toggle Theme">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- About Me Section -->
+  <section id="about" data-aos="fade-up">
+    <div class="about-container">
+      <div class="about-content">
+        <h2>About Me</h2>
+        <p>I'm a passionate software engineer who thrives in collaborative environments and believes that the best solutions emerge when great minds work together. As a natural communicator, I enjoy fostering open dialogue within teams, sharing ideas, and creating an atmosphere where creativity can flourish.</p>
+        
+        <p>My colleagues often describe me as approachable and humorous. I believe that a bit of laughter can transform even the most challenging projects into enjoyable experiences. While I love to keep things light, I also understand the importance of taking ownership and responsibility when it matters most.</p>
+        
+        <p>As a leader, I'm committed to guiding teams toward success while ensuring everyone feels heard and valued. I take pride in my ability to step up during critical moments, make difficult decisions, and support my teammates in achieving both individual and collective goals. Whether we're debugging complex code at 2 AM or brainstorming the next big feature, you can count on me to bring both technical expertise and positive energy to the table.</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Skills Section -->
+  <section id="skills" data-aos="fade-up">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-item" data-tooltip="Modern JavaScript (ES6+), frontend frameworks, Node.js backend development, asynchronous programming with Promises and async/await">
+        <span class="skill-icon">💻</span>
+        <span class="skill-name">JavaScript& TypeScript</span>
+      </div>
+      <div class="skill-item" data-tooltip="Data analysis, machine learning, web scraping, automation scripts, scientific computing with NumPy and Pandas">
+        <span class="skill-icon">🐍</span>
+        <span class="skill-name">Python</span>
+      </div>
+      <div class="skill-item" data-tooltip="Component-based UI development, state management with hooks, modern React patterns, responsive web applications">
+        <span class="skill-icon">⚛️</span>
+        <span class="skill-name">React</span>
+      </div>
+      <div class="skill-item" data-tooltip="Server-side JavaScript runtime, Express.js framework, RESTful APIs, real-time applications with Socket.io">
+        <span class="skill-icon">🟢</span>
+        <span class="skill-name">Node.js</span>
+      </div>
+      <div class="skill-item" data-tooltip="Database design, complex queries, data modeling, performance optimization, both relational and NoSQL databases">
+        <span class="skill-icon">🗄️</span>
+        <span class="skill-name">SQL</span>
+      </div>
+      <div class="skill-item" data-tooltip="Responsive web design, CSS Grid and Flexbox, semantic HTML, accessibility standards, modern CSS features">
+        <span class="skill-icon">🎨</span>
+        <span class="skill-name">CSS/HTML</span>
+      </div>
+      <div class="skill-item" data-tooltip="AWS, containerization with Docker, CI/CD pipelines, serverless architecture">
+        <span class="skill-icon">☁️</span>
+        <span class="skill-name">Cloud</span>
+      </div>
+      <div class="skill-item" data-tooltip="Object-oriented programming, enterprise applications, multithreading, JVM ecosystem, Spring framework development">
+        <span class="skill-icon">☕</span>
+        <span class="skill-name">Java</span>
+      </div>
+      <div class="skill-item" data-tooltip="Spring Boot framework, microservices architecture, dependency injection, auto-configuration, production-ready applications">
+        <span class="skill-icon">🚀</span>
+        <span class="skill-name">Spring Boot</span>
+      </div>
+      <div class="skill-item" data-tooltip="Fast web framework for Node.js, RESTful API development, middleware, routing, backend server applications">
+        <span class="skill-icon">🚄</span>
+        <span class="skill-name">Express</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" data-aos="fade-up">
+    <h2>Experience</h2>
+    <div class="job">
+      <h3>Privacy & Security Analyst</h3>
+      <p class="company">Queyella GmbH</p>
+      <p class="period">2023 - 2024</p>
+      <button class="toggle-btn">Show more</button>
+      <div class="job-details" style="display: none;">
+        <p><li>Built a privacy & mobile app analysis tool combining web-scraped privacy policies (NLP) with static analysis
+          and reverse engineering of Android APKs and iOS IPAs to flag trackers, sensitive input flows, permission
+          risks, and user-rights issues.</li>
+          <li> Fine-tuned multi-label ML models for policy and risk categorization; integrated outputs into consolidated
+          vulnerability reports.</li>
+          <li> Validated with strong F1-score (“0.87”) in testing and generated inbound interest from multiple German
+          companies (demos and POCs delivered).</li></p>
+      </div>
+    </div>
+    <div class="job">
+      <h3>Data Collection & Software Developer</h3>
+      <p class="company">Software Technology Group (TU Darmstadt)</p>
+      <p class="period">2024 - 2025</p>
+      <button class="toggle-btn">Show more</button>
+      <div class="job-details" style="display: none;">
+        <p><li> Built data pipelines to scrape and curate training datasets using Python, regex, and AI-assisted tools; cleaned/
+          normalized data for multi-label classification and LLM fine-tuning (Hugging Face).</li>
+          <li> Designed and optimized scraping scripts (including precise regular expressions) to boost sample quality and
+          lift accuracy, precision, recall, and F1.</li>
+          <li> Applied class-balancing strategies (e.g., reweighting/over-/undersampling) to mitigate imbalance and improve
+          model robustness.</li></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section id="education" data-aos="fade-up">
+    <h2>Education</h2>
+    <div class="education-item">
+      <h3>Master of Computer Science</h3>
+      <p class="institution">TU Darmstadt</p>
+      <p class="period">2020 - 2025</p>
+      <p>Specialized in Software Engineering, Web Technologies, and AI</p>
+    </div>
+    <div class="education-item">
+      <h3>Bachelor of Computer Science</h3>
+      <p class="institution">TU Darmstadt</p>
+      <p class="period">2025 - 2027</p>
+      <p>Graduated with honors, focused on Algorithms, Data Structures, Software Engineering, and AI</p>
+    </div>
+  </section>
+
+  <section id="projects" data-aos="fade-up">
+    <div class="projects-section">
+      <h2>Projects</h2>
+      <p class="projects-intro">Explore my latest work and technical achievements</p>
+      
+      <div class="projects-showcase">
+        <div class="project-preview">
+          <div class="project-icon">🤖</div>
+          <h3>AI Chat Application</h3>
+          <p>Machine learning powered chat system</p>
+          <div class="project-tech-preview">
+            <span>Typescript</span>
+            <span>Express</span>
+            <span>Huggingface</span>
+            <span>Node.js</span>
+            <span>Tailwind CSS</span>
+            <span>Rest API</span>
+          </div>
+        </div>
+        
+        <div class="project-preview">
+          <div class="project-icon">🏥</div>
+          <h3>HealthFlow</h3>
+          <p>Healthcare management microservice with enterprise security</p>
+          <div class="project-tech-preview">
+            <span>Spring Boot</span>
+            <span>JWT</span>
+            <span>Redis</span>
+            <span>Enterprise Security</span>
+            <span>Healthcare APIs</span>
+          </div>
+        </div>
+        
+        <div class="project-preview">
+          <div class="project-icon">📋</div>
+          <h3>AI Dataset Generator</h3>
+          <p>Multilingual BERT for privacy policy analysis and dataset generation</p>
+          <div class="project-tech-preview">
+            <span>Python</span>
+            <span>Express</span>
+            <span>Vue.js</span>
+            <span>mBERT</span>
+            <span>GPU Fine-tuning</span>
+            <span>YML Dataset</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="projects-cta">
+        <a href="projects.html" class="projects-btn">
+          <i class="fas fa-rocket"></i>
+          <span>View All Projects</span>
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Modal -->
+  <div id="contact-modal" class="contact-modal">
+    <div class="contact-modal-content">
+      <div class="contact-modal-header">
+        <h2>Let's Connect! 🚀</h2>
+        <button id="close-modal" class="close-modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="contact-modal-body">
+        <div class="contact-info">
+          <div class="contact-method">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <h4>Email</h4>
+              <p>ahmed.babay.personal@gmail.com</p>
+            </div>
+          </div>
+          
+          <div class="contact-method">
+            <i class="fab fa-linkedin"></i>
+            <div>
+              <h4>LinkedIn</h4>
+              <p>Connect with me professionally</p>
+            </div>
+          </div>
+          
+          <div class="contact-method">
+            <i class="fab fa-github"></i>
+            <div>
+              <h4>GitHub</h4>
+              <p>Check out my projects</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="contact-form">
+          <h3>Send me a message</h3>
+          <form id="contact-form">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" required />
+            </div>
+            
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">
+              <i class="fas fa-paper-plane"></i>
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© Ahmed Babay – CV Website</p>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+
+</body>
+</html>
