@@ -255,14 +255,29 @@
           <div class="snapshot-carousel">
             <div class="snapshot-container">
               <div class="snapshot active">
-                <img src="./metadata/StromCoach.png" alt="Screenshot 1" />
+                <img src="./metadata/Stromcoach1.png" alt="Screenshot 1" />
               </div>
+              <div class="snapshot">
+                <img src="./metadata/Stromcoach2.png" alt="Screenshot 2" />
+              </div>
+            </div>
+            <div class="carousel-controls">
+              <button class="carousel-btn prev-btn" onclick="changeSnapshot(this, -1)">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <div class="carousel-indicators">
+                <span class="indicator active" onclick="goToSnapshot(this, 0)"></span>
+                <span class="indicator" onclick="goToSnapshot(this, 1)"></span>
+              </div>
+              <button class="carousel-btn next-btn" onclick="changeSnapshot(this, 1)">
+                <i class="fas fa-chevron-right"></i>
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
+
     <!-- Project 2 -->
     <div class="project-card" data-aos="fade-up" data-aos-delay="200">
       <div class="project-header">
