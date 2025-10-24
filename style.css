@@ -598,12 +598,14 @@ body.dark-mode nav a {
 
 /* Dark mode adjustments for new sections */
 body.dark-mode .skill-item {
-  background: rgba(60,60,60,0.8);
-  border-left-color: #b59e7c;
+  background: rgba(45, 55, 72, 0.9);
+  border-left-color: #2d7d7d;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 body.dark-mode .skill-item:hover {
-  background: rgba(60,60,60,0.95);
+  background: rgba(45, 55, 72, 0.95);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
 }
 
 body.dark-mode .skill-name {
