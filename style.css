@@ -652,6 +652,11 @@ body.dark-mode #about p {
   color: #a0aec0;
 }
 
+body.dark-mode .about-content {
+  background: rgba(45, 55, 72, 0.9);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
 /* Experience Section */
 .job {
   margin-bottom: 30px;
