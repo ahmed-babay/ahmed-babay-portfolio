@@ -17,8 +17,7 @@ const typewriter = document.getElementById('typewriter');
 if (typewriter) {
   const roles = [
     "Software Engineer", 
-    "Data Scientist",
-    "Machine Learning Engineer",
+    "AI Engineer",
     "Computer Scientist",
   ];
 
