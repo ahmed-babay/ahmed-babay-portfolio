@@ -426,5 +426,7 @@ class ParticleSystem {
 
 // Initialize particle system when page loads
 document.addEventListener('DOMContentLoaded', () => {
-  new ParticleSystem();
+  if (window.matchMedia('(min-width: 769px)').matches) {
+    new ParticleSystem();
+  }
 });
