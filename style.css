@@ -780,10 +780,13 @@ button:hover, .btn:hover {
 /* About section layout - consistent with other sections */
 .about-container {
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 .about-content {
   width: 100%;
+  max-width: 720px;
   padding: 20px;
   background: rgba(255,255,255,0.9);
   border-radius: 12px;
@@ -1134,7 +1137,7 @@ header, nav, footer {
   
   .about-content {
     padding: 15px;
-    margin: 0 10px;
+    margin: 0 auto;
   }
 }
 
