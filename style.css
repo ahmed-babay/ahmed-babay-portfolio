@@ -984,7 +984,7 @@ header, nav, footer {
 }
 
 .theme-toggle-btn:active {
-  transform: translateX(5px) translateY(30px);
+  transform: translateX(1px) translateY(2px);
 }
 
 .download_button {
