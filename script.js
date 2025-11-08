@@ -145,21 +145,13 @@ document.addEventListener('DOMContentLoaded', function() {
   const themeToggle = document.getElementById("theme-toggle");
   
   if (themeToggle) {
-    console.log("Theme toggle button found!"); // Debug log
-    
     themeToggle.addEventListener("click", () => {
-      console.log("Theme toggle clicked!"); // Debug log
-      
       // Only toggle dark-mode class
       document.body.classList.toggle("dark-mode");
       
       const isDark = document.body.classList.contains("dark-mode");
       themeToggle.textContent = isDark ? "☀️" : "🌙";
-      
-      console.log("Dark mode is now:", isDark); // Debug log
     });
-  } else {
-    console.log("Theme toggle button NOT found!"); // Debug log
   }
 });
 
