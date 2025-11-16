@@ -2,12 +2,16 @@
 document.querySelectorAll('.toggle-btn').forEach(button => {
   button.addEventListener('click', () => {
     const details = button.nextElementSibling;
-    if (details.style.display === 'none') {
+    const btnText = button.querySelector('.btn-text');
+    
+    if (details.style.display === 'none' || !details.style.display) {
       details.style.display = 'block';
-      button.textContent = 'Show less';
+      btnText.textContent = 'Show less';
+      button.classList.add('active');
     } else {
       details.style.display = 'none';
-      button.textContent = 'Show more';
+      btnText.textContent = 'Show more';
+      button.classList.remove('active');
     }
   });
 });
