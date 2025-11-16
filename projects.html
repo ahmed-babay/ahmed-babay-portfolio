@@ -46,6 +46,7 @@
   <!-- Projects Section -->
   <section class="projects-container">
 
+    <!-- Project 1: HealthFlow -->
     <div class="project-card" data-aos="fade-up" data-aos-delay="200">
       <div class="project-header">
         <h2>HealthFlow</h2>
@@ -128,8 +129,8 @@
           </div>
         </div>
       </div>
-    <!-- Project 1 -->
-    <div class="project-card" data-aos="fade-up">
+    <!-- Project 2: Modern AI Chatbot -->
+    <div class="project-card" data-aos="fade-up" data-aos-delay="300">
       <div class="project-header">
         <h2>Modern AI Chatbot</h2>
         <div class="project-links">
@@ -160,7 +161,7 @@
                 <div class="tech-name">Node.js</div>
               </div>
               <div class="tech-bubble">
-                <div class="tech-icon">🚂</div>
+                <div class="tech-icon">🚄</div>
                 <div class="tech-name">Express</div>
               </div>
               <div class="tech-bubble">
@@ -211,7 +212,98 @@
       </div>
     </div>
 
-    <!-- Project 3 -->
+    <!-- Project 3: AI Career Copilot -->
+    <div class="project-card" data-aos="fade-up" data-aos-delay="400">
+      <div class="project-header">
+        <h2>AI Career Copilot</h2>
+        <div class="project-links">
+          <a href="https://github.com/ahmed-babay/career_copilot" target="_blank" class="github-link">
+            <i class="fab fa-github"></i>
+            View Code
+          </a>
+        </div>
+      </div>
+      
+      <div class="project-content">
+        <div class="project-left">
+          <div class="project-description">
+            <p>An AI-powered application that analyzes CVs and job descriptions using lightweight embedding models to detect skill gaps. The system extracts skills from both documents using local transformer models (no API dependencies), compares them to identify missing skills, and recommends personalized YouTube tutorials for each gap.</p>
+            <p>Built with a modern tech stack featuring Next.js frontend and Express.js backend, the application processes PDF and text CVs, performs semantic skill matching using embeddings, and integrates with YouTube Data API to fetch relevant learning resources. Users can save tutorials to a personalized learning plan stored locally.</p>
+            <p>Key features include local AI processing without external API dependencies, embedding-based skill extraction and comparison, intelligent skill gap detection (matched/missing/nice-to-have), YouTube tutorial recommendations, and persistent learning plan management.</p>
+          </div>
+          
+          <div class="project-tech">
+            <h3>Technologies Used</h3>
+            <div class="tech-bubbles">
+              <div class="tech-bubble">
+                <div class="tech-icon">⚡</div>
+                <div class="tech-name">Next.js</div>
+              </div>
+              <div class="tech-bubble">
+                <div class="tech-icon">🚄</div>
+                <div class="tech-name">Express.js</div>
+              </div>
+              <div class="tech-bubble">
+                <div class="tech-icon">🎨</div>
+                <div class="tech-name">Tailwind CSS</div>
+              </div>
+              <div class="tech-bubble">
+                <div class="tech-icon">🤖</div>
+                <div class="tech-name">@xenova/transformers</div>
+              </div>
+              <div class="tech-bubble">
+                <div class="tech-icon">📄</div>
+                <div class="tech-name">pdf-parse</div>
+              </div>
+              <div class="tech-bubble">
+                <div class="tech-icon">📺</div>
+                <div class="tech-name">YouTube Data API</div>
+              </div>
+              <div class="tech-bubble">
+                <div class="tech-icon">💾</div>
+                <div class="tech-name">LocalStorage</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-snapshots">
+          <h3>Project Snapshots</h3>
+          <div class="snapshot-carousel">
+            <div class="snapshot-container">
+              <div class="snapshot active">
+                <img src="./metadata/CareerCopilot1.png" alt="Career Copilot Screenshot 1" />
+              </div>
+              <div class="snapshot">
+                <img src="./metadata/CareerCopilot2.png" alt="Career Copilot Screenshot 2" />
+              </div>
+              <div class="snapshot">
+                <img src="./metadata/CareerCopilot3.png" alt="Career Copilot Screenshot 3" />
+              </div>
+              <div class="snapshot">
+                <img src="./metadata/CareerCopilot4.png" alt="Career Copilot Screenshot 4" />
+              </div>
+            </div>
+            <div class="carousel-controls">
+              <button class="carousel-btn prev-btn" onclick="changeSnapshot(this, -1)">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <div class="carousel-indicators">
+                <span class="indicator active" onclick="goToSnapshot(this, 0)"></span>
+                <span class="indicator" onclick="goToSnapshot(this, 1)"></span>
+                <span class="indicator" onclick="goToSnapshot(this, 2)"></span>
+                <span class="indicator" onclick="goToSnapshot(this, 3)"></span>
+              </div>
+              <button class="carousel-btn next-btn" onclick="changeSnapshot(this, 1)">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 4: StromCoach DE -->
     <div class="project-card" data-aos="fade-up" data-aos-delay="600">
       <div class="project-header">
         <h2>StromCoach DE</h2>
