@@ -265,7 +265,6 @@ header {
   font-weight: 500;
 }
 
-
 .download_button {
   display: flex;
   justify-content: center;
@@ -302,35 +301,6 @@ header {
   font-size: 1.1rem;
 }
 
-/* Responsive design for header */
-@media (max-width: 768px) {
-  .header-content {
-    gap: 20px;
-  }
-  
-  .profile-info h1 {
-    font-size: 2rem;
-  }
-  
-  .profile-info .title {
-    font-size: 1.1rem;
-  }
-  
-  .contact-links {
-    gap: 15px;
-  }
-  
-  .contact-link {
-    padding: 10px 15px;
-    font-size: 0.9rem;
-  }
-  
-  
-  .download-btn {
-    padding: 12px 25px;
-    font-size: 1rem;
-  }
-}
 
 /* Section spacing and flow */
 section {
@@ -443,6 +413,7 @@ body.dark-mode nav a {
 }
 
 .skill-item {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 15px;
@@ -481,9 +452,6 @@ body.dark-mode nav a {
 }
 
 /* Tooltip styles */
-.skill-item {
-  position: relative;
-}
 
 .skill-item::before {
   content: attr(data-tooltip);
@@ -533,73 +501,6 @@ body.dark-mode nav a {
   transform: translateX(-50%) translateY(-8px);
 }
 
-/* Professional Summary Section */
-#professional-summary {
-  background: linear-gradient(135deg, rgba(45,125,125,0.1), rgba(26,90,90,0.1));
-  padding: 80px 20px;
-}
-
-.summary-container {
-  max-width: 800px;
-  margin: auto;
-  text-align: center;
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 0.8s ease;
-}
-
-.summary-icon {
-  font-size: 4rem;
-  margin-bottom: 20px;
-  display: block;
-}
-
-.summary-text {
-  font-size: 1.2rem;
-  line-height: 1.8;
-  color: #2d3748;
-  margin-bottom: 40px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.summary-stats {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
-}
-
-.stat-item {
-  text-align: center;
-  padding: 20px;
-  background: rgba(255,255,255,0.8);
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  min-width: 120px;
-  transition: all 0.3s ease;
-}
-
-.stat-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-}
-
-.stat-number {
-  display: block;
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #2d7d7d;
-  margin-bottom: 8px;
-}
-
-.stat-label {
-  font-size: 0.9rem;
-  color: #666;
-  font-weight: 500;
-}
-
 /* Dark mode adjustments for new sections */
 body.dark-mode .skill-item {
   background: rgba(45, 55, 72, 0.9);
@@ -625,23 +526,7 @@ body.dark-mode .skill-item::before {
 }
 
 body.dark-mode .skill-item::after {
-  border-top-color: #2d7d7d; /* Match the professional teal background */
-}
-
-body.dark-mode .summary-text {
-  color: #e2e8f0;
-}
-
-body.dark-mode .stat-item {
-  background: rgba(60,60,60,0.8);
-}
-
-body.dark-mode .stat-label {
-  color: #a0aec0;
-}
-
-body.dark-mode .stat-number {
-  color: #2d7d7d;
+  border-top-color: #2d7d7d;
 }
 
 /* Dark mode adjustments for About section */
@@ -700,6 +585,101 @@ body.dark-mode .about-content {
 }
 
 /* Education Section */
+.university-showcase {
+  margin-bottom: 35px;
+  padding: 30px;
+  background: linear-gradient(135deg, #f0f7f7, #e8f2f2);
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  border: 2px solid rgba(45, 125, 125, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.university-showcase::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #2d7d7d, #1a5a5a, #2d7d7d);
+}
+
+.university-showcase-content {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.university-showcase-logo {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.university-showcase-logo:hover {
+  transform: scale(1.05);
+}
+
+.university-showcase-info {
+  flex: 1;
+}
+
+.university-name {
+  margin: 0 0 8px 0;
+  color: #1a365d;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.university-tagline {
+  margin: 0 0 20px 0;
+  color: #2d7d7d;
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.university-facts {
+  margin-top: 15px;
+}
+
+.university-intro {
+  margin: 0;
+  color: #4a5568;
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.university-intro strong {
+  color: #1a365d;
+  font-weight: 600;
+}
+
+.ranking-link {
+  color: #2d7d7d;
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.ranking-link:hover {
+  color: #1a5a5a;
+  border-bottom-color: #2d7d7d;
+}
+
 .education-item {
   margin-bottom: 25px;
   padding: 20px;
@@ -707,6 +687,12 @@ body.dark-mode .about-content {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   border-left: 4px solid #2d7d7d;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.education-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
 }
 
 .education-item h3 {
@@ -719,6 +705,13 @@ body.dark-mode .about-content {
   font-weight: bold;
   color: #2d7d7d;
   margin: 0 0 5px 0;
+  font-size: 1.05rem;
+}
+
+.education-description {
+  margin: 15px 0 0 0;
+  color: #555;
+  line-height: 1.6;
 }
 
 /* Dark mode adjustments */
@@ -747,18 +740,42 @@ body.dark-mode .job-details {
   border-top-color: #4a5568;
 }
 
-form input, form textarea {
-  width: 100%;
-  padding: 8px;
-  margin: 6px 0 12px 0;
-  border: 1px solid #ccc;
+body.dark-mode .education-description {
+  color: #a0aec0;
 }
 
-form button {
-  background-color: #797b7d;
-  color: white;
-  padding: 10px 15px;
-  border: none;
+body.dark-mode .university-showcase {
+  background: linear-gradient(135deg, #2a3a3a, #1f2d2d);
+  border-color: rgba(45, 125, 125, 0.4);
+}
+
+body.dark-mode .university-showcase-logo {
+  background: #ffffff;
+}
+
+body.dark-mode .university-name {
+  color: #e2e8f0;
+}
+
+body.dark-mode .university-tagline {
+  color: #2d7d7d;
+}
+
+body.dark-mode .university-intro {
+  color: #cbd5e0;
+}
+
+body.dark-mode .university-intro strong {
+  color: #e2e8f0;
+}
+
+body.dark-mode .ranking-link {
+  color: #4ca1a1;
+}
+
+body.dark-mode .ranking-link:hover {
+  color: #2d7d7d;
+  border-bottom-color: #4ca1a1;
 }
 
 button, .btn {
@@ -778,10 +795,7 @@ button:hover, .btn:hover {
   transform: scale(1.05);
 }
 
-
-/* Remove duplicate profile-pic styles - they're now defined in the header section */
-
-/* About section layout - consistent with other sections */
+/* About section layout */
 .about-container {
   position: relative;
   display: flex;
@@ -851,24 +865,6 @@ header, nav, footer {
     font-size: 1rem;
   }
   
-  .summary-stats {
-    gap: 20px;
-  }
-  
-  .stat-item {
-    min-width: 100px;
-    padding: 15px;
-  }
-  
-  .stat-number {
-    font-size: 2rem;
-  }
-  
-  .summary-text {
-    font-size: 1.1rem;
-    padding: 0 20px;
-  }
-  
   /* Mobile tooltip adjustments */
   .skill-item::before {
     max-width: 250px;
@@ -903,59 +899,6 @@ header, nav, footer {
   z-index: 1000;
 }
 
-/* Contact Button Styles */
-.contact-btn {
-  background: linear-gradient(135deg, #2d7d7d, #1a5a5a);
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 25px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(45, 125, 125, 0.3);
-  position: relative;
-  overflow: hidden;
-  transform: translateX(10px);
-}
-
-.contact-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s ease;
-}
-
-.contact-btn:hover::before {
-  left: 100%;
-}
-
-.contact-btn:hover {
-  transform: translateX(10px) translateY(-2px);
-  box-shadow: 0 8px 25px rgba(45, 125, 125, 0.4);
-}
-
-.contact-btn:active {
-  transform: translateX(0px) translateY(0);
-}
-
-.contact-btn i {
-  font-size: 1rem;
-  transition: transform 0.3s ease;
-}
-
-.contact-btn:hover i {
-  transform: scale(1.1);
-}
-
 /* Theme Toggle Button Styles */
 .theme-toggle-btn {
   background: linear-gradient(135deg, #2d7d7d, #1a5a5a);
@@ -987,15 +930,6 @@ header, nav, footer {
   transform: translateX(1px) translateY(2px);
 }
 
-.download_button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  animation: fadeInUp 0.8s ease-out 0.6s both;
-}
-
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -1005,67 +939,6 @@ header, nav, footer {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-/* Enhanced contact link hover effects */
-.contact-link {
-  position: relative;
-  overflow: hidden;
-}
-
-.contact-link::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(209, 184, 157, 0.2), transparent);
-  transition: left 0.5s ease;
-}
-
-.contact-link:hover::before {
-  left: 100%;
-}
-
-/* Professional icon styling */
-.contact-link i {
-  transition: transform 0.3s ease;
-}
-
-.contact-link:hover i {
-  transform: scale(1.1);
-}
-
-/* Enhanced download button */
-.download-btn {
-  position: relative;
-  overflow: hidden;
-}
-
-.download-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s ease;
-}
-
-.download-btn:hover::before {
-  left: 100%;
-}
-
-/* Profile picture enhancement */
-.profile-pic {
-  transition: all 0.3s ease;
-}
-
-.profile-pic:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 35px rgba(0,0,0,0.3);
 }
 
 /* Title enhancement */
@@ -1142,6 +1015,35 @@ header, nav, footer {
   .about-content {
     padding: 15px;
     margin: 0 auto;
+  }
+
+  .university-showcase {
+    padding: 20px;
+    margin-bottom: 25px;
+  }
+
+  .university-showcase-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .university-showcase-logo {
+    width: 130px;
+    height: 130px;
+  }
+
+  .university-name {
+    font-size: 1.5rem;
+  }
+
+  .university-tagline {
+    font-size: 1.1rem;
+  }
+
+  .university-intro {
+    font-size: 0.95rem;
   }
 }
 
