@@ -102,9 +102,20 @@ if (contactForm && contactModal) {
 document.addEventListener('DOMContentLoaded', function() {
   const themeToggle = document.getElementById("theme-toggle");
   if (themeToggle) {
+    // Apply persisted preference (default: dark — class is already on body)
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') {
+      document.body.classList.remove('dark-mode');
+    } else {
+      document.body.classList.add('dark-mode');
+    }
+    themeToggle.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+
     themeToggle.addEventListener("click", () => {
       document.body.classList.toggle("dark-mode");
-      themeToggle.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+      const isDark = document.body.classList.contains("dark-mode");
+      themeToggle.textContent = isDark ? "☀️" : "🌙";
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
   }
   
@@ -186,165 +197,158 @@ document.addEventListener('click', function(event) {
   }
 });
 
-// Particle Background Animation
-class ParticleSystem {
+// Constellation network background — subtle drifting nodes with proximity-based
+// connecting lines. Reads as a clean "neural network / data graph" backdrop.
+class ConstellationBackground {
   constructor() {
     this.canvas = document.getElementById('particle-canvas');
     this.ctx = this.canvas.getContext('2d');
     this.particles = [];
+    this.mouse = { x: null, y: null };
+    this.maxDistance = 175;
     this.animationId = null;
-    
     this.init();
   }
-  
+
   init() {
     this.resizeCanvas();
     this.createParticles();
     this.bindEvents();
     this.animate();
   }
-  
+
   resizeCanvas() {
-    this.canvas.width = window.innerWidth;
-    this.canvas.height = window.innerHeight;
+    const dpr = window.devicePixelRatio || 1;
+    this.canvas.width = window.innerWidth * dpr;
+    this.canvas.height = window.innerHeight * dpr;
+    this.canvas.style.width = window.innerWidth + 'px';
+    this.canvas.style.height = window.innerHeight + 'px';
+    this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+    this.ctx.scale(dpr, dpr);
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
   }
-  
+
   createParticles() {
-    const particleCount = Math.min(50, Math.floor(window.innerWidth / 20));
-    
-    for (let i = 0; i < particleCount; i++) {
+    const density = Math.min(110, Math.floor((this.width * this.height) / 11000));
+    this.particles = [];
+    for (let i = 0; i < density; i++) {
       this.particles.push({
-        x: Math.random() * this.canvas.width,
-        y: Math.random() * this.canvas.height,
-        vx: (Math.random() - 0.5) * 0.15,
-        vy: (Math.random() - 0.5) * 0.15,
-        size: 3,
-        opacity: Math.random() * 0.5 + 0.3,
-        type: Math.random() > 0.5 ? 'code' : 'dot',
-        code: this.getRandomCode(),
-        rotation: Math.random() * Math.PI * 2,
-        rotationSpeed: (Math.random() - 0.5) * 0.001,
-        color: this.getRandomColor()
+        x: Math.random() * this.width,
+        y: Math.random() * this.height,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        radius: Math.random() * 1.6 + 1.2,
       });
     }
   }
-  
-  getRandomCode() {
-    const codeSnippets = [
-      '{}', '∞', 'predict()', 'CI/CD', 'pip install', '404', '200 OK', 
-      'fetch()', 'commit()', 'docker run', 'const', 'curl', 'deploy()',
-      'import', 'export','async',
-      'await', 'try', 'epoch=42', 'finally', 'new',
-      'π', 'super', 'static', 'public', 'private',
-      'React', 'Node', 'Python', 'Java', 'SQL',
-      'API', 'JSON', '</code>', 'test()',
-      'Git', 'AWS', 'Redis',
-      'Spring', '{data}', '<dev>'
-    ];
-    return codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
-  }
-  
-  getRandomColor() {
-    const colors = [
-      'rgba(45, 125, 125, ', // Teal
-      'rgba(26, 90, 90, ',   // Dark teal
-      'rgba(46, 74, 92, ',   // Blue-gray
-      'rgba(74, 85, 104, ',  // Gray
-      'rgba(26, 54, 93, '    // Navy
-    ];
-    return colors[Math.floor(Math.random() * colors.length)];
-  }
-  
+
   bindEvents() {
     window.addEventListener('resize', () => {
       this.resizeCanvas();
-      this.particles = [];
       this.createParticles();
     });
-  }
-  
-  updateParticles() {
-    this.particles.forEach(particle => {
-      // Update position
-      particle.x += particle.vx;
-      particle.y += particle.vy;
-      
-      // Update rotation
-      particle.rotation += particle.rotationSpeed;
-      
-      // Keep particles within screen bounds (smooth circular movement)
-      if (particle.x < 0) {
-        particle.x = this.canvas.width;
-      }
-      if (particle.x > this.canvas.width) {
-        particle.x = 0;
-      }
-      if (particle.y < 0) {
-        particle.y = this.canvas.height;
-      }
-      if (particle.y > this.canvas.height) {
-        particle.y = 0;
-      }
+    window.addEventListener('mousemove', (e) => {
+      this.mouse.x = e.clientX;
+      this.mouse.y = e.clientY;
+    });
+    window.addEventListener('mouseout', () => {
+      this.mouse.x = null;
+      this.mouse.y = null;
     });
   }
-  
-  drawParticles() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    
-    this.particles.forEach(particle => {
-      this.ctx.save();
-      this.ctx.translate(particle.x, particle.y);
-      this.ctx.rotate(particle.rotation);
-      
-      if (particle.type === 'code') {
-        // Draw code snippet with glow effect
-        this.ctx.shadowColor = particle.color + '0.6)';
-        this.ctx.shadowBlur = 15;
-        this.ctx.fillStyle = particle.color + (particle.opacity + 0.2) + ')';
-        this.ctx.font = `bold 24px 'Courier New', monospace`;
-        this.ctx.textAlign = 'center';
-        this.ctx.fillText(particle.code, 0, 4);
-      } else {
-        // Draw dot with gradient and glow
-        const gradient = this.ctx.createRadialGradient(0, 0, 0, 0, 0, particle.size);
-        gradient.addColorStop(0, particle.color + (particle.opacity + 0.5) + ')');
-        gradient.addColorStop(0.7, particle.color + (particle.opacity + 0.2) + ')');
-        gradient.addColorStop(1, particle.color + (particle.opacity * 0.4) + ')');
-        
-        this.ctx.fillStyle = gradient;
-        this.ctx.beginPath();
-        this.ctx.arc(0, 0, particle.size, 0, Math.PI * 2);
-        this.ctx.fill();
-        
-        // Add inner glow
-        this.ctx.fillStyle = particle.color + '1.0)';
-        this.ctx.beginPath();
-        this.ctx.arc(0, 0, particle.size * 0.4, 0, Math.PI * 2);
-        this.ctx.fill();
-      }
-      
-      this.ctx.restore();
-    });
+
+  accentRGB() {
+    return document.body.classList.contains('dark-mode')
+      ? '45, 212, 191'   // teal-400 — pops on slate
+      : '15, 118, 110';  // teal-700 — confident on light bg
   }
-  
-  
-  
+
+  draw() {
+    const { ctx, width: w, height: h, particles, maxDistance } = this;
+    const isDark = document.body.classList.contains('dark-mode');
+    const accent = this.accentRGB();
+    const lineAlphaScale = isDark ? 0.42 : 0.28;
+    const nodeAlpha = isDark ? 0.85 : 0.7;
+
+    ctx.clearRect(0, 0, w, h);
+
+    // advance positions
+    for (const p of particles) {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0 || p.x > w) p.vx *= -1;
+      if (p.y < 0 || p.y > h) p.vy *= -1;
+    }
+
+    // connections between nearby nodes
+    ctx.lineWidth = 0.85;
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const a = particles[i], b = particles[j];
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const distSq = dx * dx + dy * dy;
+        if (distSq < maxDistance * maxDistance) {
+          const t = 1 - Math.sqrt(distSq) / maxDistance;
+          ctx.strokeStyle = `rgba(${accent}, ${t * lineAlphaScale})`;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // cursor halo — connect nearby nodes to the pointer
+    if (this.mouse.x !== null) {
+      const reach = maxDistance * 1.5;
+      ctx.lineWidth = 1.1;
+      for (const p of particles) {
+        const dx = p.x - this.mouse.x, dy = p.y - this.mouse.y;
+        const distSq = dx * dx + dy * dy;
+        if (distSq < reach * reach) {
+          const t = 1 - Math.sqrt(distSq) / reach;
+          ctx.strokeStyle = `rgba(${accent}, ${t * (isDark ? 0.55 : 0.4)})`;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(this.mouse.x, this.mouse.y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // nodes — luminous core + soft halo
+    const haloAlpha = isDark ? 0.22 : 0.14;
+    for (const p of particles) {
+      const haloRadius = p.radius * 4;
+      const halo = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, haloRadius);
+      halo.addColorStop(0, `rgba(${accent}, ${haloAlpha})`);
+      halo.addColorStop(1, `rgba(${accent}, 0)`);
+      ctx.fillStyle = halo;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, haloRadius, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = `rgba(${accent}, ${nodeAlpha})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
   animate() {
-    this.updateParticles();
-    this.drawParticles();
+    this.draw();
     this.animationId = requestAnimationFrame(() => this.animate());
   }
-  
+
   destroy() {
-    if (this.animationId) {
-      cancelAnimationFrame(this.animationId);
-    }
+    if (this.animationId) cancelAnimationFrame(this.animationId);
   }
 }
 
-// Initialize particle system when page loads
 document.addEventListener('DOMContentLoaded', () => {
-  if (window.matchMedia('(min-width: 769px)').matches) {
-    new ParticleSystem();
+  if (window.matchMedia('(min-width: 769px)').matches &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    new ConstellationBackground();
   }
 });
