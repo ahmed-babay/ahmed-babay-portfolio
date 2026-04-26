@@ -20,9 +20,9 @@ document.querySelectorAll('.toggle-btn').forEach(button => {
 const typewriter = document.getElementById('typewriter');
 if (typewriter) {
   const roles = [
-    "Software Engineer", 
+    "AI Consultant",
+    "Software Engineer",
     "AI Engineer",
-    "Computer Scientist",
   ];
 
   let currentRoleIndex = 0;
