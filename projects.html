@@ -11,8 +11,15 @@
   <link rel="stylesheet" href="projects.css" />
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme');
+      if (saved === 'light') document.documentElement.dataset.theme = 'light';
+      else document.documentElement.dataset.theme = 'dark';
+    })();
+  </script>
 </head>
-<body>
+<body class="dark-mode">
   <!-- Navigation -->
   <nav>
     <button class="nav-toggle" onclick="toggleMobileMenu()">
