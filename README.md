@@ -13,7 +13,7 @@ dependencies to install. Push to `main` and GitHub Pages serves it.
 ```
 index.html          Profile — hero, selected work, experience, capabilities,
                     education, about, contact
-projects.html       Six case studies: problem → what I built → what I took from it
+projects.html       Eight case studies: problem → what I built → what I took from it
 404.html            Not-found page
 
 assets/
