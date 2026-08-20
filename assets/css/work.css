@@ -34,19 +34,24 @@
    Filters
    -------------------------------------------------------------------------- */
 
+/* The blur/border live on a full-bleed wrapper so the sticky bar reads as a
+   band across the viewport, not a floating rectangle inside the container. */
+.filters-bar {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 60;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+}
+
 .filters {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: var(--s-2);
-  padding-block: var(--s-6);
-  position: sticky;
-  top: var(--nav-h);
-  z-index: 60;
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border);
+  padding-block: var(--s-5);
 }
 
 .filters__label {
