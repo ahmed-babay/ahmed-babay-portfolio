@@ -303,27 +303,33 @@ p { text-wrap: pretty; }
    5. Scroll reveal
    -------------------------------------------------------------------------- */
 
-[data-reveal] {
+/* Everything below is scoped to .js — set by an inline script in <head>.
+   Without JavaScript the start states never apply, so the page renders as a
+   complete document instead of a screen of invisible elements. */
+
+.js [data-reveal] {
   opacity: 0;
   transform: translateY(18px);
   transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
-[data-reveal].is-visible { opacity: 1; transform: none; }
+.js [data-reveal].is-visible { opacity: 1; transform: none; }
 
 /* Headline wipe — each line rises out of its own mask */
 .reveal-lines span { display: block; overflow: hidden; }
 
-.reveal-lines span > i {
-  display: block;
-  font-style: inherit;
+/* <i> is a line wrapper here, not emphasis — it must never render italic.
+   Unscoped, so this still holds when the .js animation styles are absent. */
+.reveal-lines span > i { display: block; font-style: inherit; }
+
+.js .reveal-lines span > i {
   transform: translateY(105%);
   transition: transform 0.95s var(--ease);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
-.reveal-lines.is-visible span > i { transform: none; }
+.js .reveal-lines.is-visible span > i { transform: none; }
 
 /* --------------------------------------------------------------------------
    6. Accessibility
@@ -361,6 +367,6 @@ p { text-wrap: pretty; }
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  [data-reveal] { opacity: 1; transform: none; }
-  .reveal-lines span > i { transform: none; }
+  .js [data-reveal] { opacity: 1; transform: none; }
+  .js .reveal-lines span > i { transform: none; }
 }

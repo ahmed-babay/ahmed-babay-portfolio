@@ -33,6 +33,10 @@
 <link rel="stylesheet" href="assets/css/home.css" />
 
 <script>
+  // Tells CSS that scripting is available, so it is safe to hide reveal
+  // targets until they animate in. Without JS they simply stay visible.
+  document.documentElement.classList.add('js');
+
   // Paint the stored theme before first paint so there is never a flash.
   (function () {
     try {
@@ -246,19 +250,19 @@
   <div class="container">
     <div class="metrics" data-reveal>
       <div class="metric">
-        <p class="metric__value"><span data-count="0.87">0.00</span></p>
+        <p class="metric__value"><span data-count="0.87">0.87</span></p>
         <p class="metric__label">F1 score on the multi-label privacy classifier shipped at Queryella</p>
       </div>
       <div class="metric">
-        <p class="metric__value"><span data-count="6">0</span><span class="unit">mo</span></p>
+        <p class="metric__value"><span data-count="6">6</span><span class="unit">mo</span></p>
         <p class="metric__label">Research residency at the hessian.AI Lab on video temporal grounding</p>
       </div>
       <div class="metric">
-        <p class="metric__value"><span data-count="6">0</span></p>
+        <p class="metric__value"><span data-count="6">6</span></p>
         <p class="metric__label">Projects taken from idea to working, documented software</p>
       </div>
       <div class="metric">
-        <p class="metric__value"><span data-count="3">0</span></p>
+        <p class="metric__value"><span data-count="3">3</span></p>
         <p class="metric__label">Roles across industry consulting and university research</p>
       </div>
     </div>
