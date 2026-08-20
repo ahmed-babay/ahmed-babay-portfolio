@@ -565,6 +565,21 @@ kbd {
   letter-spacing: 0.01em;
 }
 
+/* Employment-type flag, e.g. Full-time */
+.entry__tag {
+  display: inline-block;
+  margin-top: var(--s-2);
+  padding: 0.18rem 0.55rem;
+  border-radius: var(--r-full);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
 .entry__logo {
   margin-top: var(--s-4);
   width: 44px;

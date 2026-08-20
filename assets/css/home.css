@@ -217,8 +217,31 @@
   letter-spacing: 0.18em;
   color: var(--text-3);
   margin-bottom: var(--s-4);
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  flex-wrap: wrap;
 }
+
+/* The flagship gets a warm accent border and a label — the one card that is
+   allowed to break the visual rhythm, because it is the one to look at. */
+.work-item--flagship {
+  border-color: var(--accent-line);
+  background:
+    linear-gradient(150deg, var(--accent-soft), transparent 42%),
+    var(--surface);
+}
+
+.work-item__flag {
+  padding: 0.22rem 0.6rem;
+  border-radius: var(--r-full);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.work-item--flagship .work-item__title { font-size: clamp(1.75rem, 3.2vw, 2.4rem); }
 
 .work-item__title { font-size: clamp(1.5rem, 2.6vw, 2rem); margin-bottom: var(--s-3); }
 
@@ -288,6 +311,24 @@
   height: 100%;
   object-fit: cover;
   object-position: top center;
+}
+
+/* For app windows and overlays whose aspect ratio is nowhere near the frame,
+   letterbox rather than crop — cropping an overlay hides the thing itself. */
+.frame__shot--contain {
+  /* Close to the overlay's own proportions, so it fills the frame instead of
+     floating in letterbox bars. */
+  aspect-ratio: 5 / 4;
+  background:
+    radial-gradient(120% 90% at 50% 0%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 70%),
+    var(--surface-2);
+  padding: var(--s-4);
+}
+
+.frame__shot--contain img {
+  object-fit: contain;
+  object-position: center;
+  border-radius: var(--r-sm);
 }
 
 /* Compact grid for the remaining projects */
@@ -465,6 +506,32 @@
 }
 
 .degree:hover { border-left-color: var(--accent); transform: translateX(3px); }
+
+/* The completed credential carries the accent by default, so the eye lands
+   there before the in-progress one. */
+.degree--primary {
+  border-left-color: var(--accent);
+  background: linear-gradient(100deg, var(--accent-soft), var(--surface) 45%);
+}
+
+.degree__honour {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.degree__honour::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
 
 .degree__top {
   display: flex;
