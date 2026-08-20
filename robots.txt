@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ahmed-babay.github.io/ahmed-babay-portfolio/sitemap.xml

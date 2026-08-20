@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Page not found — Ahmed Babay</title>
+<meta name="robots" content="noindex" />
+<meta name="theme-color" content="#08090c" />
+
+<link rel="icon" href="/ahmed-babay-portfolio/assets/img/favicon.svg" type="image/svg+xml" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" />
+
+<link rel="stylesheet" href="/ahmed-babay-portfolio/assets/css/base.css" />
+<link rel="stylesheet" href="/ahmed-babay-portfolio/assets/css/components.css" />
+
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('theme');
+      document.documentElement.dataset.theme = saved === 'light' ? 'light' : 'dark';
+    } catch (e) {
+      document.documentElement.dataset.theme = 'dark';
+    }
+  })();
+</script>
+
+<style>
+  .notfound {
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: var(--gutter);
+  }
+  .notfound__code {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label);
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: var(--s-5);
+  }
+  .notfound h1 { font-size: clamp(2.4rem, 7vw, 4rem); margin-bottom: var(--s-4); }
+  .notfound p { color: var(--text-2); max-width: 40ch; margin: 0 auto var(--s-7); }
+  .notfound__actions { display: flex; flex-wrap: wrap; gap: var(--s-3); justify-content: center; }
+</style>
+</head>
+
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+</svg>
+
+<div class="ambient" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<main class="notfound">
+  <div>
+    <p class="notfound__code">Error 404</p>
+    <h1>This page didn't ship.</h1>
+    <p>The link you followed doesn't exist — or it moved when I rebuilt the site. Everything worth seeing is still one click away.</p>
+    <div class="notfound__actions">
+      <a class="btn btn--primary" href="/ahmed-babay-portfolio/">
+        <span>Back to the profile</span>
+        <svg class="arrow"><use href="#i-arrow-right"/></svg>
+      </a>
+      <a class="btn btn--ghost" href="/ahmed-babay-portfolio/projects.html">
+        <span>See the case studies</span>
+      </a>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>
