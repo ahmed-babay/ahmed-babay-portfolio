@@ -483,13 +483,17 @@ kbd {
 
 .marquee__item:hover { color: var(--text); }
 
+/* Same reasoning as .entry__logo — a light plate so dark wordmarks survive. */
 .marquee__item img {
-  height: 30px;
+  height: 34px;
   width: auto;
+  max-width: 120px;
   object-fit: contain;
+  padding: 5px 9px;
   border-radius: var(--r-xs);
+  background: #fff;
   filter: grayscale(1);
-  opacity: 0.65;
+  opacity: 0.55;
   transition: filter var(--dur-fast) var(--ease), opacity var(--dur-fast) var(--ease);
 }
 
@@ -580,20 +584,24 @@ kbd {
   text-transform: uppercase;
 }
 
+/* A light plate behind every company mark. Most logos are drawn for white
+   backgrounds — Reply's wordmark is near-black on transparent and simply
+   disappears on our dark surface otherwise. Width is intrinsic so wide
+   wordmarks are not crushed into a square. */
 .entry__logo {
   margin-top: var(--s-4);
-  width: 44px;
-  height: 44px;
+  height: 40px;
+  max-width: 140px;
   border-radius: var(--r-sm);
-  background: var(--surface-2);
+  background: #fff;
   border: 1px solid var(--border);
-  display: grid;
+  display: inline-grid;
   place-items: center;
   overflow: hidden;
-  padding: 5px;
+  padding: 6px 10px;
 }
 
-.entry__logo img { width: 100%; height: 100%; object-fit: contain; }
+.entry__logo img { max-height: 100%; width: auto; max-width: 100%; object-fit: contain; }
 
 .entry__body { padding-right: 0; }
 @media (min-width: 860px) { .entry__body { padding-left: var(--s-7); } }
