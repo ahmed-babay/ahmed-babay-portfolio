@@ -1,550 +1,775 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ahmed Babay - Projects</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="projects.css" />
-  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <script>
-    (function() {
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Case Studies — Ahmed Babay</title>
+<meta name="description" content="Six projects by Ahmed Babay, written up properly: local-first skill-gap analysis, an mBERT dataset factory, a RAG chatbot, vision-language research, a Spring Boot clinical microservice, and a dynamic electricity-tariff planner." />
+<meta name="author" content="Ahmed Babay" />
+<meta name="theme-color" content="#08090c" />
+<link rel="canonical" href="https://ahmed-babay.github.io/ahmed-babay-portfolio/projects.html" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Case Studies — Ahmed Babay" />
+<meta property="og:description" content="Six projects, written up properly: the problem, what I built, and what came out of it." />
+<meta property="og:url" content="https://ahmed-babay.github.io/ahmed-babay-portfolio/projects.html" />
+<meta property="og:image" content="https://ahmed-babay.github.io/ahmed-babay-portfolio/metadata/AhmedBabay.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+
+<link rel="stylesheet" href="assets/css/base.css" />
+<link rel="stylesheet" href="assets/css/components.css" />
+<link rel="stylesheet" href="assets/css/work.css" />
+
+<script>
+  (function () {
+    try {
       var saved = localStorage.getItem('theme');
-      if (saved === 'light') document.documentElement.dataset.theme = 'light';
-      else document.documentElement.dataset.theme = 'dark';
-    })();
-  </script>
+      document.documentElement.dataset.theme = saved === 'light' ? 'light' : 'dark';
+    } catch (e) {
+      document.documentElement.dataset.theme = 'dark';
+    }
+  })();
+</script>
 </head>
-<body class="dark-mode">
-  <!-- Navigation -->
-  <nav>
-    <button class="nav-toggle" onclick="toggleMobileMenu()">
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-    </button>
-    <ul class="nav-menu">
-      <li><a href="index.html#about" onclick="closeMobileMenu()">About</a></li>
-      <li><a href="index.html#skills" onclick="closeMobileMenu()">Skills</a></li>
-      <li><a href="index.html#experience" onclick="closeMobileMenu()">Experience</a></li>
-      <li><a href="index.html#education" onclick="closeMobileMenu()">Education</a></li>
-      <li><a href="projects.html" class="active" onclick="closeMobileMenu()">Projects</a></li>
-    </ul>
-  </nav>
 
-  <!-- Header -->
-  <header class="projects-header">
-    <div class="header-content">
-      <div class="back-button">
-        <a href="index.html" class="back-link">
-          <i class="fas fa-arrow-left"></i>
-          <span>Back to CV</span>
-        </a>
-      </div>
-      
-      <div class="projects-title">
-        <h1>My Projects</h1>
-        <p>Exploring the intersection of creativity and technology</p>
-      </div>
+<body>
+
+<!-- Icon sprite ------------------------------------------------------------->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-arrow-up-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m20 6-11 11-5-5"/></symbol>
+  <symbol id="i-chevron-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></symbol>
+  <symbol id="i-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="i-github" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.55V9h3.57v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/></symbol>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="ambient" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<canvas id="constellation" aria-hidden="true"></canvas>
+<div class="progress" data-progress aria-hidden="true"></div>
+
+<!-- Nav --------------------------------------------------------------------->
+<header class="nav" data-nav>
+  <div class="nav__inner">
+    <a class="brand" href="index.html" aria-label="Ahmed Babay — home">
+      <span class="brand__mark">AB</span>
+      <span class="brand__name">Ahmed Babay</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Sections">
+      <a class="nav__link" href="index.html#work">Work</a>
+      <a class="nav__link" href="index.html#experience">Experience</a>
+      <a class="nav__link" href="index.html#skills">Capabilities</a>
+      <a class="nav__link is-active" href="projects.html">Case studies</a>
+      <a class="nav__link" href="index.html#contact">Contact</a>
+    </nav>
+
+    <div class="nav__actions">
+      <button class="kbd-btn" data-palette-open type="button">
+        <svg><use href="#i-search"/></svg>
+        <span>Search</span>
+        <kbd>⌘K</kbd>
+      </button>
+
+      <button class="icon-btn theme-toggle" data-theme-toggle type="button" aria-label="Switch to light theme">
+        <svg class="icon-sun"><use href="#i-sun"/></svg>
+        <svg class="icon-moon"><use href="#i-moon"/></svg>
+      </button>
+
+      <a class="btn btn--primary btn--sm" href="metadata/Ahmed_Babay_CV.pdf" download>
+        <svg><use href="#i-download"/></svg>
+        <span>CV</span>
+      </a>
+
+      <button class="icon-btn nav__menu-btn" data-menu-toggle type="button" aria-expanded="false" aria-label="Open menu">
+        <svg><use href="#i-menu"/></svg>
+      </button>
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- Projects Section -->
-  <section class="projects-container">
+<div class="drawer" data-drawer>
+  <a href="index.html#work">Work <span class="mono">01</span></a>
+  <a href="index.html#experience">Experience <span class="mono">02</span></a>
+  <a href="index.html#skills">Capabilities <span class="mono">03</span></a>
+  <a href="index.html#education">Education <span class="mono">04</span></a>
+  <a href="index.html#about">About <span class="mono">05</span></a>
+  <a href="index.html#contact">Contact <span class="mono">06</span></a>
+</div>
 
-    <!-- Project 1: HealthFlow -->
-    <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-      <div class="project-header">
-        <h2>HealthFlow</h2>
-        <div class="project-links">
-          <a href="https://github.com/ahmed-babay/patient-service" target="_blank" class="github-link">
-            <i class="fab fa-github"></i>
-            View Code
+<main id="main">
+
+<!-- Page header ------------------------------------------------------------->
+<section class="page-hero">
+  <div class="container">
+    <a class="page-hero__back" href="index.html">
+      <svg><use href="#i-arrow-left"/></svg> Back to profile
+    </a>
+
+    <h1 class="display page-hero__title reveal-lines">
+      <span><i>Six projects,</i></span>
+      <span><i>written up <em class="accent-text">properly</em>.</i></span>
+    </h1>
+
+    <p class="lede page-hero__lede" data-reveal style="--reveal-delay:180ms">
+      Not a gallery of screenshots. For each one: the problem that made it worth
+      building, what I actually built, and what I took away from it.
+    </p>
+  </div>
+</section>
+
+<!-- Filters ----------------------------------------------------------------->
+<div class="container">
+  <div class="filters" data-filters>
+    <span class="filters__label">Filter</span>
+    <button type="button" data-filter="all" class="is-active" aria-pressed="true">All</button>
+    <button type="button" data-filter="ai" aria-pressed="false">AI &amp; ML</button>
+    <button type="button" data-filter="research" aria-pressed="false">Research</button>
+    <button type="button" data-filter="fullstack" aria-pressed="false">Full-stack</button>
+    <button type="button" data-filter="backend" aria-pressed="false">Backend</button>
+    <span class="filters__count"><span data-filter-count>6</span> shown</span>
+  </div>
+</div>
+
+<div class="container">
+  <div class="cases">
+
+    <!-- 01 · AI Career Copilot ---------------------------------------------->
+    <article class="case" id="career-copilot" data-tags="ai fullstack" data-reveal>
+      <div class="case__head">
+        <div>
+          <span class="case__index">01 — Applied ML · Full-stack</span>
+          <h2 class="case__title">AI Career Copilot</h2>
+          <p class="case__kicker">
+            Reads your CV and a job description, tells you exactly which skills are
+            missing, and finds you something to watch for each one.
+          </p>
+        </div>
+        <div class="case__actions">
+          <a class="btn btn--ghost btn--sm" href="https://github.com/ahmed-babay/career_copilot" target="_blank" rel="noopener">
+            <svg><use href="#i-github"/></svg> <span>Source</span>
           </a>
         </div>
       </div>
-      
-      <div class="project-content">
-        <div class="project-left">
-          <div class="project-description">
-            <p>Developed a production-ready Spring Boot microservice for hospital and healthcare management systems with JWT authentication, Redis caching, and comprehensive medical data validation for patient management. Implemented enterprise-grade security with role-based access control, intelligent performance optimization through cache strategies, and complex data modeling for medical records, prescriptions, and allergies. Architected for high-frequency healthcare workflows with comprehensive API testing, custom validators ensuring medical safety compliance, and scalable architecture optimized for mission-critical healthcare operations.</p>
+
+      <div class="case__body">
+        <div class="case__story">
+          <div class="block">
+            <p class="block__label">The problem</p>
+            <p>
+              You read a job posting, feel vaguely underqualified, and have no idea
+              which specific gap is the one that matters. Generic career advice
+              doesn't help, and pasting your CV into a third-party AI service to
+              find out means handing over a document full of personal data.
+            </p>
           </div>
-          
-          <div class="project-tech">
-            <h3>Technologies Used</h3>
-            <div class="tech-bubbles">
-              <div class="tech-bubble">
-                <div class="tech-icon">🚀</div>
-                <div class="tech-name">Spring Boot</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">🔐</div>
-                <div class="tech-name">JWT</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">🔴</div>
-                <div class="tech-name">Redis</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">🛡️</div>
-                <div class="tech-name">Enterprise Security</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">⚡</div>
-                <div class="tech-name">Performance Optimization</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">🏥</div>
-                <div class="tech-name">Healthcare APIs</div>
-              </div>
+
+          <div class="block">
+            <p class="block__label">What I built</p>
+            <ul class="block__list">
+              <li>A pipeline that ingests a CV as <strong>PDF or plain text</strong> and a job description as text, then extracts the skills in each using local transformer embeddings via <strong>@xenova/transformers</strong>.</li>
+              <li>Semantic comparison that buckets every skill into <strong>matched, missing, or nice-to-have</strong> — so the output is a decision, not a similarity score.</li>
+              <li>For each missing skill, a call to the <strong>YouTube Data API</strong> surfaces relevant tutorials, which can be saved into a learning plan persisted in the browser.</li>
+              <li><strong>Next.js</strong> frontend, <strong>Express</strong> backend, Tailwind for the interface.</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <p class="block__label">The call I'd defend</p>
+            <p>
+              Running inference locally instead of against a hosted LLM API. It made
+              the app free to run, usable offline, and — the part that actually
+              mattered — meant a user's CV never leaves their machine. Embedding
+              models are small enough that the accuracy trade-off was worth it for
+              a task that is fundamentally about matching, not generation.
+            </p>
+          </div>
+
+          <div class="case__stack">
+            <p class="case__stack-label">Stack</p>
+            <div class="chip-row">
+              <span class="chip"><i class="devicon-nextjs-original"></i> Next.js</span>
+              <span class="chip"><i class="devicon-express-original"></i> Express</span>
+              <span class="chip"><i class="devicon-tailwindcss-plain colored"></i> Tailwind CSS</span>
+              <span class="chip">@xenova/transformers</span>
+              <span class="chip">Embeddings</span>
+              <span class="chip">pdf-parse</span>
+              <span class="chip">YouTube Data API</span>
             </div>
           </div>
         </div>
-        
-        <div class="project-snapshots">
-          <h3>Project Snapshots</h3>
-          <div class="snapshot-carousel">
-            <div class="snapshot-container">
-              <div class="snapshot active">
-                <img src="./metadata/HealthFlow1.png" alt="Task Dashboard" />
-              </div>
-              <div class="snapshot">
-                <img src="./metadata/HealthFlow2.png" alt="Kanban Board" />
-              </div>
-              <div class="snapshot">
-                <img src="./metadata/HealthFlow3.png" alt="Reports View" />
-              </div>
-              <div class="snapshot">
-                <img src="./metadata/HealthFlow.png" alt="Reports View" />
-              </div>
+
+        <div class="shots">
+          <div class="shots__frame" data-carousel>
+            <div class="shots__bar" aria-hidden="true">
+              <span class="shots__dot"></span><span class="shots__dot"></span><span class="shots__dot"></span>
+              <span class="shots__name">career-copilot</span>
             </div>
-            <div class="carousel-controls">
-              <button class="carousel-btn prev-btn" onclick="changeSnapshot(this, -1)">
-                <i class="fas fa-chevron-left"></i>
-              </button>
-              <div class="carousel-indicators">
-                <span class="indicator active" onclick="goToSnapshot(this, 0)"></span>
-                <span class="indicator" onclick="goToSnapshot(this, 1)"></span>
-                <span class="indicator" onclick="goToSnapshot(this, 2)"></span>
-                <span class="indicator" onclick="goToSnapshot(this, 3)"></span>
+            <div class="shots__stage">
+              <div class="shots__slide is-active" data-slide data-zoom><img src="metadata/CareerCopilot1.png" alt="Career Copilot upload and analysis screen" loading="lazy" /></div>
+              <div class="shots__slide" data-slide data-zoom><img src="metadata/CareerCopilot2.png" alt="Skill gap breakdown" loading="lazy" /></div>
+              <div class="shots__slide" data-slide data-zoom><img src="metadata/CareerCopilot3.png" alt="Recommended tutorials" loading="lazy" /></div>
+              <div class="shots__slide" data-slide data-zoom><img src="metadata/CareerCopilot4.png" alt="Saved learning plan" loading="lazy" /></div>
+            </div>
+            <div class="shots__controls">
+              <button class="shots__btn" data-carousel-nav="-1" type="button" aria-label="Previous screenshot"><svg><use href="#i-chevron-left"/></svg></button>
+              <div class="shots__dots">
+                <button class="shots__indicator is-active" data-dot type="button" aria-label="Screenshot 1"></button>
+                <button class="shots__indicator" data-dot type="button" aria-label="Screenshot 2"></button>
+                <button class="shots__indicator" data-dot type="button" aria-label="Screenshot 3"></button>
+                <button class="shots__indicator" data-dot type="button" aria-label="Screenshot 4"></button>
               </div>
-              <button class="carousel-btn next-btn" onclick="changeSnapshot(this, 1)">
-                <i class="fas fa-chevron-right"></i>
-              </button>
+              <button class="shots__btn" data-carousel-nav="1" type="button" aria-label="Next screenshot"><svg><use href="#i-chevron-right"/></svg></button>
             </div>
           </div>
+          <p class="shots__hint">Click a screenshot to enlarge</p>
         </div>
       </div>
-    <!-- Project 2: Modern AI Chatbot -->
-    <div class="project-card" data-aos="fade-up" data-aos-delay="300">
-      <div class="project-header">
-        <h2>Modern AI Chatbot</h2>
-        <div class="project-links">
-          <a href="https://github.com/ahmed-babay/chat-bot" target="_blank" class="github-link">
-            <i class="fab fa-github"></i>
-            View Code
+    </article>
+
+    <!-- 02 · AI Dataset Generator -------------------------------------------->
+    <article class="case" id="dataset-generator" data-tags="ai research" data-reveal>
+      <div class="case__head">
+        <div>
+          <span class="case__index">02 — NLP · Human-in-the-loop</span>
+          <h2 class="case__title">AI Dataset Generator</h2>
+          <p class="case__kicker">
+            A labelling factory for privacy-policy research: a fine-tuned mBERT
+            proposes, a human disposes, and a clean dataset comes out the other end.
+          </p>
+        </div>
+        <div class="case__actions">
+          <a class="btn btn--ghost btn--sm" href="https://github.com/ahmed-babay/mBERT_Project" target="_blank" rel="noopener">
+            <svg><use href="#i-github"/></svg> <span>Source</span>
           </a>
         </div>
       </div>
-      
-      <div class="project-content">
-        <div class="project-left">
-          <div class="project-description">
-            <p>Developed a full-stack personal AI chatbot application integrating Hugging Face's open-source LLM APIs powered by RAG (Retrieval-Augmented Generation) that answers questions about Ahmed Babay with vector similarity search.</p>
-            <p>Implemented secure backend architecture using Node.js and Express with CORS and Helmet security middleware. Built responsive React frontend with TypeScript for enhanced code maintainability and Tailwind CSS for modern UI design.</p>
-            <p>Features include persistent message history, real-time communication, and robust error handling.</p>
+
+      <div class="case__body">
+        <div class="case__story">
+          <div class="block">
+            <p class="block__label">The problem</p>
+            <p>
+              Supervised research on privacy policies needs labelled data, and
+              labelling policies by hand is slow, inconsistent between annotators,
+              and mind-numbing. Worse, most existing datasets are English-only —
+              which quietly excludes every policy that isn't.
+            </p>
           </div>
-          
-          <div class="project-tech">
-            <h3>Technologies Used</h3>
-            <div class="tech-bubbles">
-              <div class="tech-bubble">
-                <div class="tech-icon">⚛️</div>
-                <div class="tech-name">React</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">🟢</div>
-                <div class="tech-name">Node.js</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">🚄</div>
-                <div class="tech-name">Express</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">💎</div>
-                <div class="tech-name">TypeScript</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">🎨</div>
-                <div class="tech-name">Tailwind CSS</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">🤗</div>
-                <div class="tech-name">Huggingface</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">🔒</div>
-                <div class="tech-name">CORS & Helmet</div>
-              </div>
+
+          <div class="block">
+            <p class="block__label">What I built</p>
+            <ul class="block__list">
+              <li>Automated <strong>scraping and text-segmentation</strong> so raw policies arrive as clean, classifiable passages instead of walls of legal prose.</li>
+              <li>A <strong>GPU-accelerated fine-tuning pipeline</strong> for multilingual BERT, producing multi-label predictions with a confidence percentage per category.</li>
+              <li>A <strong>Vue.js annotation workspace</strong> where the model's suggestion is pre-filled and the human only has to confirm or correct it — turning labelling from authoring into reviewing.</li>
+              <li>Automated <strong>YAML export</strong> so finished datasets drop straight into downstream research pipelines.</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <p class="block__label">What I took from it</p>
+            <p>
+              The model was never the hard part. The leverage was in the interface:
+              a human confirming a confident prediction is dramatically faster than
+              a human labelling from a blank slate, and that single design decision
+              did more for throughput than any amount of extra training would have.
+              Choosing <strong>mBERT</strong> over an English-only model was the
+              other one that mattered — it made non-English policies first-class
+              instead of an afterthought.
+            </p>
+          </div>
+
+          <div class="case__stack">
+            <p class="case__stack-label">Stack</p>
+            <div class="chip-row">
+              <span class="chip"><i class="devicon-python-plain colored"></i> Python</span>
+              <span class="chip">mBERT</span>
+              <span class="chip"><i class="devicon-vuejs-plain colored"></i> Vue.js</span>
+              <span class="chip"><i class="devicon-express-original"></i> Express</span>
+              <span class="chip">GPU fine-tuning</span>
+              <span class="chip">Multi-label classification</span>
+              <span class="chip">YAML</span>
             </div>
           </div>
         </div>
-        
-        <div class="project-snapshots">
-          <h3>Project Snapshots</h3>
-          <div class="snapshot-carousel">
-            <div class="snapshot-container">
-              <div class="snapshot active">
-                <img src="./metadata/Chatbot1.png" alt="Screenshot 1" />
-              </div>
-              <div class="snapshot">
-                <img src="./metadata/Chatbot2.png" alt="Screenshot 2" />
-              </div>
+
+        <div class="shots">
+          <div class="shots__frame" data-carousel>
+            <div class="shots__bar" aria-hidden="true">
+              <span class="shots__dot"></span><span class="shots__dot"></span><span class="shots__dot"></span>
+              <span class="shots__name">mbert-project</span>
             </div>
-            <div class="carousel-controls">
-              <button class="carousel-btn prev-btn" onclick="changeSnapshot(this, -1)">
-                <i class="fas fa-chevron-left"></i>
-              </button>
-              <div class="carousel-indicators">
-                <span class="indicator active" onclick="goToSnapshot(this, 0)"></span>
-                <span class="indicator" onclick="goToSnapshot(this, 1)"></span>
+            <div class="shots__stage">
+              <div class="shots__slide is-active" data-slide data-zoom><img src="metadata/mBERT2.png" alt="Annotation workspace with model suggestions" loading="lazy" /></div>
+              <div class="shots__slide" data-slide data-zoom><img src="metadata/mBERT1.png" alt="Policy segmentation view" loading="lazy" /></div>
+              <div class="shots__slide" data-slide data-zoom><img src="metadata/mBERT3.png" alt="Dataset export view" loading="lazy" /></div>
+            </div>
+            <div class="shots__controls">
+              <button class="shots__btn" data-carousel-nav="-1" type="button" aria-label="Previous screenshot"><svg><use href="#i-chevron-left"/></svg></button>
+              <div class="shots__dots">
+                <button class="shots__indicator is-active" data-dot type="button" aria-label="Screenshot 1"></button>
+                <button class="shots__indicator" data-dot type="button" aria-label="Screenshot 2"></button>
+                <button class="shots__indicator" data-dot type="button" aria-label="Screenshot 3"></button>
               </div>
-              <button class="carousel-btn next-btn" onclick="changeSnapshot(this, 1)">
-                <i class="fas fa-chevron-right"></i>
-              </button>
+              <button class="shots__btn" data-carousel-nav="1" type="button" aria-label="Next screenshot"><svg><use href="#i-chevron-right"/></svg></button>
             </div>
           </div>
+          <p class="shots__hint">Click a screenshot to enlarge</p>
         </div>
       </div>
-    </div>
+    </article>
 
-    <!-- Project 3: AI Career Copilot -->
-    <div class="project-card" data-aos="fade-up" data-aos-delay="400">
-      <div class="project-header">
-        <h2>AI Career Copilot</h2>
-        <div class="project-links">
-          <a href="https://github.com/ahmed-babay/career_copilot" target="_blank" class="github-link">
-            <i class="fab fa-github"></i>
-            View Code
+    <!-- 03 · Personal AI Chatbot ---------------------------------------------->
+    <article class="case" id="ai-chatbot" data-tags="ai fullstack" data-reveal>
+      <div class="case__head">
+        <div>
+          <span class="case__index">03 — LLM systems · RAG</span>
+          <h2 class="case__title">Personal AI Chatbot</h2>
+          <p class="case__kicker">
+            A retrieval-augmented assistant that answers questions about my
+            background from a grounded corpus instead of improvising.
+          </p>
+        </div>
+        <div class="case__actions">
+          <a class="btn btn--ghost btn--sm" href="https://github.com/ahmed-babay/chat-bot" target="_blank" rel="noopener">
+            <svg><use href="#i-github"/></svg> <span>Source</span>
           </a>
         </div>
       </div>
-      
-      <div class="project-content">
-        <div class="project-left">
-          <div class="project-description">
-            <p>An AI-powered application that analyzes CVs and job descriptions using lightweight embedding models to detect skill gaps. The system extracts skills from both documents using local transformer models (no API dependencies), compares them to identify missing skills, and recommends personalized YouTube tutorials for each gap.</p>
-            <p>Built with a modern tech stack featuring Next.js frontend and Express.js backend, the application processes PDF and text CVs, performs semantic skill matching using embeddings, and integrates with YouTube Data API to fetch relevant learning resources. Users can save tutorials to a personalized learning plan stored locally.</p>
-            <p>Key features include local AI processing without external API dependencies, embedding-based skill extraction and comparison, intelligent skill gap detection (matched/missing/nice-to-have), YouTube tutorial recommendations, and persistent learning plan management.</p>
+
+      <div class="case__body">
+        <div class="case__story">
+          <div class="block">
+            <p class="block__label">The problem</p>
+            <p>
+              A CV tells you what someone did; it doesn't answer "has he actually
+              shipped anything with Redis?" A chatbot could — but a chatbot that
+              confidently invents details about my own career would be considerably
+              worse than having no chatbot at all.
+            </p>
           </div>
-          
-          <div class="project-tech">
-            <h3>Technologies Used</h3>
-            <div class="tech-bubbles">
-              <div class="tech-bubble">
-                <div class="tech-icon">⚡</div>
-                <div class="tech-name">Next.js</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">🚄</div>
-                <div class="tech-name">Express.js</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">🎨</div>
-                <div class="tech-name">Tailwind CSS</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">🤖</div>
-                <div class="tech-name">@xenova/transformers</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">📄</div>
-                <div class="tech-name">pdf-parse</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">📺</div>
-                <div class="tech-name">YouTube Data API</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">💾</div>
-                <div class="tech-name">LocalStorage</div>
-              </div>
+
+          <div class="block">
+            <p class="block__label">What I built</p>
+            <ul class="block__list">
+              <li>A <strong>RAG pipeline</strong>: a curated corpus about my background is embedded and searched by <strong>vector similarity</strong>, and only the retrieved passages are handed to the model as grounding.</li>
+              <li>An open-source LLM served through <strong>Hugging Face's APIs</strong>, rather than a proprietary hosted model.</li>
+              <li>A <strong>Node.js and Express</strong> backend hardened with <strong>Helmet</strong> and a CORS policy, so the API isn't an open relay to the model.</li>
+              <li>A <strong>React + TypeScript</strong> client with Tailwind, persistent message history, real-time responses, and error handling that fails visibly rather than silently.</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <p class="block__label">What I took from it</p>
+            <p>
+              Grounding beats model size. Once retrieval was doing its job, a modest
+              open-source model gave better answers than a larger one guessing from
+              its weights — because the failure mode changed from
+              <strong>confidently wrong</strong> to <strong>honestly unsure</strong>.
+              That trade is almost always the right one when the subject is facts
+              about a real person.
+            </p>
+          </div>
+
+          <div class="case__stack">
+            <p class="case__stack-label">Stack</p>
+            <div class="chip-row">
+              <span class="chip"><i class="devicon-typescript-plain colored"></i> TypeScript</span>
+              <span class="chip"><i class="devicon-react-original colored"></i> React</span>
+              <span class="chip"><i class="devicon-nodejs-plain colored"></i> Node.js</span>
+              <span class="chip"><i class="devicon-express-original"></i> Express</span>
+              <span class="chip">Hugging Face</span>
+              <span class="chip">RAG</span>
+              <span class="chip">Helmet &amp; CORS</span>
             </div>
           </div>
         </div>
-        
-        <div class="project-snapshots">
-          <h3>Project Snapshots</h3>
-          <div class="snapshot-carousel">
-            <div class="snapshot-container">
-              <div class="snapshot active">
-                <img src="./metadata/CareerCopilot1.png" alt="Career Copilot Screenshot 1" />
-              </div>
-              <div class="snapshot">
-                <img src="./metadata/CareerCopilot2.png" alt="Career Copilot Screenshot 2" />
-              </div>
-              <div class="snapshot">
-                <img src="./metadata/CareerCopilot3.png" alt="Career Copilot Screenshot 3" />
-              </div>
-              <div class="snapshot">
-                <img src="./metadata/CareerCopilot4.png" alt="Career Copilot Screenshot 4" />
-              </div>
+
+        <div class="shots">
+          <div class="shots__frame" data-carousel>
+            <div class="shots__bar" aria-hidden="true">
+              <span class="shots__dot"></span><span class="shots__dot"></span><span class="shots__dot"></span>
+              <span class="shots__name">chat-bot</span>
             </div>
-            <div class="carousel-controls">
-              <button class="carousel-btn prev-btn" onclick="changeSnapshot(this, -1)">
-                <i class="fas fa-chevron-left"></i>
-              </button>
-              <div class="carousel-indicators">
-                <span class="indicator active" onclick="goToSnapshot(this, 0)"></span>
-                <span class="indicator" onclick="goToSnapshot(this, 1)"></span>
-                <span class="indicator" onclick="goToSnapshot(this, 2)"></span>
-                <span class="indicator" onclick="goToSnapshot(this, 3)"></span>
+            <div class="shots__stage">
+              <div class="shots__slide is-active" data-slide data-zoom><img src="metadata/Chatbot1.png" alt="Chatbot answering a question about my background" loading="lazy" /></div>
+              <div class="shots__slide" data-slide data-zoom><img src="metadata/Chatbot2.png" alt="Chat interface with message history" loading="lazy" /></div>
+            </div>
+            <div class="shots__controls">
+              <button class="shots__btn" data-carousel-nav="-1" type="button" aria-label="Previous screenshot"><svg><use href="#i-chevron-left"/></svg></button>
+              <div class="shots__dots">
+                <button class="shots__indicator is-active" data-dot type="button" aria-label="Screenshot 1"></button>
+                <button class="shots__indicator" data-dot type="button" aria-label="Screenshot 2"></button>
               </div>
-              <button class="carousel-btn next-btn" onclick="changeSnapshot(this, 1)">
-                <i class="fas fa-chevron-right"></i>
-              </button>
+              <button class="shots__btn" data-carousel-nav="1" type="button" aria-label="Next screenshot"><svg><use href="#i-chevron-right"/></svg></button>
             </div>
           </div>
+          <p class="shots__hint">Click a screenshot to enlarge</p>
         </div>
       </div>
-    </div>
+    </article>
 
-    <!-- Project 4: StromCoach DE -->
-    <div class="project-card" data-aos="fade-up" data-aos-delay="600">
-      <div class="project-header">
-        <h2>StromCoach DE</h2>
-        <div class="project-links">
-          <a href="https://github.com/ahmed-babay/stromcoach-DE" target="_blank" class="github-link">
-            <i class="fab fa-github"></i>
-            View Code
+    <!-- 04 · hessian.AI research ---------------------------------------------->
+    <article class="case" id="hessian-research" data-tags="research ai" data-reveal>
+      <div class="case__head">
+        <div>
+          <span class="case__index">04 — Research residency</span>
+          <h2 class="case__title">Training-Free Temporal Grounding</h2>
+          <p class="case__kicker">
+            Six months in the hessian.AI Lab Program, working on finding the right
+            moment in a video without training a model to do it.
+          </p>
+        </div>
+        <div class="case__actions">
+          <a class="btn btn--ghost btn--sm" href="https://hessian.ai/" target="_blank" rel="noopener">
+            <svg><use href="#i-arrow-up-right"/></svg> <span>hessian.AI</span>
           </a>
         </div>
       </div>
-      
-      <div class="project-content">
-        <div class="project-left">
-          <div class="project-description">
-            <p>Developed a smart web application that helps German electricity consumers save money by finding the cheapest time windows to run their appliances. The app analyzes dynamic electricity tariffs using real-time data from Energy Charts API and calculates optimal scheduling for high-consumption devices.</p>
-            <p>Features include customizable planning with flat rate input, appliance duration settings, deadline configuration, savings calculator showing exact savings compared to flat rates, and persistent settings using localStorage.</p>
-            <p>Implemented server-side API routes as CORS proxy to fetch pricing data and sliding window algorithm for optimization.</p>
+
+      <div class="case__body">
+        <div class="case__story">
+          <div class="block">
+            <p class="block__label">The problem</p>
+            <p>
+              <strong>Temporal grounding</strong> is the task of taking a sentence
+              and locating the exact span of a video it describes. The standard
+              approach is to train on densely annotated video, which is expensive
+              to produce and doesn't transfer well beyond the domain it was
+              annotated in.
+            </p>
           </div>
-          
-          <div class="project-tech">
-            <h3>Technologies Used</h3>
-            <div class="tech-bubbles">
-              <div class="tech-bubble">
-                <div class="tech-icon">⚡</div>
-                <div class="tech-name">Next.js</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">⚛️</div>
-                <div class="tech-name">React</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">💎</div>
-                <div class="tech-name">TypeScript</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">🎨</div>
-                <div class="tech-name">Tailwind CSS</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">📊</div>
-                <div class="tech-name">Energy Charts API</div>
-              </div>
+
+          <div class="block">
+            <p class="block__label">What I worked on</p>
+            <ul class="block__list">
+              <li>Developed and evaluated <strong>training-free methods</strong> that use pretrained vision-language models directly, without fine-tuning on grounding annotations.</li>
+              <li>Built the evaluation setup to compare approaches consistently, and read into the surrounding literature to place the work properly.</li>
+              <li>Ran under the supervision of <strong>Prof. Dr. Marcus Rohrbach</strong> at TU Darmstadt, as a 9-ECTS component of the hessian.AI Lab Program.</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <p class="block__label">What I took from it</p>
+            <p>
+              Research discipline that carries directly into engineering: define
+              the metric before you fall in love with the method, make comparisons
+              genuinely like-for-like, and treat a negative result as information
+              rather than a failure. It also made me permanently sceptical of
+              benchmark numbers quoted without their evaluation protocol.
+            </p>
+          </div>
+
+          <div class="case__stack">
+            <p class="case__stack-label">Stack</p>
+            <div class="chip-row">
+              <span class="chip"><i class="devicon-python-plain colored"></i> Python</span>
+              <span class="chip"><i class="devicon-pytorch-original colored"></i> PyTorch</span>
+              <span class="chip">Vision-Language Models</span>
+              <span class="chip">Temporal grounding</span>
+              <span class="chip">Evaluation design</span>
             </div>
           </div>
         </div>
-        
-        <div class="project-snapshots">
-          <h3>Project Snapshots</h3>
-          <div class="snapshot-carousel">
-            <div class="snapshot-container">
-              <div class="snapshot active">
-                <img src="./metadata/Stromcoach1.png" alt="Screenshot 1" />
+
+        <div class="shots">
+          <div class="research-panel">
+            <span class="research-panel__logo"><img src="metadata/Hessian.AI.jpg" alt="hessian.AI logo" loading="lazy" /></span>
+            <dl>
+              <div>
+                <dt>Programme</dt>
+                <dd>hessian.AI Lab Program — research internship</dd>
               </div>
-              <div class="snapshot">
-                <img src="./metadata/Stromcoach2.png" alt="Screenshot 2" />
+              <div>
+                <dt>Duration</dt>
+                <dd>6 months · 9 ECTS</dd>
               </div>
-            </div>
-            <div class="carousel-controls">
-              <button class="carousel-btn prev-btn" onclick="changeSnapshot(this, -1)">
-                <i class="fas fa-chevron-left"></i>
-              </button>
-              <div class="carousel-indicators">
-                <span class="indicator active" onclick="goToSnapshot(this, 0)"></span>
-                <span class="indicator" onclick="goToSnapshot(this, 1)"></span>
+              <div>
+                <dt>Supervision</dt>
+                <dd>Prof. Dr. Marcus Rohrbach, TU Darmstadt</dd>
               </div>
-              <button class="carousel-btn next-btn" onclick="changeSnapshot(this, 1)">
-                <i class="fas fa-chevron-right"></i>
-              </button>
-            </div>
+              <div>
+                <dt>Area</dt>
+                <dd>Multimodal learning · video understanding</dd>
+              </div>
+            </dl>
           </div>
         </div>
       </div>
-    </div>
+    </article>
 
-    <!-- Project 2 -->
-    <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-      <div class="project-header">
-        <h2>AI Dataset Generator</h2>
-        <div class="project-links">
-          <a href="https://github.com/ahmed-babay/mBERT_Project" target="_blank" class="github-link">
-            <i class="fab fa-github"></i>
-            View Code
+    <!-- 05 · HealthFlow -------------------------------------------------------->
+    <article class="case" id="healthflow" data-tags="backend fullstack" data-reveal>
+      <div class="case__head">
+        <div>
+          <span class="case__index">05 — Backend · Enterprise</span>
+          <h2 class="case__title">HealthFlow</h2>
+          <p class="case__kicker">
+            A Spring Boot microservice for clinical data, built as if a real
+            hospital were going to depend on it.
+          </p>
+        </div>
+        <div class="case__actions">
+          <a class="btn btn--ghost btn--sm" href="https://github.com/ahmed-babay/patient-service" target="_blank" rel="noopener">
+            <svg><use href="#i-github"/></svg> <span>Source</span>
           </a>
         </div>
       </div>
-      
-      <div class="project-content">
-        <div class="project-left">
-          <div class="project-description">
-            <p>Engineered an intelligent dataset generation platform leveraging fine-tuned multilingual BERT models for privacy policy analysis. Developed automated web scraping and text segmentation algorithms to process privacy policies at scale.</p>
-            <p>Implemented machine learning pipeline with GPU-accelerated training using Python, resulting in accurate percentage-based classification suggestions.</p>
-            <p>Built interactive Vue.js interface for manual annotation and validation, with automated YML export functionality for seamless dataset integration across research applications.</p>
+
+      <div class="case__body">
+        <div class="case__story">
+          <div class="block">
+            <p class="block__label">The problem</p>
+            <p>
+              Healthcare software has an unusual combination of constraints: the
+              read volume is high and repetitive, the data model is genuinely
+              complicated — records, prescriptions, allergies, and the relationships
+              between them — and a validation bug isn't a bad user experience, it's
+              a safety incident.
+            </p>
           </div>
-          
-          <div class="project-tech">
-            <h3>Technologies Used</h3>
-            <div class="tech-bubbles">
-              <div class="tech-bubble">
-                <div class="tech-icon">🐍</div>
-                <div class="tech-name">Python</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">🚄</div>
-                <div class="tech-name">Express</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">💚</div>
-                <div class="tech-name">Vue.js</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">🤖</div>
-                <div class="tech-name">mBERT</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">🚀</div>
-                <div class="tech-name">GPU Fine-tuning</div>
-              </div>
-              <div class="tech-bubble">
-                <div class="tech-icon">📄</div>
-                <div class="tech-name">YML Dataset</div>
-              </div>
+
+          <div class="block">
+            <p class="block__label">What I built</p>
+            <ul class="block__list">
+              <li>A production-shaped <strong>Spring Boot microservice</strong> for patient management, with <strong>JWT authentication</strong> and role-based access control so clinical data is only reachable by the roles entitled to it.</li>
+              <li><strong>Redis caching</strong> targeted at the high-frequency read paths, rather than sprinkled everywhere — the point was to cut latency where it was actually being spent.</li>
+              <li><strong>Custom validators</strong> encoding medical safety rules, so invalid clinical combinations are rejected at the boundary instead of being stored and discovered later.</li>
+              <li>Complex domain modelling across medical records, prescriptions, and allergies, backed by comprehensive API tests.</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <p class="block__label">What I took from it</p>
+            <p>
+              In a safety-critical domain, validation is architecture. Pushing the
+              rules into custom validators at the edge — rather than leaving them
+              implicit in service code — meant the invariants were stated once,
+              testable in isolation, and impossible to forget at a new call site.
+            </p>
+          </div>
+
+          <div class="case__stack">
+            <p class="case__stack-label">Stack</p>
+            <div class="chip-row">
+              <span class="chip"><i class="devicon-java-plain colored"></i> Java</span>
+              <span class="chip"><i class="devicon-spring-plain colored"></i> Spring Boot</span>
+              <span class="chip"><i class="devicon-redis-plain colored"></i> Redis</span>
+              <span class="chip">JWT &amp; RBAC</span>
+              <span class="chip">REST APIs</span>
+              <span class="chip">Custom validation</span>
             </div>
           </div>
         </div>
-        
-        <div class="project-snapshots">
-          <h3>Project Snapshots</h3>
-          <div class="snapshot-carousel">
-            <div class="snapshot-container">
-              <div class="snapshot active">
-                <img src="./metadata/mBERT2.png" alt="Screenshot 1" />
-              </div>
-              <div class="snapshot">
-                <img src="./metadata/mBERT1.png" alt="Screenshot 2" />
-              </div>
-              <div class="snapshot">
-                <img src="./metadata/mBERT3.png" alt="Screenshot 3" />
-              </div>
+
+        <div class="shots">
+          <div class="shots__frame" data-carousel>
+            <div class="shots__bar" aria-hidden="true">
+              <span class="shots__dot"></span><span class="shots__dot"></span><span class="shots__dot"></span>
+              <span class="shots__name">patient-service</span>
             </div>
-            <div class="carousel-controls">
-              <button class="carousel-btn prev-btn" onclick="changeSnapshot(this, -1)">
-                <i class="fas fa-chevron-left"></i>
-              </button>
-              <div class="carousel-indicators">
-                <span class="indicator active" onclick="goToSnapshot(this, 0)"></span>
-                <span class="indicator" onclick="goToSnapshot(this, 1)"></span>
-                <span class="indicator" onclick="goToSnapshot(this, 2)"></span>
+            <div class="shots__stage">
+              <div class="shots__slide is-active" data-slide data-zoom><img src="metadata/HealthFlow1.png" alt="HealthFlow API overview" loading="lazy" /></div>
+              <div class="shots__slide" data-slide data-zoom><img src="metadata/HealthFlow2.png" alt="HealthFlow endpoint detail" loading="lazy" /></div>
+              <div class="shots__slide" data-slide data-zoom><img src="metadata/HealthFlow3.png" alt="HealthFlow data model" loading="lazy" /></div>
+              <div class="shots__slide" data-slide data-zoom><img src="metadata/HealthFlow.png" alt="HealthFlow service architecture" loading="lazy" /></div>
+            </div>
+            <div class="shots__controls">
+              <button class="shots__btn" data-carousel-nav="-1" type="button" aria-label="Previous screenshot"><svg><use href="#i-chevron-left"/></svg></button>
+              <div class="shots__dots">
+                <button class="shots__indicator is-active" data-dot type="button" aria-label="Screenshot 1"></button>
+                <button class="shots__indicator" data-dot type="button" aria-label="Screenshot 2"></button>
+                <button class="shots__indicator" data-dot type="button" aria-label="Screenshot 3"></button>
+                <button class="shots__indicator" data-dot type="button" aria-label="Screenshot 4"></button>
               </div>
-              <button class="carousel-btn next-btn" onclick="changeSnapshot(this, 1)">
-                <i class="fas fa-chevron-right"></i>
-              </button>
+              <button class="shots__btn" data-carousel-nav="1" type="button" aria-label="Next screenshot"><svg><use href="#i-chevron-right"/></svg></button>
             </div>
           </div>
+          <p class="shots__hint">Click a screenshot to enlarge</p>
         </div>
       </div>
+    </article>
+
+    <!-- 06 · StromCoach DE ----------------------------------------------------->
+    <article class="case" id="stromcoach" data-tags="fullstack" data-reveal>
+      <div class="case__head">
+        <div>
+          <span class="case__index">06 — Full-stack · Product</span>
+          <h2 class="case__title">StromCoach DE</h2>
+          <p class="case__kicker">
+            Tells German households the cheapest hour to run the dishwasher, and
+            exactly how much that decision saved them.
+          </p>
+        </div>
+        <div class="case__actions">
+          <a class="btn btn--ghost btn--sm" href="https://github.com/ahmed-babay/stromcoach-DE" target="_blank" rel="noopener">
+            <svg><use href="#i-github"/></svg> <span>Source</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="case__body">
+        <div class="case__story">
+          <div class="block">
+            <p class="block__label">The problem</p>
+            <p>
+              Dynamic electricity tariffs in Germany reprice every hour, so running
+              a high-consumption appliance at the wrong time quietly costs real
+              money. The data to avoid that is public — but it arrives as a price
+              curve, and nobody wants to read a chart to decide when to do laundry.
+            </p>
+          </div>
+
+          <div class="block">
+            <p class="block__label">What I built</p>
+            <ul class="block__list">
+              <li>Live pricing pulled from the <strong>Energy Charts API</strong> through a <strong>Next.js server-side route acting as a CORS proxy</strong>, so the browser never has to fight the upstream API's origin policy.</li>
+              <li>A <strong>sliding-window search</strong> over the price curve that finds the cheapest contiguous block long enough to run the appliance before the user's deadline.</li>
+              <li>A savings calculator that answers the only question that matters — <strong>how much cheaper is this than my flat rate?</strong> — in euros, not percentages.</li>
+              <li>Customisable flat rate, appliance duration, and deadline, all persisted in localStorage so returning users skip setup.</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <p class="block__label">What I took from it</p>
+            <p>
+              The algorithm was the easy half. The product only became useful once
+              the output stopped being "here is the price curve" and started being
+              "start it at 14:00, you'll save €0.62" — a reminder that the last
+              translation step, from correct answer to actionable one, is usually
+              where the value actually lives.
+            </p>
+          </div>
+
+          <div class="case__stack">
+            <p class="case__stack-label">Stack</p>
+            <div class="chip-row">
+              <span class="chip"><i class="devicon-nextjs-original"></i> Next.js</span>
+              <span class="chip"><i class="devicon-react-original colored"></i> React</span>
+              <span class="chip"><i class="devicon-typescript-plain colored"></i> TypeScript</span>
+              <span class="chip"><i class="devicon-tailwindcss-plain colored"></i> Tailwind CSS</span>
+              <span class="chip">Energy Charts API</span>
+              <span class="chip">Sliding window</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="shots">
+          <div class="shots__frame" data-carousel>
+            <div class="shots__bar" aria-hidden="true">
+              <span class="shots__dot"></span><span class="shots__dot"></span><span class="shots__dot"></span>
+              <span class="shots__name">stromcoach-de</span>
+            </div>
+            <div class="shots__stage">
+              <div class="shots__slide is-active" data-slide data-zoom><img src="metadata/Stromcoach1.png" alt="StromCoach cheapest-window recommendation" loading="lazy" /></div>
+              <div class="shots__slide" data-slide data-zoom><img src="metadata/Stromcoach2.png" alt="StromCoach price curve and savings calculator" loading="lazy" /></div>
+            </div>
+            <div class="shots__controls">
+              <button class="shots__btn" data-carousel-nav="-1" type="button" aria-label="Previous screenshot"><svg><use href="#i-chevron-left"/></svg></button>
+              <div class="shots__dots">
+                <button class="shots__indicator is-active" data-dot type="button" aria-label="Screenshot 1"></button>
+                <button class="shots__indicator" data-dot type="button" aria-label="Screenshot 2"></button>
+              </div>
+              <button class="shots__btn" data-carousel-nav="1" type="button" aria-label="Next screenshot"><svg><use href="#i-chevron-right"/></svg></button>
+            </div>
+          </div>
+          <p class="shots__hint">Click a screenshot to enlarge</p>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</div>
+
+<!-- Closer ------------------------------------------------------------------>
+<section class="closer">
+  <div class="container container--narrow">
+    <h2 data-reveal>Seen enough?</h2>
+    <p data-reveal style="--reveal-delay:100ms">
+      There's more on GitHub, and I'm always happy to talk through any of these in
+      more detail than a web page allows.
+    </p>
+    <div class="closer__actions" data-reveal style="--reveal-delay:180ms">
+      <a class="btn btn--primary" href="index.html#contact">
+        <svg><use href="#i-mail"/></svg> <span>Get in touch</span>
+      </a>
+      <a class="btn btn--ghost" href="https://github.com/ahmed-babay" target="_blank" rel="noopener">
+        <svg><use href="#i-github"/></svg> <span>Browse GitHub</span>
+      </a>
     </div>
+  </div>
+</section>
 
-    
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <p class="footer__note">© <span data-year>2026</span> Ahmed Babay — designed &amp; built in Darmstadt.</p>
+    <nav class="footer__links" aria-label="Elsewhere">
+      <a href="index.html">Profile</a>
+      <a href="https://github.com/ahmed-babay" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/ahmed-babay-0a6a9b1b1/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:ahmed.babay.personal@gmail.com">Email</a>
+    </nav>
+    <p class="footer__note mono">No frameworks. No trackers.</p>
+  </div>
+</footer>
+
+<!-- Command palette --------------------------------------------------------->
+<div class="palette" data-palette role="dialog" aria-modal="true" aria-label="Command palette">
+  <div class="palette__panel">
+    <div class="palette__search">
+      <svg><use href="#i-search"/></svg>
+      <input type="text" placeholder="Jump to a section, profile, or the CV…" aria-label="Search commands" />
     </div>
-  </section>
+    <div class="palette__list" data-palette-list role="listbox" aria-label="Commands"></div>
+    <div class="palette__foot">
+      <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
+      <span><kbd>↵</kbd> open</span>
+      <span><kbd>esc</kbd> close</span>
+    </div>
+  </div>
+</div>
 
-  <!-- Footer -->
-  <footer>
-    <p>© Ahmed Babay – Projects Portfolio</p>
-  </footer>
+<!-- Lightbox ---------------------------------------------------------------->
+<div class="lightbox" data-lightbox role="dialog" aria-modal="true" aria-label="Enlarged screenshot">
+  <button class="lightbox__close" data-lightbox-close type="button" aria-label="Close">
+    <svg><use href="#i-close"/></svg>
+  </button>
+  <img src="" alt="" />
+</div>
 
-  <script src="script.js"></script>
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  
-  <canvas id="particle-canvas"></canvas>
-  <script>
-    AOS.init();
-    
-    // Carousel functionality for project snapshots
-    function changeSnapshot(button, direction) {
-      const carousel = button.closest('.snapshot-carousel');
-      const container = carousel.querySelector('.snapshot-container');
-      const snapshots = container.querySelectorAll('.snapshot');
-      const indicators = carousel.querySelectorAll('.indicator');
-      
-      // Find current active snapshot
-      let currentIndex = 0;
-      snapshots.forEach((snapshot, index) => {
-        if (snapshot.classList.contains('active')) {
-          currentIndex = index;
-        }
-      });
-      
-      // Calculate new index
-      let newIndex = currentIndex + direction;
-      if (newIndex < 0) newIndex = snapshots.length - 1;
-      if (newIndex >= snapshots.length) newIndex = 0;
-      
-      // Update active states
-      snapshots[currentIndex].classList.remove('active');
-      snapshots[newIndex].classList.add('active');
-      indicators[currentIndex].classList.remove('active');
-      indicators[newIndex].classList.add('active');
-    }
-    
-    function goToSnapshot(indicator, index) {
-      const carousel = indicator.closest('.snapshot-carousel');
-      const container = carousel.querySelector('.snapshot-container');
-      const snapshots = container.querySelectorAll('.snapshot');
-      const indicators = carousel.querySelectorAll('.indicator');
-      
-      // Remove active class from all snapshots and indicators
-      snapshots.forEach(snapshot => snapshot.classList.remove('active'));
-      indicators.forEach(ind => ind.classList.remove('active'));
-      
-      // Add active class to selected snapshot and indicator
-      snapshots[index].classList.add('active');
-      indicator.classList.add('active');
-    }
-    
-    // Auto-advance carousels every 4 seconds
-    function autoAdvanceCarousels() {
-      const carousels = document.querySelectorAll('.snapshot-carousel');
-      carousels.forEach(carousel => {
-        const nextBtn = carousel.querySelector('.next-btn');
-        if (nextBtn) {
-          changeSnapshot(nextBtn, 1);
-        }
-      });
-    }
-    
-    // Start auto-advance after page loads
-    setTimeout(() => {
-      setInterval(autoAdvanceCarousels, 4000);
-    }, 2000);
-  </script>
+<!-- Toast ------------------------------------------------------------------->
+<div class="toast" data-toast role="status" aria-live="polite">
+  <svg><use href="#i-check"/></svg>
+  <span data-toast-text></span>
+</div>
+
+<script src="assets/js/theme.js" defer></script>
+<script src="assets/js/ui.js" defer></script>
+<script src="assets/js/palette.js" defer></script>
+<script src="assets/js/constellation.js" defer></script>
+
 </body>
 </html>
-
