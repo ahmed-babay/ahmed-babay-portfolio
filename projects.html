@@ -5,16 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <title>Case Studies — Ahmed Babay</title>
-<meta name="description" content="Six projects by Ahmed Babay, written up properly: local-first skill-gap analysis, an mBERT dataset factory, a RAG chatbot, vision-language research, a Spring Boot clinical microservice, and a dynamic electricity-tariff planner." />
+<meta name="description" content="Eight projects by Ahmed Babay, written up properly — led by Nimbus, an offline-capable voice assistant for Windows, and Morning Pulse, a resilient daily-briefing app." />
 <meta name="author" content="Ahmed Babay" />
 <meta name="theme-color" content="#08090c" />
 <link rel="canonical" href="https://ahmed-babay.github.io/ahmed-babay-portfolio/projects.html" />
 
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Case Studies — Ahmed Babay" />
-<meta property="og:description" content="Six projects, written up properly: the problem, what I built, and what came out of it." />
+<meta property="og:description" content="Eight projects, written up properly: the problem, what I built, and what came out of it." />
 <meta property="og:url" content="https://ahmed-babay.github.io/ahmed-babay-portfolio/projects.html" />
-<meta property="og:image" content="https://ahmed-babay.github.io/ahmed-babay-portfolio/metadata/AhmedBabay.jpg" />
+<meta property="og:image" content="https://ahmed-babay.github.io/ahmed-babay-portfolio/assets/img/portrait-800.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
 
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
@@ -129,13 +129,14 @@
     </a>
 
     <h1 class="display page-hero__title reveal-lines">
-      <span><i>Six projects,</i></span>
+      <span><i>Eight projects,</i></span>
       <span><i>written up <em class="accent-text">properly</em>.</i></span>
     </h1>
 
     <p class="lede page-hero__lede" data-reveal style="--reveal-delay:180ms">
       Not a gallery of screenshots. For each one: the problem that made it worth
-      building, what I actually built, and what I took away from it.
+      building, what I actually built, and what I took away from it. Nimbus first —
+      it is the biggest thing I have made.
     </p>
   </div>
 </section>
@@ -149,18 +150,250 @@
     <button type="button" data-filter="research" aria-pressed="false">Research</button>
     <button type="button" data-filter="fullstack" aria-pressed="false">Full-stack</button>
     <button type="button" data-filter="backend" aria-pressed="false">Backend</button>
-    <span class="filters__count"><span data-filter-count>6</span> shown</span>
+    <span class="filters__count"><span data-filter-count>8</span> shown</span>
   </div>
 </div>
 
 <div class="container">
   <div class="cases">
 
-    <!-- 01 · AI Career Copilot ---------------------------------------------->
+    <!-- 01 · Nimbus ---------------------------------------------------------->
+    <article class="case case--flagship" id="nimbus" data-tags="ai fullstack" data-reveal>
+      <div class="case__head">
+        <div>
+          <span class="case__index">
+            <span class="case__flag">Flagship</span> 01 — Desktop AI systems
+          </span>
+          <h2 class="case__title">Nimbus</h2>
+          <p class="case__kicker">
+            A voice-activated Windows overlay that answers out loud, renders rich
+            cards, and can run the whole speech-to-answer-to-speech loop on your
+            own machine.
+          </p>
+        </div>
+        <div class="case__actions">
+          <a class="btn btn--ghost btn--sm" href="https://github.com/ahmed-babay/nimbus" target="_blank" rel="noopener">
+            <svg><use href="#i-github"/></svg> <span>Source</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="case__body">
+        <div class="case__story">
+          <div class="block">
+            <p class="block__label">The problem</p>
+            <p>
+              Voice assistants make you choose: convenience or privacy. The
+              capable ones stream your microphone to someone else's servers; the
+              private ones can barely do anything. And on Windows the assistant
+              is either welded into the OS or a browser tab you have to go and
+              find.
+            </p>
+            <p>
+              I wanted something that appears on a keypress, answers, and
+              disappears — with no taskbar footprint, no signup chain, and no
+              requirement that my voice leave the machine at all.
+            </p>
+          </div>
+
+          <div class="block">
+            <p class="block__label">What I built</p>
+            <ul class="block__list">
+              <li>An <strong>Electron + React + TypeScript</strong> overlay bundled with electron-vite, living in the system tray and summoned by a global hotkey (<strong>Ctrl+Shift+Space</strong>). Tailwind v4 for the frosted glass, Framer Motion for the show/hide.</li>
+              <li>A voice pipeline that records until it hears silence, transcribes with <strong>Whisper</strong>, classifies intent through a structured-JSON call to <strong>Gemini</strong> (pulling out the city, the ticker, the destination), calls the right service, and speaks the answer back. The mic stays open for follow-ups.</li>
+              <li><strong>Rich cards rendered inline with no charting library</strong> — stock sparklines, weather, crypto, news with thumbnails, GitHub trending, live departure boards, and maps with drive/bike/walk/transit times side by side.</li>
+              <li><strong>Screen capture</strong> (Ctrl+Shift+S) freezes the display, you drag a box, and Gemini's vision model answers questions about that region — "what does this error mean?"</li>
+              <li><strong>Text actions</strong> (Ctrl+Shift+A) on any selected text anywhere in Windows: Fix, Rewrite, Summarize, Explain, Translate, Reply.</li>
+              <li><strong>Deep research</strong> that plans several searches, reads the raw pages in parallel, and synthesises from what it actually read rather than from model memory.</li>
+              <li><strong>Persistent memory</strong> — facts ("I take the RB68 to work"), reminders, calendar events, and a searchable archive of past answers.</li>
+              <li><strong>Local models on WebGPU</strong>: Whisper base, Qwen 3.5 0.8B, and Kokoro TTS download on demand and run in-process, with no separate toolkit to install.</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <p class="block__label">Decisions I'd defend</p>
+            <ul class="block__list">
+              <li><strong>Whisper instead of the browser's SpeechRecognition.</strong> Electron ships open-source Chromium, which has no proprietary Google API key — so the native speech API simply doesn't work. Found that by hitting it, and rebuilt the capture layer on MediaRecorder.</li>
+              <li><strong>Hotkey instead of a wake word</strong>, after Picovoice discontinued Porcupine's free tier. A hotkey is also the more honest design: nothing is listening until you say so.</li>
+              <li><strong>Keys never reach the renderer.</strong> Every service call runs in the main process, and stored keys use Electron's <code>safeStorage</code> — on Windows that's DPAPI, tied to your user account.</li>
+              <li><strong>Explicit capture only.</strong> No clipboard watching, no screen history, no ambient recording. Every screenshot costs a deliberate keypress. That rules out some genuinely useful features, and I think it is the right trade.</li>
+              <li><strong>Two-stage repair for place names.</strong> German station and place names wreck English-tuned transcription, so the transcriber gets a vocabulary hint of frequent places and the intent router expands whatever is left — turning "the airport" into the one you actually meant.</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <p class="block__label">What I took from it</p>
+            <p>
+              This is the largest thing I've built alone, and almost none of the
+              hard parts were the models. They were at the seams: what happens
+              when you start typing while the mic is still open, how a free tier
+              disappearing mid-project reshapes your architecture, where exactly
+              to draw the privacy line when the convenient answer is always
+              "capture more".
+            </p>
+            <p>
+              It also settled something for me about local inference. Running
+              speech and generation on-device is no longer a downgrade you accept
+              for privacy — for this class of task it's simply <strong>good
+              enough, free, and always available</strong>, which is the same
+              conclusion I keep reaching in my day job.
+            </p>
+          </div>
+
+          <div class="case__stack">
+            <p class="case__stack-label">Stack</p>
+            <div class="chip-row">
+              <span class="chip">Electron</span>
+              <span class="chip"><i class="devicon-react-original colored"></i> React</span>
+              <span class="chip"><i class="devicon-typescript-plain colored"></i> TypeScript</span>
+              <span class="chip"><i class="devicon-tailwindcss-plain colored"></i> Tailwind v4</span>
+              <span class="chip">WebGPU</span>
+              <span class="chip">Whisper</span>
+              <span class="chip">Gemini</span>
+              <span class="chip">Framer Motion</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="shots">
+          <div class="shots__frame" data-carousel>
+            <div class="shots__bar" aria-hidden="true">
+              <span class="shots__dot"></span><span class="shots__dot"></span><span class="shots__dot"></span>
+              <span class="shots__name">nimbus — overlay</span>
+            </div>
+            <div class="shots__stage shots__stage--contain" style="aspect-ratio: 5 / 4">
+              <div class="shots__slide is-active" data-slide data-zoom><img src="metadata/nimbus5.png" alt="Route answer with a map and drive, bike, walk and transit times" loading="lazy" /></div>
+              <div class="shots__slide" data-slide data-zoom><img src="metadata/nimbus2.png" alt="Nimbus listening, with a live waveform" loading="lazy" /></div>
+              <div class="shots__slide" data-slide data-zoom><img src="metadata/nimbus3.png" alt="Live train departure board, with the spoken answer highlighted as it is read" loading="lazy" /></div>
+              <div class="shots__slide" data-slide data-zoom><img src="metadata/nimbus4.png" alt="Stock cards with inline sparklines for AAPL, TSLA and MSFT" loading="lazy" /></div>
+              <div class="shots__slide" data-slide data-zoom><img src="metadata/nimbus9.png" alt="Text actions toolbar over selected text: Fix, Rewrite, Summarize, Explain, Translate, Reply" loading="lazy" /></div>
+              <div class="shots__slide" data-slide data-zoom><img src="metadata/nimbus7.png" alt="Live radio playing inside Nimbus" loading="lazy" /></div>
+              <div class="shots__slide" data-slide data-zoom><img src="metadata/nimbus8.png" alt="Command palette showing memory and on-screen capabilities" loading="lazy" /></div>
+              <div class="shots__slide" data-slide data-zoom><img src="metadata/nimbus6.png" alt="Slash-command surface listing daily briefing, calendar and reminder commands" loading="lazy" /></div>
+              <div class="shots__slide" data-slide data-zoom><img src="metadata/nimbus1.png" alt="Settings: choosing between on-device and cloud answer models, with remaining quota" loading="lazy" /></div>
+            </div>
+            <div class="shots__controls">
+              <button class="shots__btn" data-carousel-nav="-1" type="button" aria-label="Previous screenshot"><svg><use href="#i-chevron-left"/></svg></button>
+              <div class="shots__dots">
+                <button class="shots__indicator is-active" data-dot type="button" aria-label="Screenshot 1"></button>
+                <button class="shots__indicator" data-dot type="button" aria-label="Screenshot 2"></button>
+                <button class="shots__indicator" data-dot type="button" aria-label="Screenshot 3"></button>
+                <button class="shots__indicator" data-dot type="button" aria-label="Screenshot 4"></button>
+                <button class="shots__indicator" data-dot type="button" aria-label="Screenshot 5"></button>
+                <button class="shots__indicator" data-dot type="button" aria-label="Screenshot 6"></button>
+                <button class="shots__indicator" data-dot type="button" aria-label="Screenshot 7"></button>
+                <button class="shots__indicator" data-dot type="button" aria-label="Screenshot 8"></button>
+                <button class="shots__indicator" data-dot type="button" aria-label="Screenshot 9"></button>
+              </div>
+              <button class="shots__btn" data-carousel-nav="1" type="button" aria-label="Next screenshot"><svg><use href="#i-chevron-right"/></svg></button>
+            </div>
+          </div>
+          <p class="shots__hint">Click a screenshot to enlarge</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02 · Morning Pulse ---------------------------------------------------->
+    <article class="case" id="morning-pulse" data-tags="fullstack backend ai" data-reveal>
+      <div class="case__head">
+        <div>
+          <span class="case__index">02 — Full-stack · Product</span>
+          <h2 class="case__title">Morning Pulse</h2>
+          <p class="case__kicker">
+            One calm daily briefing — weather, markets, news, events and space —
+            normalised from a dozen APIs into an installable app that still works
+            when the network doesn't.
+          </p>
+        </div>
+        <div class="case__actions">
+          <a class="btn btn--ghost btn--sm" href="https://github.com/ahmed-babay/Morning-Pulse" target="_blank" rel="noopener">
+            <svg><use href="#i-github"/></svg> <span>Source</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="case__body">
+        <div class="case__story">
+          <div class="block">
+            <p class="block__label">The problem</p>
+            <p>
+              Starting the day means opening eight tabs: weather here, markets
+              there, crypto somewhere else, a news site, a calendar of holidays.
+              Every one of them formats its data differently, and none of them
+              tells you which parts actually changed enough to care about.
+            </p>
+          </div>
+
+          <div class="block">
+            <p class="block__label">What I built</p>
+            <ul class="block__list">
+              <li>A <strong>FastAPI</strong> backend (Python 3.12) whose briefing module handles <strong>provider orchestration, validation, normalisation, stale-on-error caching and RSS hardening</strong> — so eight very different upstreams arrive at the frontend in one shape.</li>
+              <li>A <strong>React + TypeScript</strong> frontend on Vite, with typed API hooks and domain widgets, <strong>TanStack Query</strong> for server state and caching, and <strong>Zustand</strong> for persisted theme, location and favourites.</li>
+              <li>Data pulled from <strong>Open-Meteo, CoinGecko, Frankfurter (ECB reference rates), Nager.Date, USGS, NASA EONET, Launch Library 2 and NASA APOD</strong>.</li>
+              <li>A <strong>service worker</strong> so that after one successful load the app shell and last-good query data stay available offline.</li>
+              <li>Hardening that assumes hostile input: CORS enforcement, rate limiting, explicit request validation, and RSS processing with size limits, HTTPS-only links, markup stripping and deduplication.</li>
+              <li>Shipped as <strong>Docker Compose</strong> with an Nginx proxy layer, TLS terminated at the edge, and containers running non-root.</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <p class="block__label">The call I'd defend</p>
+            <p>
+              <strong>Stale-on-error caching.</strong> A dashboard that aggregates
+              eight providers is otherwise only as reliable as the worst one that
+              morning — one flaky upstream and the whole page is a wall of error
+              cards. Serving the last good value with an honest timestamp is
+              almost always more useful than admitting defeat, and it turned a
+              fragile aggregator into something I actually open every day.
+            </p>
+          </div>
+
+          <div class="case__stack">
+            <p class="case__stack-label">Stack</p>
+            <div class="chip-row">
+              <span class="chip"><i class="devicon-react-original colored"></i> React</span>
+              <span class="chip"><i class="devicon-typescript-plain colored"></i> TypeScript</span>
+              <span class="chip"><i class="devicon-fastapi-plain colored"></i> FastAPI</span>
+              <span class="chip"><i class="devicon-python-plain colored"></i> Python 3.12</span>
+              <span class="chip">TanStack Query</span>
+              <span class="chip">Zustand</span>
+              <span class="chip"><i class="devicon-docker-plain colored"></i> Docker</span>
+              <span class="chip">Nginx</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="shots">
+          <div class="shots__frame" data-carousel>
+            <div class="shots__bar" aria-hidden="true">
+              <span class="shots__dot"></span><span class="shots__dot"></span><span class="shots__dot"></span>
+              <span class="shots__name">morning-pulse</span>
+            </div>
+            <div class="shots__stage shots__stage--contain" style="aspect-ratio: 2 / 1">
+              <div class="shots__slide is-active" data-slide data-zoom><img src="metadata/pulse1.png" alt="Morning Pulse overview with weather and live crypto markets" loading="lazy" /></div>
+              <div class="shots__slide" data-slide data-zoom><img src="metadata/pulse2.png" alt="Morning Pulse markets and news view" loading="lazy" /></div>
+              <div class="shots__slide" data-slide data-zoom><img src="metadata/pulse3.png" alt="Morning Pulse events and space launches view" loading="lazy" /></div>
+            </div>
+            <div class="shots__controls">
+              <button class="shots__btn" data-carousel-nav="-1" type="button" aria-label="Previous screenshot"><svg><use href="#i-chevron-left"/></svg></button>
+              <div class="shots__dots">
+                <button class="shots__indicator is-active" data-dot type="button" aria-label="Screenshot 1"></button>
+                <button class="shots__indicator" data-dot type="button" aria-label="Screenshot 2"></button>
+                <button class="shots__indicator" data-dot type="button" aria-label="Screenshot 3"></button>
+              </div>
+              <button class="shots__btn" data-carousel-nav="1" type="button" aria-label="Next screenshot"><svg><use href="#i-chevron-right"/></svg></button>
+            </div>
+          </div>
+          <p class="shots__hint">Click a screenshot to enlarge</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03 · AI Career Copilot ---------------------------------------------->
     <article class="case" id="career-copilot" data-tags="ai fullstack" data-reveal>
       <div class="case__head">
         <div>
-          <span class="case__index">01 — Applied ML · Full-stack</span>
+          <span class="case__index">03 — Applied ML · Full-stack</span>
           <h2 class="case__title">AI Career Copilot</h2>
           <p class="case__kicker">
             Reads your CV and a job description, tells you exactly which skills are
@@ -253,7 +486,7 @@
     <article class="case" id="dataset-generator" data-tags="ai research" data-reveal>
       <div class="case__head">
         <div>
-          <span class="case__index">02 — NLP · Human-in-the-loop</span>
+          <span class="case__index">04 — NLP · Human-in-the-loop</span>
           <h2 class="case__title">AI Dataset Generator</h2>
           <p class="case__kicker">
             A labelling factory for privacy-policy research: a fine-tuned mBERT
@@ -346,7 +579,7 @@
     <article class="case" id="ai-chatbot" data-tags="ai fullstack" data-reveal>
       <div class="case__head">
         <div>
-          <span class="case__index">03 — LLM systems · RAG</span>
+          <span class="case__index">05 — LLM systems · RAG</span>
           <h2 class="case__title">Personal AI Chatbot</h2>
           <p class="case__kicker">
             A retrieval-augmented assistant that answers questions about my
@@ -436,7 +669,7 @@
     <article class="case" id="hessian-research" data-tags="research ai" data-reveal>
       <div class="case__head">
         <div>
-          <span class="case__index">04 — Research residency</span>
+          <span class="case__index">06 — Research residency</span>
           <h2 class="case__title">Training-Free Temporal Grounding</h2>
           <p class="case__kicker">
             Six months in the hessian.AI Lab Program, working on finding the right
@@ -525,7 +758,7 @@
     <article class="case" id="healthflow" data-tags="backend fullstack" data-reveal>
       <div class="case__head">
         <div>
-          <span class="case__index">05 — Backend · Enterprise</span>
+          <span class="case__index">07 — Backend · Enterprise</span>
           <h2 class="case__title">HealthFlow</h2>
           <p class="case__kicker">
             A Spring Boot microservice for clinical data, built as if a real
@@ -617,7 +850,7 @@
     <article class="case" id="stromcoach" data-tags="fullstack" data-reveal>
       <div class="case__head">
         <div>
-          <span class="case__index">06 — Full-stack · Product</span>
+          <span class="case__index">08 — Full-stack · Product</span>
           <h2 class="case__title">StromCoach DE</h2>
           <p class="case__kicker">
             Tells German households the cheapest hour to run the dishwasher, and

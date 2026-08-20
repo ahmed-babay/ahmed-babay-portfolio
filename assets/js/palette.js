@@ -32,6 +32,15 @@
     { group: 'Navigate', label: 'Contact',       icon: 'section', href: 'index.html#contact' },
     { group: 'Navigate', label: 'All case studies', icon: 'section', href: 'projects.html' },
 
+    { group: 'Case studies', label: 'Nimbus — voice overlay for Windows', icon: 'section', href: 'projects.html#nimbus' },
+    { group: 'Case studies', label: 'Morning Pulse — daily briefing app', icon: 'section', href: 'projects.html#morning-pulse' },
+    { group: 'Case studies', label: 'AI Career Copilot', icon: 'section', href: 'projects.html#career-copilot' },
+    { group: 'Case studies', label: 'AI Dataset Generator', icon: 'section', href: 'projects.html#dataset-generator' },
+    { group: 'Case studies', label: 'Personal AI Chatbot', icon: 'section', href: 'projects.html#ai-chatbot' },
+    { group: 'Case studies', label: 'hessian.AI Lab research', icon: 'section', href: 'projects.html#hessian-research' },
+    { group: 'Case studies', label: 'HealthFlow', icon: 'section', href: 'projects.html#healthflow' },
+    { group: 'Case studies', label: 'StromCoach DE', icon: 'section', href: 'projects.html#stromcoach' },
+
     { group: 'Elsewhere', label: 'GitHub',   icon: 'link', href: 'https://github.com/ahmed-babay', external: true },
     { group: 'Elsewhere', label: 'LinkedIn', icon: 'link', href: 'https://www.linkedin.com/in/ahmed-babay-0a6a9b1b1/', external: true },
 
