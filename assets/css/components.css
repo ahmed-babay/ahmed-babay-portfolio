@@ -588,20 +588,34 @@ kbd {
    backgrounds — Reply's wordmark is near-black on transparent and simply
    disappears on our dark surface otherwise. Width is intrinsic so wide
    wordmarks are not crushed into a square. */
+/* Symmetric padding plus min-width == height means the plate sizes itself to
+   the mark: a square logo lands on an exactly square plate, while a wide
+   wordmark (Reply is 3.76:1) pushes the plate out to a rectangle on its own. */
 .entry__logo {
+  --logo-h: 32px;
+  --logo-pad: 6px;
+  /* +2px covers the 1px border on each side, since box-sizing is border-box.
+     Height and min-width then resolve to the same number, so a square mark
+     produces an exactly square plate. */
+  --logo-box: calc(var(--logo-h) + var(--logo-pad) * 2 + 2px);
   margin-top: var(--s-4);
-  height: 40px;
-  max-width: 140px;
+  height: var(--logo-box);
+  min-width: var(--logo-box);
+  max-width: 150px;
   border-radius: var(--r-sm);
   background: #fff;
   border: 1px solid var(--border);
   display: inline-grid;
   place-items: center;
   overflow: hidden;
-  padding: 6px 10px;
+  padding: var(--logo-pad);
 }
 
-.entry__logo img { max-height: 100%; width: auto; max-width: 100%; object-fit: contain; }
+/* A fixed height, not a percentage: inside a shrink-to-fit grid a percentage
+   height is indeterminate, so the img falls back to contributing its intrinsic
+   width — which is exactly what stretched square marks into rectangles. With a
+   fixed height the width follows the logo's own aspect ratio. */
+.entry__logo img { height: var(--logo-h); width: auto; object-fit: contain; }
 
 .entry__body { padding-right: 0; }
 @media (min-width: 860px) { .entry__body { padding-left: var(--s-7); } }
@@ -891,3 +905,12 @@ kbd {
 
 .toast.is-visible { opacity: 1; transform: none; }
 .toast svg { width: 16px; height: 16px; color: var(--accent); }
+
+/* --------------------------------------------------------------------------
+   Third-party icon overrides
+   -------------------------------------------------------------------------- */
+
+/* Devicon's single-colour Python glyph ships in the logo's yellow (#ffd845).
+   Use the brand blue instead, tuned per theme so it stays legible on both. */
+.devicon-python-plain.colored { color: #5a9fd4; }
+:root[data-theme="light"] .devicon-python-plain.colored { color: #3776ab; }
