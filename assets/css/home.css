@@ -16,15 +16,23 @@
 
 .hero__grid {
   display: grid;
-  gap: var(--s-9);
+  gap: var(--s-7);
   align-items: center;
 }
 
+/* On desktop the portrait spans both text rows on the right. On mobile the
+   source order does the work: intro, then portrait, then the meta strip —
+   so the photo lands just after the CTAs instead of below the fold. */
 @media (min-width: 940px) {
   .hero__grid {
     grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
-    gap: var(--s-10);
+    grid-template-rows: auto auto;
+    gap: var(--s-7) var(--s-10);
   }
+
+  .hero__intro { grid-column: 1; grid-row: 1; }
+  .hero__aside { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+  .hero__meta  { grid-column: 1; grid-row: 2; }
 }
 
 .hero__status { margin-bottom: var(--s-6); }
@@ -49,7 +57,6 @@
   flex-wrap: wrap;
   align-items: center;
   gap: var(--s-3);
-  margin-bottom: var(--s-8);
 }
 
 .hero__meta {
@@ -343,12 +350,21 @@
 @media (min-width: 720px) { .stacks { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1080px) { .stacks { grid-template-columns: repeat(4, 1fr); } }
 
-.stack { padding: var(--s-6); }
+/* Flex column + auto-margin on the note keeps all four footers on one line,
+   however unevenly the lists above them wrap. */
+.stack {
+  padding: var(--s-6);
+  display: flex;
+  flex-direction: column;
+}
 
+/* min-height holds the rule at the same y across all four cards, even when a
+   longer title wraps to two lines. */
 .stack__head {
   display: flex;
   align-items: center;
   gap: var(--s-3);
+  min-height: 3.4rem;
   padding-bottom: var(--s-4);
   margin-bottom: var(--s-5);
   border-bottom: 1px solid var(--border);
@@ -381,9 +397,18 @@
 
 .stack__item:hover i { filter: none; transform: scale(1.12); }
 
+/* Sprite icon standing in where no brand mark exists */
+.stack__item svg {
+  width: 16px;
+  height: 16px;
+  margin-inline: 2px;
+  flex: none;
+  color: var(--accent);
+}
+
 .stack__note {
-  margin-top: var(--s-5);
-  padding-top: var(--s-4);
+  margin-top: auto;
+  padding-top: var(--s-5);
   border-top: 1px solid var(--border);
   font-family: var(--font-mono);
   font-size: var(--fs-label);
@@ -493,6 +518,8 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-3);
+  white-space: nowrap;
+  flex: none;
 }
 
 .fact__val { font-size: var(--fs-sm); font-weight: 500; text-align: right; }

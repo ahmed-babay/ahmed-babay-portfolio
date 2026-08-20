@@ -26,8 +26,8 @@
   var w = 0;
   var h = 0;
 
-  var LINK_DIST = 165;
-  var POINTER_DIST = 240;
+  var LINK_DIST = 150;
+  var POINTER_DIST = 230;
 
   /* Accent is read from the stylesheet so the canvas always matches the theme. */
   var accent = [94, 241, 200];
@@ -71,7 +71,7 @@
   function seed() {
     // Scale with viewport area, but hold a hard ceiling so large monitors do
     // not quietly turn this into an O(n^2) space heater.
-    var count = Math.min(88, Math.floor((w * h) / 15000));
+    var count = Math.min(58, Math.floor((w * h) / 24000));
     nodes = [];
 
     for (var i = 0; i < count; i++) {
@@ -86,10 +86,11 @@
   }
 
   function draw() {
+    // Kept deliberately faint: this is a texture behind the type, not a feature.
     var light = isLight();
-    var lineScale = light ? 0.22 : 0.34;
-    var nodeAlpha = light ? 0.55 : 0.7;
-    var haloAlpha = light ? 0.08 : 0.16;
+    var lineScale = light ? 0.14 : 0.17;
+    var nodeAlpha = light ? 0.34 : 0.40;
+    var haloAlpha = light ? 0.05 : 0.08;
 
     ctx.clearRect(0, 0, w, h);
 
@@ -134,7 +135,7 @@
         if (md2 >= POINTER_DIST * POINTER_DIST) continue;
 
         var mt = 1 - Math.sqrt(md2) / POINTER_DIST;
-        ctx.strokeStyle = rgba((mt * (light ? 0.3 : 0.45)).toFixed(3));
+        ctx.strokeStyle = rgba((mt * (light ? 0.22 : 0.3)).toFixed(3));
         ctx.beginPath();
         ctx.moveTo(m.x, m.y);
         ctx.lineTo(pointer.x, pointer.y);
