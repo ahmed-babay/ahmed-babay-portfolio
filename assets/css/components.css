@@ -1,0 +1,916 @@
+/* ==========================================================================
+   components.css : nav, buttons, chips, cards, timeline, forms, footer
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Scroll progress
+   -------------------------------------------------------------------------- */
+
+.progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 100%;
+  z-index: 200;
+  transform-origin: 0 50%;
+  transform: scaleX(var(--progress, 0));
+  background: linear-gradient(90deg, var(--accent), var(--warm));
+  transition: transform 0.1s linear;
+}
+
+/* --------------------------------------------------------------------------
+   Navigation
+   -------------------------------------------------------------------------- */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 120;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid transparent;
+  transition: background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease),
+              backdrop-filter var(--dur) var(--ease);
+}
+
+.nav.is-stuck {
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border-bottom-color: var(--border);
+}
+
+.nav__inner {
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: var(--s-5);
+}
+
+/* Monogram */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  font-size: 1.0625rem;
+  margin-right: auto;
+}
+
+.brand__mark {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-sm);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  transition: transform var(--dur) var(--ease);
+}
+
+.brand:hover .brand__mark { transform: rotate(-8deg) scale(1.06); }
+
+.brand__name { display: none; }
+@media (min-width: 480px) { .brand__name { display: inline; } }
+
+.nav__links {
+  display: none;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+@media (min-width: 900px) { .nav__links { display: flex; } }
+
+.nav__link {
+  position: relative;
+  padding: var(--s-2) var(--s-4);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--text-2);
+  border-radius: var(--r-sm);
+  transition: color var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease);
+}
+
+.nav__link:hover { color: var(--text); background: var(--surface-2); }
+
+.nav__link.is-active { color: var(--text); }
+
+.nav__link.is-active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 2px;
+  translate: -50% 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.nav__actions { display: flex; align-items: center; gap: var(--s-2); }
+
+/* Icon button — theme toggle, command palette, menu */
+.icon-btn {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-2);
+  transition: color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease),
+              background-color var(--dur-fast) var(--ease),
+              transform var(--dur-fast) var(--ease);
+}
+
+.icon-btn:hover {
+  color: var(--text);
+  border-color: var(--border-2);
+  background: var(--surface-2);
+  transform: translateY(-1px);
+}
+
+.icon-btn svg { width: 17px; height: 17px; }
+
+/* Theme toggle swaps its two glyphs */
+.theme-toggle .icon-moon { display: none; }
+:root[data-theme="light"] .theme-toggle .icon-moon { display: block; }
+:root[data-theme="light"] .theme-toggle .icon-sun { display: none; }
+
+/* ⌘K trigger */
+.kbd-btn {
+  display: none;
+  align-items: center;
+  gap: var(--s-3);
+  height: 38px;
+  padding-inline: var(--s-3) var(--s-2);
+  border-radius: var(--r-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-3);
+  font-size: var(--fs-xs);
+  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+
+.kbd-btn:hover { color: var(--text-2); border-color: var(--border-2); }
+.kbd-btn svg { width: 15px; height: 15px; }
+
+@media (min-width: 1080px) { .kbd-btn { display: inline-flex; } }
+
+kbd {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  padding: 2px 6px;
+  border-radius: var(--r-xs);
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  color: var(--text-3);
+  line-height: 1.4;
+}
+
+.nav__menu-btn { display: grid; }
+@media (min-width: 900px) { .nav__menu-btn { display: none; } }
+
+/* Mobile drawer */
+.drawer {
+  position: fixed;
+  inset: var(--nav-h) 0 auto 0;
+  z-index: 110;
+  background: color-mix(in srgb, var(--bg) 96%, transparent);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  padding: var(--s-4) var(--gutter) var(--s-7);
+  display: grid;
+  gap: var(--s-1);
+  transform: translateY(-110%);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease), visibility var(--dur);
+}
+
+.drawer.is-open { transform: none; opacity: 1; visibility: visible; }
+
+.drawer a {
+  padding: var(--s-4) var(--s-2);
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-2);
+}
+
+.drawer a:hover { color: var(--accent); }
+.drawer a .mono { color: var(--text-3); }
+
+@media (min-width: 900px) { .drawer { display: none; } }
+
+/* --------------------------------------------------------------------------
+   Buttons
+   -------------------------------------------------------------------------- */
+
+.btn {
+  --btn-bg: var(--surface);
+  --btn-fg: var(--text);
+  --btn-bd: var(--border-2);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-3);
+  padding: 0.8rem 1.35rem;
+  border-radius: var(--r-full);
+  border: 1px solid var(--btn-bd);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: transform var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease),
+              background-color var(--dur-fast) var(--ease),
+              box-shadow var(--dur-fast) var(--ease);
+}
+
+.btn svg { width: 16px; height: 16px; flex: none; }
+
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+
+.btn--primary {
+  --btn-bg: var(--accent);
+  --btn-fg: var(--accent-ink);
+  --btn-bd: transparent;
+  box-shadow: 0 8px 28px -10px var(--accent-glow);
+}
+
+.btn--primary:hover {
+  --btn-bg: var(--accent-2);
+  box-shadow: 0 14px 36px -10px var(--accent-glow);
+}
+
+.btn--ghost { --btn-bg: transparent; }
+.btn--ghost:hover { --btn-bg: var(--surface-2); --btn-bd: var(--border-3); }
+
+.btn--sm { padding: 0.55rem 1rem; font-size: var(--fs-xs); }
+
+/* Arrow that slides on hover */
+.btn .arrow { transition: transform var(--dur-fast) var(--ease); }
+.btn:hover .arrow { transform: translateX(3px); }
+
+/* Text-only forward link */
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.text-link svg { width: 15px; height: 15px; transition: transform var(--dur-fast) var(--ease); }
+.text-link:hover svg { transform: translateX(4px); }
+
+/* --------------------------------------------------------------------------
+   Chips / tags / badges
+   -------------------------------------------------------------------------- */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 0.32rem 0.7rem;
+  border-radius: var(--r-full);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--text-2);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.chip i { font-size: 0.95em; }
+
+.chip--accent {
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.chip-row { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+
+/* Status pill with a live pulse */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: 0.4rem 0.9rem 0.4rem 0.7rem;
+  border-radius: var(--r-full);
+  border: 1px solid var(--accent-line);
+  background: var(--accent-soft);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+
+.status__dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  position: relative;
+  flex: none;
+}
+
+.status__dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: ping 2.2s var(--ease-in-out) infinite;
+}
+
+@keyframes ping {
+  0%   { transform: scale(1);   opacity: 0.7; }
+  70%  { transform: scale(2.8); opacity: 0; }
+  100% { transform: scale(2.8); opacity: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   Surface card
+   -------------------------------------------------------------------------- */
+
+.card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  transition: border-color var(--dur) var(--ease),
+              transform var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease);
+}
+
+.card:hover { border-color: var(--border-2); }
+
+/* Cursor-tracking sheen, driven by --mx / --my from JS */
+.card--glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    22rem circle at var(--mx, 50%) var(--my, 0%),
+    var(--accent-line),
+    transparent 45%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+  pointer-events: none;
+}
+
+.card--glow:hover::before { opacity: 1; }
+
+/* --------------------------------------------------------------------------
+   Metrics
+   -------------------------------------------------------------------------- */
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+
+@media (min-width: 760px) { .metrics { grid-template-columns: repeat(4, 1fr); } }
+
+.metric {
+  background: var(--bg);
+  padding: var(--s-5) var(--s-5) var(--s-4);
+  transition: background-color var(--dur) var(--ease);
+}
+
+.metric:hover { background: var(--surface); }
+
+.metric__value {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.35rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--text);
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.metric__value .unit { font-size: 0.5em; color: var(--accent); }
+
+.metric__label {
+  margin-top: var(--s-3);
+  font-size: var(--fs-xs);
+  color: var(--text-3);
+  line-height: 1.45;
+}
+
+/* --------------------------------------------------------------------------
+   Logo marquee
+   -------------------------------------------------------------------------- */
+
+.marquee {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--s-6);
+  border-block: 1px solid var(--border);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.marquee__track {
+  display: flex;
+  align-items: center;
+  gap: var(--s-10);
+  width: max-content;
+  animation: scroll-x 38s linear infinite;
+}
+
+.marquee:hover .marquee__track { animation-play-state: paused; }
+
+@keyframes scroll-x {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee__item {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  flex: none;
+  color: var(--text-3);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.marquee__item:hover { color: var(--text); }
+
+/* Same reasoning as .entry__logo — a light plate so dark wordmarks survive. */
+.marquee__item img {
+  height: 34px;
+  width: auto;
+  max-width: 120px;
+  object-fit: contain;
+  padding: 5px 9px;
+  border-radius: var(--r-xs);
+  background: #fff;
+  filter: grayscale(1);
+  opacity: 0.55;
+  transition: filter var(--dur-fast) var(--ease), opacity var(--dur-fast) var(--ease);
+}
+
+.marquee__item:hover img { filter: none; opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track { animation: none; }
+  .marquee { -webkit-mask-image: none; mask-image: none; overflow-x: auto; }
+}
+
+/* --------------------------------------------------------------------------
+   Timeline (experience)
+   -------------------------------------------------------------------------- */
+
+.timeline { position: relative; }
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: linear-gradient(var(--accent-line), var(--border), transparent);
+}
+
+@media (min-width: 860px) { .timeline::before { left: 200px; } }
+
+.entry {
+  position: relative;
+  padding-left: var(--s-7);
+  padding-block: var(--s-6);
+  border-bottom: 1px solid var(--border);
+}
+
+.entry:last-child { border-bottom: 0; }
+
+@media (min-width: 860px) {
+  .entry {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: var(--s-8);
+    padding-left: 0;
+  }
+}
+
+.entry__dot {
+  position: absolute;
+  left: 0;
+  top: calc(var(--s-6) + 0.55rem);
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--border-3);
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+
+@media (min-width: 860px) { .entry__dot { left: 195px; } }
+
+.entry:hover .entry__dot,
+.entry.is-current .entry__dot {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.entry__meta { padding-top: 0.2rem; }
+
+.entry__period {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-3);
+  letter-spacing: 0.01em;
+}
+
+/* Employment-type flag, e.g. Full-time */
+.entry__tag {
+  display: inline-block;
+  margin-top: var(--s-2);
+  padding: 0.18rem 0.55rem;
+  border-radius: var(--r-full);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* A light plate behind every company mark. Most logos are drawn for white
+   backgrounds — Reply's wordmark is near-black on transparent and simply
+   disappears on our dark surface otherwise. Width is intrinsic so wide
+   wordmarks are not crushed into a square. */
+/* Symmetric padding plus min-width == height means the plate sizes itself to
+   the mark: a square logo lands on an exactly square plate, while a wide
+   wordmark (Reply is 3.76:1) pushes the plate out to a rectangle on its own. */
+.entry__logo {
+  --logo-h: 32px;
+  --logo-pad: 6px;
+  /* +2px covers the 1px border on each side, since box-sizing is border-box.
+     Height and min-width then resolve to the same number, so a square mark
+     produces an exactly square plate. */
+  --logo-box: calc(var(--logo-h) + var(--logo-pad) * 2 + 2px);
+  margin-top: var(--s-4);
+  height: var(--logo-box);
+  min-width: var(--logo-box);
+  max-width: 150px;
+  border-radius: var(--r-sm);
+  background: #fff;
+  border: 1px solid var(--border);
+  display: inline-grid;
+  place-items: center;
+  overflow: hidden;
+  padding: var(--logo-pad);
+}
+
+/* A fixed height, not a percentage: inside a shrink-to-fit grid a percentage
+   height is indeterminate, so the img falls back to contributing its intrinsic
+   width — which is exactly what stretched square marks into rectangles. With a
+   fixed height the width follows the logo's own aspect ratio. */
+.entry__logo img { height: var(--logo-h); width: auto; object-fit: contain; }
+
+.entry__body { padding-right: 0; }
+@media (min-width: 860px) { .entry__body { padding-left: var(--s-7); } }
+
+.entry__role {
+  font-size: 1.25rem;
+  margin-bottom: var(--s-2);
+}
+
+.entry__org {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: var(--s-4);
+}
+
+.entry__org svg { width: 13px; height: 13px; opacity: 0; transition: opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease); }
+.entry__org:hover svg { opacity: 1; transform: translate(2px, -2px); }
+
+.entry__list { display: grid; gap: var(--s-3); margin-bottom: var(--s-5); }
+
+.entry__list li {
+  position: relative;
+  padding-left: var(--s-5);
+  color: var(--text-2);
+  font-size: var(--fs-sm);
+  line-height: 1.68;
+}
+
+.entry__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.68em;
+  width: 6px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.entry__list strong { color: var(--text); font-weight: 600; }
+
+/* --------------------------------------------------------------------------
+   Forms
+   -------------------------------------------------------------------------- */
+
+.field { display: grid; gap: var(--s-2); }
+
+.field label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+  color: var(--text);
+  font-size: var(--fs-sm);
+  transition: border-color var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease);
+}
+
+.field input::placeholder,
+.field textarea::placeholder { color: var(--text-3); }
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--surface);
+}
+
+.field textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+
+.footer {
+  border-top: 1px solid var(--border);
+  padding-block: var(--s-8) var(--s-7);
+}
+
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-5);
+}
+
+.footer__note { font-size: var(--fs-xs); color: var(--text-3); }
+
+.footer__links { display: flex; flex-wrap: wrap; gap: var(--s-5); }
+
+.footer__links a {
+  font-size: var(--fs-xs);
+  color: var(--text-3);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.footer__links a:hover { color: var(--accent); }
+
+/* --------------------------------------------------------------------------
+   Command palette
+   -------------------------------------------------------------------------- */
+
+.palette {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-items: start center;
+  padding: clamp(3rem, 12vh, 8rem) var(--s-4) var(--s-4);
+  background: color-mix(in srgb, var(--bg) 62%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--dur-fast) var(--ease), visibility var(--dur-fast);
+}
+
+.palette.is-open { opacity: 1; visibility: visible; }
+
+.palette__panel {
+  width: min(560px, 100%);
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  transform: translateY(-10px) scale(0.98);
+  transition: transform var(--dur) var(--ease);
+}
+
+.palette.is-open .palette__panel { transform: none; }
+
+.palette__search {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-4) var(--s-5);
+  border-bottom: 1px solid var(--border);
+}
+
+.palette__search svg { width: 17px; height: 17px; color: var(--text-3); flex: none; }
+
+.palette__search input {
+  flex: 1;
+  border: 0;
+  background: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+.palette__list { max-height: min(52vh, 380px); overflow-y: auto; padding: var(--s-2); }
+
+.palette__group {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  padding: var(--s-3) var(--s-3) var(--s-2);
+}
+
+.palette__item {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  width: 100%;
+  padding: var(--s-3);
+  border-radius: var(--r-sm);
+  font-size: var(--fs-sm);
+  color: var(--text-2);
+  text-align: left;
+  transition: background-color 0.12s var(--ease), color 0.12s var(--ease);
+}
+
+.palette__item svg { width: 16px; height: 16px; color: var(--text-3); flex: none; }
+
+.palette__item[aria-selected="true"] {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.palette__item[aria-selected="true"] svg { color: var(--accent); }
+
+.palette__item .hint { margin-left: auto; font-family: var(--font-mono); font-size: var(--fs-label); color: var(--text-3); }
+
+.palette__empty { padding: var(--s-6); text-align: center; color: var(--text-3); font-size: var(--fs-sm); }
+
+.palette__foot {
+  display: flex;
+  gap: var(--s-5);
+  padding: var(--s-3) var(--s-5);
+  border-top: 1px solid var(--border);
+  font-size: var(--fs-label);
+  color: var(--text-3);
+}
+
+.palette__foot span { display: inline-flex; align-items: center; gap: var(--s-2); }
+
+/* --------------------------------------------------------------------------
+   Lightbox
+   -------------------------------------------------------------------------- */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: grid;
+  place-items: center;
+  padding: var(--s-6);
+  background: rgba(4, 6, 10, 0.88);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--dur-fast) var(--ease), visibility var(--dur-fast);
+}
+
+.lightbox.is-open { opacity: 1; visibility: visible; }
+
+.lightbox img {
+  max-width: min(1200px, 94vw);
+  max-height: 86vh;
+  width: auto;
+  object-fit: contain;
+  border-radius: var(--r);
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: var(--shadow-lg);
+  transform: scale(0.97);
+  transition: transform var(--dur) var(--ease);
+}
+
+.lightbox.is-open img { transform: none; }
+
+.lightbox__close {
+  position: absolute;
+  top: var(--s-5);
+  right: var(--s-5);
+  width: 42px; height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.14);
+  color: #fff;
+}
+
+.lightbox__close:hover { background: rgba(255,255,255,.16); }
+.lightbox__close svg { width: 18px; height: 18px; }
+
+/* --------------------------------------------------------------------------
+   Toast
+   -------------------------------------------------------------------------- */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: var(--s-6);
+  translate: -50% 0;
+  z-index: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-3) var(--s-5);
+  border-radius: var(--r-full);
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  box-shadow: var(--shadow);
+  font-size: var(--fs-sm);
+  opacity: 0;
+  transform: translateY(14px);
+  pointer-events: none;
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+.toast.is-visible { opacity: 1; transform: none; }
+.toast svg { width: 16px; height: 16px; color: var(--accent); }
+
+/* --------------------------------------------------------------------------
+   Third-party icon overrides
+   -------------------------------------------------------------------------- */
+
+/* Devicon's single-colour Python glyph ships in the logo's yellow (#ffd845).
+   Use the brand blue instead, tuned per theme so it stays legible on both. */
+.devicon-python-plain.colored { color: #5a9fd4; }
+:root[data-theme="light"] .devicon-python-plain.colored { color: #3776ab; }

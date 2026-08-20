@@ -1,0 +1,384 @@
+/* ==========================================================================
+   work.css : case-studies page
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Page header
+   -------------------------------------------------------------------------- */
+
+.page-hero {
+  padding-block: clamp(3.5rem, 9vw, 6.5rem) var(--s-8);
+  border-bottom: 1px solid var(--border);
+}
+
+.page-hero__back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-3);
+  margin-bottom: var(--s-6);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.page-hero__back svg { width: 15px; height: 15px; transition: transform var(--dur-fast) var(--ease); }
+.page-hero__back:hover { color: var(--accent); }
+.page-hero__back:hover svg { transform: translateX(-3px); }
+
+.page-hero__title { margin-bottom: var(--s-5); max-width: 16ch; }
+
+.page-hero__lede { margin-bottom: var(--s-7); }
+
+/* --------------------------------------------------------------------------
+   Filters
+   -------------------------------------------------------------------------- */
+
+/* The blur/border live on a full-bleed wrapper so the sticky bar reads as a
+   band across the viewport, not a floating rectangle inside the container. */
+.filters-bar {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 60;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2);
+  padding-block: var(--s-5);
+}
+
+.filters__label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-right: var(--s-3);
+}
+
+.filters button {
+  padding: 0.42rem 0.9rem;
+  border-radius: var(--r-full);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-2);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  transition: color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease),
+              background-color var(--dur-fast) var(--ease);
+}
+
+.filters button:hover { color: var(--text); border-color: var(--border-2); }
+
+.filters button.is-active {
+  background: var(--accent);
+  border-color: transparent;
+  color: var(--accent-ink);
+}
+
+.filters__count {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-3);
+}
+
+/* --------------------------------------------------------------------------
+   Case study
+   -------------------------------------------------------------------------- */
+
+.cases { display: grid; gap: var(--s-10); padding-block: var(--s-10); }
+
+.case { scroll-margin-top: calc(var(--nav-h) + 5.5rem); }
+
+.case[hidden] { display: none; }
+
+.case__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--s-5);
+  padding-bottom: var(--s-5);
+  margin-bottom: var(--s-7);
+  border-bottom: 1px solid var(--border);
+}
+
+.case__index {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.18em;
+  color: var(--text-3);
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--s-3);
+}
+
+.case__flag {
+  padding: 0.22rem 0.6rem;
+  border-radius: var(--r-full);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+/* The flagship gets more presence: accent rule under the header and a larger
+   title, without breaking out of the page's rhythm. */
+.case--flagship .case__head { border-bottom-color: var(--accent-line); }
+.case--flagship .case__title { font-size: clamp(2rem, 4vw, 3.1rem); }
+.case--flagship .case__kicker { font-size: var(--fs-body); color: var(--text-2); }
+
+.case__title { font-size: clamp(1.75rem, 3.4vw, 2.6rem); margin-bottom: var(--s-3); }
+
+.case__kicker { color: var(--text-2); font-size: var(--fs-sm); max-width: 52ch; }
+
+.case__actions { display: flex; flex-wrap: wrap; gap: var(--s-3); }
+
+.case__body { display: grid; gap: var(--s-8); align-items: start; }
+
+@media (min-width: 1000px) {
+  .case__body {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: var(--s-9);
+  }
+}
+
+/* Narrative blocks */
+.case__story { display: grid; gap: var(--s-6); }
+
+.block__label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-bottom: var(--s-3);
+}
+
+.block__label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.block p { color: var(--text-2); font-size: var(--fs-sm); }
+.block p + p { margin-top: var(--s-3); }
+.block strong { color: var(--text); font-weight: 600; }
+
+.block__list { display: grid; gap: var(--s-3); }
+
+.block__list li {
+  position: relative;
+  padding-left: var(--s-5);
+  color: var(--text-2);
+  font-size: var(--fs-sm);
+  line-height: 1.65;
+}
+
+.block__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.66em;
+  width: 6px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.case__stack { padding-top: var(--s-5); border-top: 1px solid var(--border); }
+
+.case__stack-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: var(--s-4);
+}
+
+/* --------------------------------------------------------------------------
+   Carousel
+   -------------------------------------------------------------------------- */
+
+.shots { position: sticky; top: calc(var(--nav-h) + 5.5rem); }
+
+@media (max-width: 999px) { .shots { position: static; } }
+
+.shots__frame {
+  border-radius: var(--r);
+  border: 1px solid var(--border-2);
+  background: var(--surface-2);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.shots__bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px var(--s-4);
+  background: var(--surface-3);
+  border-bottom: 1px solid var(--border);
+}
+
+.shots__dot { width: 9px; height: 9px; border-radius: 50%; background: var(--border-3); }
+
+.shots__name {
+  margin-left: var(--s-3);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  color: var(--text-3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shots__stage {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: var(--bg-2);
+}
+
+/* Overlay/app screenshots vary wildly in aspect ratio — letterbox them on a
+   tinted stage instead of cropping the window out of its own screenshot. */
+.shots__stage--contain {
+  aspect-ratio: 4 / 3;
+  background:
+    radial-gradient(120% 90% at 50% 0%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%),
+    var(--surface-2);
+}
+
+.shots__stage--contain .shots__slide { padding: var(--s-5); }
+
+.shots__stage--contain .shots__slide img {
+  object-fit: contain;
+  object-position: center;
+  border-radius: var(--r-sm);
+}
+
+.shots__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.55s var(--ease);
+  cursor: zoom-in;
+}
+
+.shots__slide.is-active { opacity: 1; visibility: visible; }
+
+.shots__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.shots__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding: var(--s-3) var(--s-4);
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.shots__btn {
+  width: 32px; height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-xs);
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+
+.shots__btn:hover { color: var(--accent); border-color: var(--accent-line); }
+.shots__btn svg { width: 15px; height: 15px; }
+
+.shots__dots { display: flex; gap: var(--s-2); }
+
+.shots__indicator {
+  width: 22px;
+  height: 3px;
+  border-radius: var(--r-full);
+  background: var(--border-3);
+  transition: background-color var(--dur-fast) var(--ease), width var(--dur-fast) var(--ease);
+}
+
+.shots__indicator.is-active { background: var(--accent); width: 34px; }
+
+.shots__hint {
+  margin-top: var(--s-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  color: var(--text-3);
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   Research case (no screenshots)
+   -------------------------------------------------------------------------- */
+
+.research-panel {
+  padding: var(--s-7);
+  display: grid;
+  gap: var(--s-5);
+  border-radius: var(--r);
+  border: 1px solid var(--border);
+  background: linear-gradient(160deg, var(--surface), var(--bg-2));
+}
+
+.research-panel__logo {
+  width: 64px; height: 64px;
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #fff;
+  padding: 5px;
+}
+
+.research-panel__logo img { width: 100%; height: 100%; object-fit: contain; }
+
+.research-panel dl { display: grid; gap: var(--s-4); }
+
+.research-panel dt {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 2px;
+}
+
+.research-panel dd { font-size: var(--fs-sm); margin: 0; }
+
+/* --------------------------------------------------------------------------
+   Closing CTA
+   -------------------------------------------------------------------------- */
+
+.closer {
+  text-align: center;
+  padding-block: var(--s-10);
+  border-top: 1px solid var(--border);
+}
+
+.closer h2 { margin-bottom: var(--s-4); }
+.closer p { color: var(--text-2); margin-inline: auto; margin-bottom: var(--s-7); max-width: 44ch; }
+.closer__actions { display: flex; flex-wrap: wrap; gap: var(--s-3); justify-content: center; }

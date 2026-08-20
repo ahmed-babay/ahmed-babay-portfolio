@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Page not found — Ahmed Babay</title>
+<meta name="robots" content="noindex" />
+<meta name="theme-color" content="#08090c" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600&display=swap" />
+
+<!--
+  Deliberately self-contained: GitHub Pages serves this file for a missing path
+  at any depth, so relative asset URLs would resolve differently every time.
+  Inlining the styles means the page can never arrive unstyled.
+-->
+<style>
+  :root {
+    --bg: #08090c;
+    --surface: #111419;
+    --border: rgba(255,255,255,.12);
+    --text: #eef1f6;
+    --text-2: #9aa4b4;
+    --text-3: #6b7486;
+    --accent: #5ef1c8;
+    --accent-2: #37d9ae;
+    --accent-ink: #04150f;
+    color-scheme: dark;
+  }
+
+  :root[data-theme="light"] {
+    --bg: #f7f8fa;
+    --surface: #ffffff;
+    --border: rgba(9,12,20,.15);
+    --text: #0d1017;
+    --text-2: #4c5566;
+    --text-3: #78808f;
+    --accent: #0d9488;
+    --accent-2: #0f766e;
+    --accent-ink: #ffffff;
+    color-scheme: light;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  * { margin: 0; }
+
+  body {
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    padding: 1.5rem;
+    text-align: center;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.65;
+    letter-spacing: -.011em;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Same ambient wash as the rest of the site, so this still feels like home. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(60rem 40rem at 12% -8%, rgba(94,241,200,.22), transparent 62%),
+      radial-gradient(50rem 36rem at 92% 4%, rgba(139,124,246,.10), transparent 60%);
+  }
+
+  :root[data-theme="light"] body::before { opacity: .5; }
+
+  .code {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .7rem;
+    font-weight: 500;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-family: "Space Grotesk", "Inter", sans-serif;
+    font-weight: 600;
+    font-size: clamp(2.2rem, 7vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -.045em;
+    margin-bottom: 1rem;
+    text-wrap: balance;
+  }
+
+  p.lede {
+    color: var(--text-2);
+    max-width: 42ch;
+    margin: 0 auto 2.5rem;
+    text-wrap: pretty;
+  }
+
+  .actions { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center; }
+
+  a.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .8rem 1.35rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    font-size: .9125rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform .22s cubic-bezier(.22,1,.36,1), background-color .22s ease;
+  }
+
+  a.btn:hover { transform: translateY(-2px); }
+
+  a.btn--primary {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-color: transparent;
+    box-shadow: 0 8px 28px -10px rgba(94,241,200,.4);
+  }
+
+  a.btn--primary:hover { background: var(--accent-2); }
+
+  a.btn svg { width: 16px; height: 16px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition-duration: .01ms !important; }
+  }
+</style>
+
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('theme');
+      document.documentElement.dataset.theme = saved === 'light' ? 'light' : 'dark';
+    } catch (e) {
+      document.documentElement.dataset.theme = 'dark';
+    }
+  })();
+</script>
+</head>
+
+<body>
+  <main>
+    <p class="code">Error 404</p>
+    <h1>This page didn't ship.</h1>
+    <p class="lede">
+      The link you followed doesn't exist — or it moved when I rebuilt the site.
+      Everything worth seeing is still one click away.
+    </p>
+    <div class="actions">
+      <a class="btn btn--primary" href="/ahmed-babay-portfolio/">
+        Back to the profile
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </a>
+      <a class="btn" href="/ahmed-babay-portfolio/projects.html">See the case studies</a>
+    </div>
+  </main>
+</body>
+</html>
