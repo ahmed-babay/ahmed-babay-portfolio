@@ -95,7 +95,9 @@
 
   function resolve(y) {
     var vh = window.innerHeight;
-    var probe = y + vh * 0.42;
+    /* A very small lead. Any more and a room swaps in while you are still
+       reading the one before it. */
+    var probe = y + vh * 0.05;
 
     var i = 0;
     for (var k = 0; k < acts.length; k++) {
@@ -109,9 +111,11 @@
     if (!next) return { box: here, room: act.room, from: act.room, to: act.room, blend: 0 };
 
     /* Travel over the tail of the act, so the move feels the same whether the
-       section is one screen tall or five. Generous, because leaving a room and
-       arriving in the next is meant to be watched, not skipped. */
-    var travel = Math.min(act.height * 0.6, vh * 1.15);
+       section is one screen tall or five. Short, and it lands in the trailing
+       space below the content — a tall section like the back garden would
+       otherwise start swapping out while you were still reading the last case
+       study. */
+    var travel = Math.min(act.height * 0.28, vh * 0.38);
     var start  = act.top + act.height - travel;
 
     if (probe <= start) {

@@ -249,15 +249,22 @@
   50%      { opacity: var(--star-op); }
 }
 
-.smoke { animation: smoke 8s linear infinite; }
-.smoke:nth-of-type(2) { animation-delay: -2.6s; }
-.smoke:nth-of-type(3) { animation-delay: -5.2s; }
+/* fill-box, or the scale() pivots on the centre of the whole world and the
+   puffs sail off across the sky instead of leaving the chimney. */
+.smoke {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: smoke 7s linear infinite;
+}
+.smoke:nth-of-type(2) { animation-delay: -2.3s; }
+.smoke:nth-of-type(3) { animation-delay: -4.6s; }
 
 @keyframes smoke {
-  0%   { opacity: 0;   transform: translate(0,0) scale(.4); }
-  15%  { opacity: .26; }
-  100% { opacity: 0;   transform: translate(38px,-130px) scale(2.4); }
+  0%   { opacity: 0;   transform: translate(0, 0)     scale(.3); }
+  16%  { opacity: .5; }
+  100% { opacity: 0;   transform: translate(12px,-118px) scale(1.7); }
 }
+.smoke:nth-of-type(4) { animation-delay: -6.2s; animation-duration: 8s; }
 
 .win-glow { opacity: var(--win-op); }
 .win-flicker { animation: flicker 7s ease-in-out infinite; }
@@ -292,7 +299,11 @@
 
 .shaft { opacity: var(--shaft-op); }
 
-.canopy { animation: sway 8s ease-in-out infinite; transform-origin: bottom center; }
+.canopy {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: sway 8s ease-in-out infinite;
+}
 .canopy--b { animation-duration: 10.5s; animation-delay: -3s; }
 .canopy--c { animation-duration: 9.2s;  animation-delay: -5.4s; }
 @keyframes sway {
@@ -333,6 +344,31 @@
 /* Rooms you are not reading about recede. */
 [data-room-art] { transition: opacity .9s var(--ease); }
 [data-room-art].is-dim { opacity: .22; }
+
+/* The bird holds its place; only the near wing moves, slowly. */
+.bird-wing {
+  transform-box: fill-box;
+  transform-origin: 100% 100%;
+  animation: birdWing 2.6s ease-in-out infinite alternate;
+}
+@keyframes birdWing {
+  from { transform: rotate(-12deg) scaleY(.86); }
+  to   { transform: rotate(16deg)  scaleY(1.06); }
+}
+
+/* Asleep in the nest: the z's rise straight up. */
+.snooze {
+  transform-box: fill-box;
+  animation: snooze 4.5s ease-out infinite;
+  opacity: 0;
+}
+.snooze:nth-of-type(2) { animation-delay: -1.5s; }
+.snooze:nth-of-type(3) { animation-delay: -3.0s; }
+@keyframes snooze {
+  0%   { opacity: 0;   transform: translateY(6px) scale(.6); }
+  22%  { opacity: .9; }
+  100% { opacity: 0;   transform: translateY(-52px) scale(1.35); }
+}
 
 /* --------------------------------------------------------------------------
    5. Room hotspots — a quiet affordance, not a game control
@@ -547,6 +583,10 @@
   justify-content: flex-end;
   padding: clamp(5rem, 12vh, 9rem) clamp(1.5rem, 3.5vw, 3.5rem);
 }
+
+/* Every room ends with a run-out: empty space the size of the travel window,
+   so the next room dissolves in after you have finished reading, not during. */
+.act.act--room { padding-bottom: calc(clamp(5rem, 12vh, 9rem) + 34vh); }
 
 /* The closing act gets extra room so the camera settles before the page ends. */
 .act:last-child { padding-bottom: 24vh; }
@@ -1147,12 +1187,17 @@ html:not(.js) .mask-lines span > i { transform: none; }
     transition-duration: 0.01ms !important;
   }
   .star, .smoke, .win-flicker, .halo, .firefly, .canopy,
+  .bird-wing, .snooze,
   .screen-glow, .cat-eye, .pendulum, .steam, .ticker__track,
   .boot__mark, .scroll-cue::before {
     animation: none !important;
   }
   .mask-lines span > i { transform: none !important; }
   .panel { opacity: 1; transform: none; }
+
+  /* These are revealed by their own animation, so without it they would never
+     be seen at all. */
+  .snooze { opacity: .7; }
 }
 
 /* --------------------------------------------------------------------------
