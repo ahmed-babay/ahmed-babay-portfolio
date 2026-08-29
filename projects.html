@@ -165,11 +165,7 @@
             <span class="case__flag">Flagship</span> 01 — Desktop AI systems
           </span>
           <h2 class="case__title">Nimbus</h2>
-          <p class="case__kicker">
-            A voice-activated Windows overlay that answers out loud, renders rich
-            cards, and can run the whole speech-to-answer-to-speech loop on your
-            own machine.
-          </p>
+          <p class="case__kicker">A voice-activated Windows overlay. Press a key, ask a question, get an answer out loud — and it can run the whole loop on your own machine.</p>
         </div>
         <div class="case__actions">
           <a class="btn btn--ghost btn--sm" href="https://github.com/ahmed-babay/nimbus" target="_blank" rel="noopener">
@@ -182,62 +178,23 @@
         <div class="case__story">
           <div class="block">
             <p class="block__label">The problem</p>
-            <p>
-              Voice assistants make you choose: convenience or privacy. The
-              capable ones stream your microphone to someone else's servers; the
-              private ones can barely do anything. And on Windows the assistant
-              is either welded into the OS or a browser tab you have to go and
-              find.
-            </p>
-            <p>
-              I wanted something that appears on a keypress, answers, and
-              disappears — with no taskbar footprint, no signup chain, and no
-              requirement that my voice leave the machine at all.
-            </p>
+            <p>Voice assistants make you choose between capable and private. I wanted one that appears on a keypress, answers, and disappears, without my voice leaving the machine.</p>
           </div>
 
           <div class="block">
             <p class="block__label">What I built</p>
             <ul class="block__list">
-              <li>An <strong>Electron + React + TypeScript</strong> overlay bundled with electron-vite, living in the system tray and summoned by a global hotkey (<strong>Ctrl+Shift+Space</strong>). Tailwind v4 for the frosted glass, Framer Motion for the show/hide.</li>
-              <li>A voice pipeline that records until it hears silence, transcribes with <strong>Whisper</strong>, classifies intent through a structured-JSON call to <strong>Gemini</strong> (pulling out the city, the ticker, the destination), calls the right service, and speaks the answer back. The mic stays open for follow-ups.</li>
-              <li><strong>Rich cards rendered inline with no charting library</strong> — stock sparklines, weather, crypto, news with thumbnails, GitHub trending, live departure boards, and maps with drive/bike/walk/transit times side by side.</li>
-              <li><strong>Screen capture</strong> (Ctrl+Shift+S) freezes the display, you drag a box, and Gemini's vision model answers questions about that region — "what does this error mean?"</li>
-              <li><strong>Text actions</strong> (Ctrl+Shift+A) on any selected text anywhere in Windows: Fix, Rewrite, Summarize, Explain, Translate, Reply.</li>
-              <li><strong>Deep research</strong> that plans several searches, reads the raw pages in parallel, and synthesises from what it actually read rather than from model memory.</li>
-              <li><strong>Persistent memory</strong> — facts ("I take the RB68 to work"), reminders, calendar events, and a searchable archive of past answers.</li>
-              <li><strong>Local models on WebGPU</strong>: Whisper base, Qwen 3.5 0.8B, and Kokoro TTS download on demand and run in-process, with no separate toolkit to install.</li>
-            </ul>
-          </div>
-
-          <div class="block">
-            <p class="block__label">Decisions I'd defend</p>
-            <ul class="block__list">
-              <li><strong>Whisper instead of the browser's SpeechRecognition.</strong> Electron ships open-source Chromium, which has no proprietary Google API key — so the native speech API simply doesn't work. Found that by hitting it, and rebuilt the capture layer on MediaRecorder.</li>
-              <li><strong>Hotkey instead of a wake word</strong>, after Picovoice discontinued Porcupine's free tier. A hotkey is also the more honest design: nothing is listening until you say so.</li>
-              <li><strong>Keys never reach the renderer.</strong> Every service call runs in the main process, and stored keys use Electron's <code>safeStorage</code> — on Windows that's DPAPI, tied to your user account.</li>
-              <li><strong>Explicit capture only.</strong> No clipboard watching, no screen history, no ambient recording. Every screenshot costs a deliberate keypress. That rules out some genuinely useful features, and I think it is the right trade.</li>
-              <li><strong>Two-stage repair for place names.</strong> German station and place names wreck English-tuned transcription, so the transcriber gets a vocabulary hint of frequent places and the intent router expands whatever is left — turning "the airport" into the one you actually meant.</li>
+              <li>An <strong>Electron + React</strong> overlay that lives in the system tray and opens on a global hotkey.</li>
+              <li>Whisper transcribes, Gemini classifies the intent, the right service answers, and it speaks back.</li>
+              <li>Rich cards rendered inline: weather, stocks, crypto, news, live departures, maps.</li>
+              <li>Screen capture and text actions that work on anything selected anywhere in Windows.</li>
+              <li>Whisper, Qwen and Kokoro run <strong>locally on WebGPU</strong> — no cloud required.</li>
             </ul>
           </div>
 
           <div class="block">
             <p class="block__label">What I took from it</p>
-            <p>
-              This is the largest thing I've built alone, and almost none of the
-              hard parts were the models. They were at the seams: what happens
-              when you start typing while the mic is still open, how a free tier
-              disappearing mid-project reshapes your architecture, where exactly
-              to draw the privacy line when the convenient answer is always
-              "capture more".
-            </p>
-            <p>
-              It also settled something for me about local inference. Running
-              speech and generation on-device is no longer a downgrade you accept
-              for privacy — for this class of task it's simply <strong>good
-              enough, free, and always available</strong>, which is the same
-              conclusion I keep reaching in my day job.
-            </p>
+            <p>The models were the easy part; the hard parts were at the seams. Local inference turned out to be good enough that privacy costs you nothing.</p>
           </div>
 
           <div class="case__stack">
@@ -299,11 +256,7 @@
         <div>
           <span class="case__index">02 — Full-stack · Product</span>
           <h2 class="case__title">Morning Pulse</h2>
-          <p class="case__kicker">
-            One calm daily briefing — weather, markets, news, events and space —
-            normalised from a dozen APIs into an installable app that still works
-            when the network doesn't.
-          </p>
+          <p class="case__kicker">One daily briefing — weather, markets, news, events and space — normalised from a dozen APIs, and still working when the network isn't.</p>
         </div>
         <div class="case__actions">
           <a class="btn btn--ghost btn--sm" href="https://github.com/ahmed-babay/Morning-Pulse" target="_blank" rel="noopener">
@@ -316,36 +269,23 @@
         <div class="case__story">
           <div class="block">
             <p class="block__label">The problem</p>
-            <p>
-              Starting the day means opening eight tabs: weather here, markets
-              there, crypto somewhere else, a news site, a calendar of holidays.
-              Every one of them formats its data differently, and none of them
-              tells you which parts actually changed enough to care about.
-            </p>
+            <p>Starting the day meant eight open tabs, each formatting its data differently and none of them saying what had actually changed.</p>
           </div>
 
           <div class="block">
             <p class="block__label">What I built</p>
             <ul class="block__list">
-              <li>A <strong>FastAPI</strong> backend (Python 3.12) whose briefing module handles <strong>provider orchestration, validation, normalisation, stale-on-error caching and RSS hardening</strong> — so eight very different upstreams arrive at the frontend in one shape.</li>
-              <li>A <strong>React + TypeScript</strong> frontend on Vite, with typed API hooks and domain widgets, <strong>TanStack Query</strong> for server state and caching, and <strong>Zustand</strong> for persisted theme, location and favourites.</li>
-              <li>Data pulled from <strong>Open-Meteo, CoinGecko, Frankfurter (ECB reference rates), Nager.Date, USGS, NASA EONET, Launch Library 2 and NASA APOD</strong>.</li>
-              <li>A <strong>service worker</strong> so that after one successful load the app shell and last-good query data stay available offline.</li>
-              <li>Hardening that assumes hostile input: CORS enforcement, rate limiting, explicit request validation, and RSS processing with size limits, HTTPS-only links, markup stripping and deduplication.</li>
-              <li>Shipped as <strong>Docker Compose</strong> with an Nginx proxy layer, TLS terminated at the edge, and containers running non-root.</li>
+              <li>A <strong>FastAPI</strong> backend that normalises eight very different upstreams into one shape.</li>
+              <li>A React + TypeScript frontend with TanStack Query for server state and Zustand for preferences.</li>
+              <li>Data from Open-Meteo, CoinGecko, Frankfurter, Nager.Date, USGS, NASA EONET and Launch Library 2.</li>
+              <li>A service worker that keeps the shell and last-good data available <strong>offline</strong>.</li>
+              <li>Shipped as Docker Compose behind Nginx, with TLS terminated at the edge.</li>
             </ul>
           </div>
 
           <div class="block">
-            <p class="block__label">The call I'd defend</p>
-            <p>
-              <strong>Stale-on-error caching.</strong> A dashboard that aggregates
-              eight providers is otherwise only as reliable as the worst one that
-              morning — one flaky upstream and the whole page is a wall of error
-              cards. Serving the last good value with an honest timestamp is
-              almost always more useful than admitting defeat, and it turned a
-              fragile aggregator into something I actually open every day.
-            </p>
+            <p class="block__label">What I took from it</p>
+            <p>Stale-on-error caching made it reliable. Serving the last good value with an honest timestamp beats a wall of error cards.</p>
           </div>
 
           <div class="case__stack">
@@ -395,10 +335,7 @@
         <div>
           <span class="case__index">03 — Applied ML · Full-stack</span>
           <h2 class="case__title">AI Career Copilot</h2>
-          <p class="case__kicker">
-            Reads your CV and a job description, tells you exactly which skills are
-            missing, and finds you something to watch for each one.
-          </p>
+          <p class="case__kicker">Reads a CV and a job description, names the skills that are missing, and finds something to watch for each one.</p>
         </div>
         <div class="case__actions">
           <a class="btn btn--ghost btn--sm" href="https://github.com/ahmed-babay/career_copilot" target="_blank" rel="noopener">
@@ -411,33 +348,22 @@
         <div class="case__story">
           <div class="block">
             <p class="block__label">The problem</p>
-            <p>
-              You read a job posting, feel vaguely underqualified, and have no idea
-              which specific gap is the one that matters. Generic career advice
-              doesn't help, and pasting your CV into a third-party AI service to
-              find out means handing over a document full of personal data.
-            </p>
+            <p>A job posting leaves you guessing which gap actually matters. Finding out usually means handing your CV to someone else's AI service.</p>
           </div>
 
           <div class="block">
             <p class="block__label">What I built</p>
             <ul class="block__list">
-              <li>A pipeline that ingests a CV as <strong>PDF or plain text</strong> and a job description as text, then extracts the skills in each using local transformer embeddings via <strong>@xenova/transformers</strong>.</li>
-              <li>Semantic comparison that buckets every skill into <strong>matched, missing, or nice-to-have</strong> — so the output is a decision, not a similarity score.</li>
-              <li>For each missing skill, a call to the <strong>YouTube Data API</strong> surfaces relevant tutorials, which can be saved into a learning plan persisted in the browser.</li>
-              <li><strong>Next.js</strong> frontend, <strong>Express</strong> backend, Tailwind for the interface.</li>
+              <li>Extracts the skills from both documents using <strong>local transformer embeddings</strong>.</li>
+              <li>Sorts every skill into matched, missing, or nice-to-have — a decision, not a similarity score.</li>
+              <li>Pulls a YouTube tutorial for each gap into a saved learning plan.</li>
+              <li>Next.js frontend, Express backend, Tailwind interface.</li>
             </ul>
           </div>
 
           <div class="block">
-            <p class="block__label">The call I'd defend</p>
-            <p>
-              Running inference locally instead of against a hosted LLM API. It made
-              the app free to run, usable offline, and — the part that actually
-              mattered — meant a user's CV never leaves their machine. Embedding
-              models are small enough that the accuracy trade-off was worth it for
-              a task that is fundamentally about matching, not generation.
-            </p>
+            <p class="block__label">What I took from it</p>
+            <p>Running inference on-device made it free and offline-capable, and meant the CV never leaves the machine.</p>
           </div>
 
           <div class="case__stack">
@@ -488,10 +414,7 @@
         <div>
           <span class="case__index">04 — NLP · Human-in-the-loop</span>
           <h2 class="case__title">AI Dataset Generator</h2>
-          <p class="case__kicker">
-            A labelling factory for privacy-policy research: a fine-tuned mBERT
-            proposes, a human disposes, and a clean dataset comes out the other end.
-          </p>
+          <p class="case__kicker">A labelling tool for privacy-policy research: a fine-tuned mBERT proposes, a human confirms.</p>
         </div>
         <div class="case__actions">
           <a class="btn btn--ghost btn--sm" href="https://github.com/ahmed-babay/mBERT_Project" target="_blank" rel="noopener">
@@ -504,35 +427,22 @@
         <div class="case__story">
           <div class="block">
             <p class="block__label">The problem</p>
-            <p>
-              Supervised research on privacy policies needs labelled data, and
-              labelling policies by hand is slow, inconsistent between annotators,
-              and mind-numbing. Worse, most existing datasets are English-only —
-              which quietly excludes every policy that isn't.
-            </p>
+            <p>Labelling policies by hand is slow and inconsistent between annotators. Most existing datasets are English-only, which excludes every policy that isn't.</p>
           </div>
 
           <div class="block">
             <p class="block__label">What I built</p>
             <ul class="block__list">
-              <li>Automated <strong>scraping and text-segmentation</strong> so raw policies arrive as clean, classifiable passages instead of walls of legal prose.</li>
-              <li>A <strong>GPU-accelerated fine-tuning pipeline</strong> for multilingual BERT, producing multi-label predictions with a confidence percentage per category.</li>
-              <li>A <strong>Vue.js annotation workspace</strong> where the model's suggestion is pre-filled and the human only has to confirm or correct it — turning labelling from authoring into reviewing.</li>
-              <li>Automated <strong>YAML export</strong> so finished datasets drop straight into downstream research pipelines.</li>
+              <li>Scraping and segmentation turn raw policies into clean, classifiable passages.</li>
+              <li>A fine-tuned <strong>multilingual BERT</strong> gives multi-label predictions with a confidence score.</li>
+              <li>A Vue.js workspace pre-fills the model's suggestion, so the human only confirms or corrects.</li>
+              <li>YAML export that drops straight into downstream research pipelines.</li>
             </ul>
           </div>
 
           <div class="block">
             <p class="block__label">What I took from it</p>
-            <p>
-              The model was never the hard part. The leverage was in the interface:
-              a human confirming a confident prediction is dramatically faster than
-              a human labelling from a blank slate, and that single design decision
-              did more for throughput than any amount of extra training would have.
-              Choosing <strong>mBERT</strong> over an English-only model was the
-              other one that mattered — it made non-English policies first-class
-              instead of an afterthought.
-            </p>
+            <p>The interface was the leverage, not the model. Confirming a confident prediction is far faster than labelling from a blank slate.</p>
           </div>
 
           <div class="case__stack">
@@ -581,10 +491,7 @@
         <div>
           <span class="case__index">05 — LLM systems · RAG</span>
           <h2 class="case__title">Personal AI Chatbot</h2>
-          <p class="case__kicker">
-            A retrieval-augmented assistant that answers questions about my
-            background from a grounded corpus instead of improvising.
-          </p>
+          <p class="case__kicker">A retrieval-augmented assistant that answers questions about my background from a grounded corpus rather than from memory.</p>
         </div>
         <div class="case__actions">
           <a class="btn btn--ghost btn--sm" href="https://github.com/ahmed-babay/chat-bot" target="_blank" rel="noopener">
@@ -597,34 +504,22 @@
         <div class="case__story">
           <div class="block">
             <p class="block__label">The problem</p>
-            <p>
-              A CV tells you what someone did; it doesn't answer "has he actually
-              shipped anything with Redis?" A chatbot could — but a chatbot that
-              confidently invents details about my own career would be considerably
-              worse than having no chatbot at all.
-            </p>
+            <p>A CV says what someone did, not whether they have actually shipped with Redis. A chatbot inventing details about my own career would be worse than no chatbot.</p>
           </div>
 
           <div class="block">
             <p class="block__label">What I built</p>
             <ul class="block__list">
-              <li>A <strong>RAG pipeline</strong>: a curated corpus about my background is embedded and searched by <strong>vector similarity</strong>, and only the retrieved passages are handed to the model as grounding.</li>
-              <li>An open-source LLM served through <strong>Hugging Face's APIs</strong>, rather than a proprietary hosted model.</li>
-              <li>A <strong>Node.js and Express</strong> backend hardened with <strong>Helmet</strong> and a CORS policy, so the API isn't an open relay to the model.</li>
-              <li>A <strong>React + TypeScript</strong> client with Tailwind, persistent message history, real-time responses, and error handling that fails visibly rather than silently.</li>
+              <li>A <strong>RAG pipeline</strong>: a curated corpus is embedded and searched by vector similarity.</li>
+              <li>An open-source LLM served through Hugging Face rather than a proprietary hosted model.</li>
+              <li>A Node.js and Express backend hardened with Helmet and a CORS policy.</li>
+              <li>A React + TypeScript client with persistent history and visible error handling.</li>
             </ul>
           </div>
 
           <div class="block">
             <p class="block__label">What I took from it</p>
-            <p>
-              Grounding beats model size. Once retrieval was doing its job, a modest
-              open-source model gave better answers than a larger one guessing from
-              its weights — because the failure mode changed from
-              <strong>confidently wrong</strong> to <strong>honestly unsure</strong>.
-              That trade is almost always the right one when the subject is facts
-              about a real person.
-            </p>
+            <p>Grounding beats model size. Retrieval changed the failure mode from confidently wrong to honestly unsure.</p>
           </div>
 
           <div class="case__stack">
@@ -671,10 +566,7 @@
         <div>
           <span class="case__index">06 — Research residency</span>
           <h2 class="case__title">Training-Free Temporal Grounding</h2>
-          <p class="case__kicker">
-            Six months in the hessian.AI Lab Program, working on finding the right
-            moment in a video without training a model to do it.
-          </p>
+          <p class="case__kicker">Six months in the hessian.AI Lab Program: finding the right moment in a video without training a model to do it.</p>
         </div>
         <div class="case__actions">
           <a class="btn btn--ghost btn--sm" href="https://hessian.ai/" target="_blank" rel="noopener">
@@ -687,33 +579,21 @@
         <div class="case__story">
           <div class="block">
             <p class="block__label">The problem</p>
-            <p>
-              <strong>Temporal grounding</strong> is the task of taking a sentence
-              and locating the exact span of a video it describes. The standard
-              approach is to train on densely annotated video, which is expensive
-              to produce and doesn't transfer well beyond the domain it was
-              annotated in.
-            </p>
+            <p>Temporal grounding normally needs densely annotated video. That is expensive to produce and transfers poorly beyond the domain it was annotated in.</p>
           </div>
 
           <div class="block">
             <p class="block__label">What I worked on</p>
             <ul class="block__list">
-              <li>Developed and evaluated <strong>training-free methods</strong> that use pretrained vision-language models directly, without fine-tuning on grounding annotations.</li>
-              <li>Built the evaluation setup to compare approaches consistently, and read into the surrounding literature to place the work properly.</li>
-              <li>Ran under the supervision of <strong>Prof. Dr. Marcus Rohrbach</strong> at TU Darmstadt, as a 9-ECTS component of the hessian.AI Lab Program.</li>
+              <li>Developed and evaluated <strong>training-free</strong> methods using pretrained vision-language models directly.</li>
+              <li>Built the evaluation setup so approaches could be compared like-for-like.</li>
+              <li>Supervised by Prof. Dr. Marcus Rohrbach at TU Darmstadt, as a 9-ECTS component of the programme.</li>
             </ul>
           </div>
 
           <div class="block">
             <p class="block__label">What I took from it</p>
-            <p>
-              Research discipline that carries directly into engineering: define
-              the metric before you fall in love with the method, make comparisons
-              genuinely like-for-like, and treat a negative result as information
-              rather than a failure. It also made me permanently sceptical of
-              benchmark numbers quoted without their evaluation protocol.
-            </p>
+            <p>Define the metric before you fall in love with the method, and treat a negative result as information. It also made me sceptical of benchmark numbers quoted without their protocol.</p>
           </div>
 
           <div class="case__stack">
@@ -760,10 +640,7 @@
         <div>
           <span class="case__index">07 — Backend · Enterprise</span>
           <h2 class="case__title">HealthFlow</h2>
-          <p class="case__kicker">
-            A Spring Boot microservice for clinical data, built as if a real
-            hospital were going to depend on it.
-          </p>
+          <p class="case__kicker">A Spring Boot microservice for clinical data, built as if a real hospital were going to depend on it.</p>
         </div>
         <div class="case__actions">
           <a class="btn btn--ghost btn--sm" href="https://github.com/ahmed-babay/patient-service" target="_blank" rel="noopener">
@@ -776,33 +653,22 @@
         <div class="case__story">
           <div class="block">
             <p class="block__label">The problem</p>
-            <p>
-              Healthcare software has an unusual combination of constraints: the
-              read volume is high and repetitive, the data model is genuinely
-              complicated — records, prescriptions, allergies, and the relationships
-              between them — and a validation bug isn't a bad user experience, it's
-              a safety incident.
-            </p>
+            <p>Healthcare software has high, repetitive read volume and a genuinely complicated data model. A validation bug there is a safety incident, not a bad experience.</p>
           </div>
 
           <div class="block">
             <p class="block__label">What I built</p>
             <ul class="block__list">
-              <li>A production-shaped <strong>Spring Boot microservice</strong> for patient management, with <strong>JWT authentication</strong> and role-based access control so clinical data is only reachable by the roles entitled to it.</li>
-              <li><strong>Redis caching</strong> targeted at the high-frequency read paths, rather than sprinkled everywhere — the point was to cut latency where it was actually being spent.</li>
-              <li><strong>Custom validators</strong> encoding medical safety rules, so invalid clinical combinations are rejected at the boundary instead of being stored and discovered later.</li>
-              <li>Complex domain modelling across medical records, prescriptions, and allergies, backed by comprehensive API tests.</li>
+              <li>A Spring Boot microservice for patient management with <strong>JWT auth and role-based access</strong>.</li>
+              <li>Redis caching aimed at the high-frequency read paths rather than sprinkled everywhere.</li>
+              <li>Custom validators encoding medical safety rules, rejecting invalid combinations at the boundary.</li>
+              <li>Domain modelling across records, prescriptions and allergies, backed by API tests.</li>
             </ul>
           </div>
 
           <div class="block">
             <p class="block__label">What I took from it</p>
-            <p>
-              In a safety-critical domain, validation is architecture. Pushing the
-              rules into custom validators at the edge — rather than leaving them
-              implicit in service code — meant the invariants were stated once,
-              testable in isolation, and impossible to forget at a new call site.
-            </p>
+            <p>In a safety-critical domain, validation is architecture: stated once, testable in isolation, impossible to forget at a new call site.</p>
           </div>
 
           <div class="case__stack">
@@ -852,10 +718,7 @@
         <div>
           <span class="case__index">08 — Full-stack · Product</span>
           <h2 class="case__title">StromCoach DE</h2>
-          <p class="case__kicker">
-            Tells German households the cheapest hour to run the dishwasher, and
-            exactly how much that decision saved them.
-          </p>
+          <p class="case__kicker">Tells German households the cheapest hour to run the dishwasher, and exactly what that decision saved them.</p>
         </div>
         <div class="case__actions">
           <a class="btn btn--ghost btn--sm" href="https://github.com/ahmed-babay/stromcoach-DE" target="_blank" rel="noopener">
@@ -868,33 +731,22 @@
         <div class="case__story">
           <div class="block">
             <p class="block__label">The problem</p>
-            <p>
-              Dynamic electricity tariffs in Germany reprice every hour, so running
-              a high-consumption appliance at the wrong time quietly costs real
-              money. The data to avoid that is public — but it arrives as a price
-              curve, and nobody wants to read a chart to decide when to do laundry.
-            </p>
+            <p>Dynamic German tariffs reprice every hour, so running an appliance at the wrong time quietly costs money. The data is public, but nobody wants to read a price curve to decide when to do laundry.</p>
           </div>
 
           <div class="block">
             <p class="block__label">What I built</p>
             <ul class="block__list">
-              <li>Live pricing pulled from the <strong>Energy Charts API</strong> through a <strong>Next.js server-side route acting as a CORS proxy</strong>, so the browser never has to fight the upstream API's origin policy.</li>
-              <li>A <strong>sliding-window search</strong> over the price curve that finds the cheapest contiguous block long enough to run the appliance before the user's deadline.</li>
-              <li>A savings calculator that answers the only question that matters — <strong>how much cheaper is this than my flat rate?</strong> — in euros, not percentages.</li>
-              <li>Customisable flat rate, appliance duration, and deadline, all persisted in localStorage so returning users skip setup.</li>
+              <li>Live pricing from the Energy Charts API through a Next.js server route acting as a proxy.</li>
+              <li>A <strong>sliding-window search</strong> for the cheapest block long enough to finish before your deadline.</li>
+              <li>A savings calculator that answers in euros, not percentages.</li>
+              <li>Flat rate, appliance duration and deadline persisted in localStorage.</li>
             </ul>
           </div>
 
           <div class="block">
             <p class="block__label">What I took from it</p>
-            <p>
-              The algorithm was the easy half. The product only became useful once
-              the output stopped being "here is the price curve" and started being
-              "start it at 14:00, you'll save €0.62" — a reminder that the last
-              translation step, from correct answer to actionable one, is usually
-              where the value actually lives.
-            </p>
+            <p>The algorithm was the easy half. The value appeared when the output stopped being a price curve and became &ldquo;start it at 14:00, you'll save &euro;0.62&rdquo;.</p>
           </div>
 
           <div class="case__stack">
