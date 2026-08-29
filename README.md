@@ -1,7 +1,7 @@
 # Ahmed Babay — Portfolio
 
 Personal site and case-study portfolio.
-**Live:** https://ahmed-babay.github.io/ahmed-babay-portfolio/
+**Live:** https://ahmedbabay.me
 
 Built as a hand-written static site: no framework, no build step, no
 dependencies to install. Push to `main` and GitHub Pages serves it.
