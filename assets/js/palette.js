@@ -23,13 +23,24 @@
     theme:   '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/>'
   };
 
-  var COMMANDS = [
-    { group: 'Navigate', label: 'Work',          icon: 'section', href: 'index.html#work' },
-    { group: 'Navigate', label: 'Experience',    icon: 'section', href: 'index.html#experience' },
-    { group: 'Navigate', label: 'Capabilities',  icon: 'section', href: 'index.html#skills' },
-    { group: 'Navigate', label: 'Education',     icon: 'section', href: 'index.html#education' },
-    { group: 'Navigate', label: 'About',         icon: 'section', href: 'index.html#about' },
-    { group: 'Navigate', label: 'Contact',       icon: 'section', href: 'index.html#contact' },
+  /* Rooms. On the house page these move the camera; anywhere else they are
+     ordinary deep links that the house restores from the URL on load. */
+  var ROOMS = [
+    ['hall',    'Entrance hall — at a glance'],
+    ['studio',  'Studio — selected work'],
+    ['office',  'Office — experience'],
+    ['kitchen', 'Kitchen — capabilities'],
+    ['attic',   'Attic — education & research'],
+    ['living',  'Living room — about'],
+    ['yard',    'Back garden — case studies'],
+    ['mail',    'Mailbox — contact'],
+    ['exterior','Step back outside']
+  ];
+
+  var COMMANDS = ROOMS.map(function (r) {
+    return { group: 'Rooms', label: r[1], icon: 'section', room: r[0] };
+  }).concat([
+    { group: 'Rooms', label: 'The whole house', icon: 'section', room: 'house' },
     { group: 'Navigate', label: 'All case studies', icon: 'section', href: 'projects.html' },
 
     { group: 'Case studies', label: 'Nimbus — voice overlay for Windows', icon: 'section', href: 'projects.html#nimbus' },
@@ -46,12 +57,12 @@
 
     { group: 'Actions', label: 'Download CV (PDF)', icon: 'file', href: 'metadata/Ahmed_Babay_CV.pdf', download: true },
     { group: 'Actions', label: 'Send an email',     icon: 'mail', href: 'mailto:ahmed.babay.personal@gmail.com' },
-    { group: 'Actions', label: 'Toggle theme',      icon: 'theme', action: function () {
+    { group: 'Actions', label: 'Switch day / night', icon: 'theme', action: function () {
         var btn = document.querySelector('[data-theme-toggle]');
         if (btn) btn.click();
       }
     }
-  ];
+  ]);
 
   var results = [];
   var cursor = 0;
@@ -113,6 +124,12 @@
     close();
 
     if (cmd.action) { cmd.action(); return; }
+
+    if (cmd.room) {
+      if (typeof window.houseGo === 'function') window.houseGo(cmd.room);
+      else window.location.href = 'index.html' + (cmd.room === 'exterior' ? '' : '#' + cmd.room);
+      return;
+    }
 
     if (cmd.external) {
       window.open(cmd.href, '_blank', 'noopener');
