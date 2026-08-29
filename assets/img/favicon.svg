@@ -1,5 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Ahmed Babay">
+  <!--
+    The house with the light on — the same idea the site is built around.
+    No text: a favicon is rendered without the page's webfonts, so the old
+    "AB" fell back to whatever sans the OS had. A shape always renders.
+  -->
   <rect width="64" height="64" rx="14" fill="#5ef1c8"/>
-  <text x="32" y="43" font-family="Space Grotesk, Inter, sans-serif" font-size="30"
-        font-weight="700" letter-spacing="-1.5" text-anchor="middle" fill="#04150f">AB</text>
+
+  <!-- roof, walls and chimney as one silhouette -->
+  <path d="M32 11 L57 32.5 H50.5 V54 H13.5 V32.5 H7 Z" fill="#04150f"/>
+  <path d="M42 15.5 h5.5 V22 L42 17.2 Z" fill="#04150f"/>
+
+  <!-- the lit window -->
+  <rect x="26.5" y="35" width="11" height="10" rx="1.5" fill="#ffc887"/>
+  <path d="M32 35 v10 M26.5 40 h11" stroke="#04150f" stroke-width="1.6"/>
 </svg>
