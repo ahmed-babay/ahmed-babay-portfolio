@@ -267,17 +267,15 @@
     if (!act) return;
     measure();
 
-    /* Instant, so none of the rooms in between are ever built or drawn. The
-       arrival is then played as a push-in from the whole-house framing, which
-       reads as flying to it rather than cutting to it. */
+    /* Instant, so none of the rooms in between are ever built or drawn, and
+       the camera is placed rather than animated — a click that replays a
+       fly-in reads as the room re-rendering itself. */
     window.scrollTo({ top: act.top + 2, left: 0, behavior: 'instant' });
-
-    if (!instant && !reduce) {
-      cam = targetBox('house');
-      paint(cam);
-      window.dispatchEvent(new CustomEvent('roomarrive', { detail: { room: room } }));
-    }
     onScroll();
+
+    var r = resolve(window.scrollY);
+    cam = want = r.box;
+    paint(cam);
   }
 
   window.houseGo = jump;

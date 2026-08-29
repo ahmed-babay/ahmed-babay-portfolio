@@ -88,16 +88,6 @@
     syncWorld();
   }
 
-  /* A jump lands instantly, then plays the push-in. */
-  window.addEventListener('roomarrive', function (e) {
-    var el = stages[e.detail && e.detail.room];
-    if (!el) return;
-    el.classList.remove('is-arriving');
-    void el.offsetWidth;
-    el.classList.add('is-arriving');
-    setTimeout(function () { el.classList.remove('is-arriving'); }, 1100);
-  });
-
   window.addEventListener('roomtravel', function (e) {
     var d = e.detail || {};
     travel(d.from, d.to, d.blend || 0);

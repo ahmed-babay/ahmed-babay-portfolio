@@ -156,13 +156,6 @@
   opacity: 1;
 }
 
-/* A jump plays this once: the room comes up out of the dark toward you. */
-.stage.is-arriving { animation: arriveFade 900ms var(--cam-ease); }
-@keyframes arriveFade { from { opacity: 0; } }
-
-.stage.is-arriving .stage__cam { animation: arriveZoom 1000ms var(--cam-ease); }
-@keyframes arriveZoom { from { transform: translateZ(-460px); } }
-
 
 /* --------------------------------------------------------------------------
    3. Shared room fittings
@@ -448,8 +441,6 @@
    6c. Case studies, out the back
    -------------------------------------------------------------------------- */
 
-/* The garden gets a wider column — these are long reads. */
-.act[data-act="yard"] .panel { max-width: 780px; }
 
 .act[data-act="yard"] .cases {
   display: grid;
@@ -465,23 +456,8 @@
 .act[data-act="yard"] .case__title { font-size: clamp(1.6rem, 3vw, 2.1rem); }
 .act[data-act="yard"] .case--flagship .case__title { font-size: clamp(1.8rem, 3.4vw, 2.4rem); }
 
-/* No cards out here — the write-ups sit straight on the garden. The column
-   gets its own soft ground instead, and the type is lifted a step so it holds
-   against the scene behind it. */
-.act[data-act="yard"] .panel { position: relative; }
-.act[data-act="yard"] .panel::before {
-  content: "";
-  position: absolute;
-  inset: -6vh -6vw -6vh -12vw;
-  z-index: -1;
-  pointer-events: none;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    color-mix(in srgb, var(--bg) 74%, transparent) 22%,
-    color-mix(in srgb, var(--bg) 88%, transparent) 46%
-  );
-}
+/* No cards out here — the write-ups sit straight on the garden, on the same
+   scrim every other room uses. */
 
 .act[data-act="yard"] .case {
   background: transparent;
@@ -528,17 +504,13 @@
 .act[data-act="yard"] .case--flagship .case__head { border-bottom-color: var(--border-2); }
 .act[data-act="yard"] .case--flagship .case__kicker { font-size: var(--fs-sm); }
 
-.act[data-act="yard"] .case.is-target {
-  border: 0;
-  box-shadow: none;
-}
-.act[data-act="yard"] .case.is-target .case__title { color: var(--accent); }
+/* Arriving at a case study scrolls you to it. That is the whole cue — no
+   outline, no recolouring of the title. */
+.act[data-act="yard"] .case.is-target { border: 0; box-shadow: none; }
 
-/* the one you clicked through to gets a moment of attention */
-.act[data-act="yard"] .case.is-target {
-  border-color: var(--accent-line);
-  box-shadow: 0 0 0 1px var(--accent-line), 0 24px 60px -30px var(--accent-glow);
-}
+/* The mark carries the house rather than initials. */
+.hud__mark svg  { width: 21px; height: 21px; }
+.boot__mark svg { width: 38px; height: 38px; }
 
 /* --------------------------------------------------------------------------
    7. Reading column over a live room
@@ -582,8 +554,7 @@
   .tick, .screen-flick, .code-scroll, .blink-led, .pulse-soft, .rain, .moth,
   .build-bar, .wave, .fan, .print-page, .rgb-wave rect,
   .ripple, .glint, .bob, .dog, .dog-tail, .dog-ear, .canopy,
-  .stage__grain, .stage__flicker,
-  .stage.is-arriving, .stage.is-arriving .stage__cam {
+  .stage__grain, .stage__flicker {
     animation: none !important;
   }
   .layer--fore, .layer--far { filter: none; }
