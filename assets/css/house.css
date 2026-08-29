@@ -1155,7 +1155,8 @@ html:not(.js) .mask-lines span > i { transform: none; }
   /* The scene is a band pinned to the top and the reading column scrolls
      underneath it, so it has to sit above .acts — both were z-index 3, and
      the later one in the DOM was winning. */
-  .world { height: var(--scene-h); z-index: 4; border-bottom: 1px solid var(--border); }
+  /* No border: the band dissolves into the page instead (see rooms.css). */
+  .world { height: var(--scene-h); z-index: 4; }
 
   /* Clearance belongs on every act, not once on the list: jump to any room and
      its heading would otherwise start behind the band. */
@@ -1164,10 +1165,34 @@ html:not(.js) .mask-lines span > i { transform: none; }
     min-height: 100vh;
     justify-content: stretch;
     /* the last value clears the fixed room strip along the bottom */
-    padding: calc(var(--scene-h) + 1.75rem) var(--gutter) calc(clamp(3rem, 8vh, 5rem) + 3.5rem);
+    padding: calc(var(--scene-h) + 5.5rem) var(--gutter) calc(clamp(3rem, 8vh, 5rem) + 3.5rem);
   }
   .act.act--room { padding-bottom: calc(clamp(3rem, 8vh, 5rem) + 26vh); }
   .panel { margin-left: 0; }
+
+  /* Text does not slide under a hard edge — it dissolves. This is a fixed
+     wash of the page colour sitting directly beneath the band, fading to
+     nothing over the next ~7rem, so a line of copy thins out and disappears
+     into the room as it scrolls up.
+
+     It lives inside .acts (z-index 3), so it paints above the copy but stays
+     below the band at z-index 4 — no extra markup needed. */
+  .acts::before {
+    content: "";
+    position: fixed;
+    top: calc(var(--scene-h) - 1px);
+    left: 0; right: 0;
+    height: 5rem;
+    z-index: 5;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      var(--bg) 0%,
+      color-mix(in srgb, var(--bg) 82%, transparent) 34%,
+      color-mix(in srgb, var(--bg) 45%, transparent) 64%,
+      transparent 100%
+    );
+  }
 
   /* The floor plan is the only way to move around without scrolling the whole
      page, and ⌘K is not reachable on a phone — so it becomes a strip along the
@@ -1194,6 +1219,18 @@ html:not(.js) .mask-lines span > i { transform: none; }
     mask-image: linear-gradient(90deg, #000 88%, transparent);
   }
   .compass__plan::-webkit-scrollbar { display: none; }
+
+  /* and the same dissolve above the room strip */
+  .acts::after {
+    content: "";
+    position: fixed;
+    left: 0; right: 0;
+    bottom: calc(3rem + env(safe-area-inset-bottom, 0px));
+    height: 4.5rem;
+    z-index: 5;
+    pointer-events: none;
+    background: linear-gradient(0deg, var(--bg) 0%, transparent 100%);
+  }
   .compass__row { display: contents; }
   .compass__cell,
   .compass__row--attic .compass__cell,
