@@ -534,7 +534,7 @@
    -------------------------------------------------------------------------- */
 
 @media (max-width: 999px) {
-  .stages { height: var(--scene-h); bottom: auto; z-index: 3; }
+  .stages { height: var(--scene-h); bottom: auto; z-index: 4; }
   .stage  { perspective-origin: 50% 50%; }
   .stages::after {
     background: linear-gradient(180deg, transparent 52%, color-mix(in srgb, var(--bg) 72%, transparent) 100%);

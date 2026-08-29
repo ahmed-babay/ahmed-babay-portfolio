@@ -1152,14 +1152,63 @@ html:not(.js) .mask-lines span > i { transform: none; }
    -------------------------------------------------------------------------- */
 
 @media (max-width: 999px) {
-  .world { height: var(--scene-h); z-index: 3; border-bottom: 1px solid var(--border); }
-  .acts  { padding-top: var(--scene-h); }
+  /* The scene is a band pinned to the top and the reading column scrolls
+     underneath it, so it has to sit above .acts — both were z-index 3, and
+     the later one in the DOM was winning. */
+  .world { height: var(--scene-h); z-index: 4; border-bottom: 1px solid var(--border); }
+
+  /* Clearance belongs on every act, not once on the list: jump to any room and
+     its heading would otherwise start behind the band. */
+  .acts { padding-top: 0; }
   .act {
-    min-height: calc(100vh - var(--scene-h));
+    min-height: 100vh;
     justify-content: stretch;
-    padding: clamp(3rem, 8vh, 5rem) var(--gutter);
+    /* the last value clears the fixed room strip along the bottom */
+    padding: calc(var(--scene-h) + 1.75rem) var(--gutter) calc(clamp(3rem, 8vh, 5rem) + 3.5rem);
   }
+  .act.act--room { padding-bottom: calc(clamp(3rem, 8vh, 5rem) + 26vh); }
   .panel { margin-left: 0; }
+
+  /* The floor plan is the only way to move around without scrolling the whole
+     page, and ⌘K is not reachable on a phone — so it becomes a strip along the
+     bottom instead of disappearing. */
+  .compass {
+    display: block;
+    left: 0; right: 0; bottom: 0;
+    width: auto;
+    z-index: 140;
+    border-radius: 0;
+    border-left: 0; border-right: 0; border-bottom: 0;
+    padding: .5rem var(--gutter);
+    padding-bottom: calc(.5rem + env(safe-area-inset-bottom, 0px));
+  }
+  .compass__label { display: none; }
+  .compass__plan {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    /* it scrolls sideways; fade the right edge so that reads as an invitation */
+    -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent);
+    mask-image: linear-gradient(90deg, #000 88%, transparent);
+  }
+  .compass__plan::-webkit-scrollbar { display: none; }
+  .compass__row { display: contents; }
+  .compass__cell,
+  .compass__row--attic .compass__cell,
+  .compass__row--yard .compass__cell {
+    height: 32px;
+    flex: 0 0 auto;
+    padding: 0 .75rem;
+    font-size: .6rem;
+    border-style: solid;
+  }
+
+  /* On a desktop the plan steps aside while you are outside, because the title
+     card wants that corner. Here it is the only navigation, so it stays. */
+  html.is-outside .compass { opacity: 1; transform: none; pointer-events: auto; }
+
   .hud {
     background: var(--bg);
     background: color-mix(in srgb, var(--bg) 72%, transparent);
@@ -1168,6 +1217,12 @@ html:not(.js) .mask-lines span > i { transform: none; }
     border-bottom: 1px solid var(--border);
     z-index: 130;
   }
+}
+
+/* Short viewports — a phone on its side — need a smaller band. */
+@media (max-width: 999px) and (max-height: 560px) {
+  :root { --scene-h: 40vh; }
+  .act { padding-top: calc(var(--scene-h) + 1rem); }
 }
 
 @media (max-width: 560px) {
