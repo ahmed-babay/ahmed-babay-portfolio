@@ -517,6 +517,17 @@
   overflow: hidden;
 }
 
+/* With the cards gone, a solid mint badge reads as a green block dropped on
+   the garden. Outline it instead, and let the flagship match its neighbours. */
+.act[data-act="yard"] .case__flag {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent-line);
+  font-weight: 600;
+}
+.act[data-act="yard"] .case--flagship .case__head { border-bottom-color: var(--border-2); }
+.act[data-act="yard"] .case--flagship .case__kicker { font-size: var(--fs-sm); }
+
 .act[data-act="yard"] .case.is-target {
   border: 0;
   box-shadow: none;
