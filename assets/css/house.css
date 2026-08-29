@@ -808,18 +808,30 @@ html:not(.js) .mask-lines span > i { transform: none; }
 .plaque__value .unit { font-size: .5em; color: var(--accent); margin-left: .1em; }
 .plaque__label { margin-top: var(--s-2); font-size: var(--fs-xs); line-height: 1.5; color: var(--text-3); }
 
+/* No frame: the portrait dissolves into the page at its edges instead of
+   sitting in a box. The mask is an ellipse held solid over the face and run
+   out to nothing at the corners. */
 .hang {
   position: relative;
-  padding: 10px;
-  border: 1px solid var(--border-2);
-  border-radius: var(--r-sm);
-  background: linear-gradient(150deg, var(--surface-2), var(--surface));
-  box-shadow: var(--shadow);
-  max-width: 220px;
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  max-width: 250px;
 }
-.hang img { display: block; width: 100%; height: auto; border-radius: 3px; }
+
+.hang img {
+  display: block;
+  width: 100%;
+  height: auto;
+  -webkit-mask-image: radial-gradient(ellipse 60% 66% at 50% 41%,
+              #000 20%, rgba(0,0,0,.9) 44%, rgba(0,0,0,.45) 68%, rgba(0,0,0,.12) 86%, transparent 100%);
+  mask-image: radial-gradient(ellipse 60% 66% at 50% 41%,
+              #000 20%, rgba(0,0,0,.9) 44%, rgba(0,0,0,.45) 68%, rgba(0,0,0,.12) 86%, transparent 100%);
+}
+
 .hang figcaption {
-  margin-top: var(--s-3);
+  margin-top: calc(var(--s-4) * -1);
   font-family: var(--font-mono);
   font-size: .62rem;
   letter-spacing: .12em;
@@ -827,16 +839,9 @@ html:not(.js) .mask-lines span > i { transform: none; }
   color: var(--text-3);
   text-align: center;
 }
-.hang::before {
-  content: "";
-  position: absolute;
-  top: -18px; left: 50%;
-  width: 1px; height: 18px;
-  background: var(--border-3);
-}
 
 .hall-grid { display: grid; gap: var(--s-5); }
-@media (min-width: 620px) { .hall-grid { grid-template-columns: 220px 1fr; align-items: start; } }
+@media (min-width: 620px) { .hall-grid { grid-template-columns: 250px 1fr; align-items: center; } }
 
 /* Studio — projects */
 .build {
