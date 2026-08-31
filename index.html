@@ -171,6 +171,93 @@
   <!-- Sky ------------------------------------------------------------------->
   <rect x="-700" y="-600" width="3400" height="1610" fill="url(#g-sky)" />
 
+  <!-- High sky -------------------------------------------------------------->
+  <!-- Everything above y=-600, which no room's framing ever reaches. It exists
+       only for the arrival: the camera starts up here and falls through it.
+       .world is painted var(--sky-1) and that is also this gradient's top
+       stop, so there is no seam where the rect ends. The two bands drift by
+       different amounts against the descent, which is what gives the fall
+       its depth. -->
+  <g class="sky-high" aria-hidden="true">
+    <g class="sky-high__far">
+      <g class="night-only">
+        <!-- Highest band. Only the narrow-screen framing, where the scene is a
+             shallow pinned strip, reaches this far up — but there it is the
+             first thing you see, so it cannot be empty. -->
+        <circle class="star" cx="300"  cy="-3720" r="2.1" fill="var(--star)" />
+        <circle class="star" cx="880"  cy="-3480" r="1.5" fill="var(--star)" />
+        <circle class="star" cx="1480" cy="-3660" r="2.3" fill="var(--star)" />
+        <circle class="star" cx="2040" cy="-3400" r="1.6" fill="var(--star)" />
+        <circle class="star" cx="620"  cy="-3060" r="1.8" fill="var(--star)" />
+        <circle class="star" cx="1240" cy="-2900" r="2.4" fill="var(--star)" />
+        <circle class="star" cx="1820" cy="-3120" r="1.4" fill="var(--star)" />
+        <circle class="star" cx="2280" cy="-2760" r="1.9" fill="var(--star)" />
+        <circle class="star" cx="140"  cy="-2560" r="1.5" fill="var(--star)" />
+        <circle class="star" cx="1020" cy="-2480" r="2.0" fill="var(--star)" />
+        <circle class="star" cx="1660" cy="-2620" r="1.3" fill="var(--star)" />
+
+        <circle class="star" cx="180"  cy="-2120" r="1.9" fill="var(--star)" />
+        <circle class="star" cx="520"  cy="-1960" r="1.3" fill="var(--star)" />
+        <circle class="star" cx="880"  cy="-2210" r="2.4" fill="var(--star)" />
+        <circle class="star" cx="1240" cy="-2020" r="1.5" fill="var(--star)" />
+        <circle class="star" cx="1600" cy="-2180" r="2.0" fill="var(--star)" />
+        <circle class="star" cx="1960" cy="-1940" r="1.4" fill="var(--star)" />
+        <circle class="star" cx="2320" cy="-2100" r="1.8" fill="var(--star)" />
+        <circle class="star" cx="340"  cy="-1620" r="2.2" fill="var(--star)" />
+        <circle class="star" cx="760"  cy="-1480" r="1.4" fill="var(--star)" />
+        <circle class="star" cx="1120" cy="-1700" r="1.7" fill="var(--star)" />
+        <circle class="star" cx="1480" cy="-1520" r="2.5" fill="var(--star)" />
+        <circle class="star" cx="1840" cy="-1660" r="1.3" fill="var(--star)" />
+        <circle class="star" cx="2260" cy="-1560" r="1.9" fill="var(--star)" />
+        <circle class="star" cx="120"  cy="-1180" r="1.6" fill="var(--star)" />
+        <circle class="star" cx="560"  cy="-1040" r="2.1" fill="var(--star)" />
+        <circle class="star" cx="980"  cy="-1240" r="1.4" fill="var(--star)" />
+        <circle class="star" cx="1380" cy="-1080" r="1.8" fill="var(--star)" />
+        <circle class="star" cx="1760" cy="-1220" r="2.3" fill="var(--star)" />
+        <circle class="star" cx="2180" cy="-1120" r="1.5" fill="var(--star)" />
+        <circle class="star" cx="420"  cy="-760"  r="1.7" fill="var(--star)" />
+        <circle class="star" cx="900"  cy="-640"  r="1.3" fill="var(--star)" />
+        <circle class="star" cx="1320" cy="-800"  r="2.0" fill="var(--star)" />
+        <circle class="star" cx="1700" cy="-680"  r="1.5" fill="var(--star)" />
+        <circle class="star" cx="2080" cy="-780"  r="1.8" fill="var(--star)" />
+      </g>
+
+      <!-- Thin cirrus, far enough up to read as altitude rather than weather -->
+      <g class="day-only" fill="var(--cloud)" opacity=".55">
+        <ellipse cx="600"  cy="-2040" rx="300" ry="26" />
+        <ellipse cx="1700" cy="-1880" rx="360" ry="30" />
+        <ellipse cx="1080" cy="-1560" rx="280" ry="22" />
+        <ellipse cx="2100" cy="-1300" rx="240" ry="24" />
+      </g>
+    </g>
+
+    <g class="sky-high__near">
+      <!-- Heavier cloud that the camera passes close to on the way down -->
+      <g class="day-only" fill="var(--cloud)">
+        <ellipse cx="420"  cy="-1420" rx="260" ry="72" />
+        <ellipse cx="560"  cy="-1470" rx="180" ry="56" />
+        <ellipse cx="1520" cy="-1120" rx="300" ry="84" />
+        <ellipse cx="1360" cy="-1170" rx="200" ry="62" />
+        <ellipse cx="980"  cy="-880"  rx="240" ry="66" />
+        <ellipse cx="1120" cy="-920"  rx="160" ry="48" />
+      </g>
+
+      <!-- A skein of birds, crossing the frame as you fall past them -->
+      <g class="day-only sky-high__birds" fill="none" stroke="var(--hill-far)"
+         stroke-width="4" stroke-linecap="round" opacity=".7">
+        <path d="M900 -1760 q14 -12 28 0 q14 -12 28 0" />
+        <path d="M980 -1710 q11 -10 22 0 q11 -10 22 0" />
+        <path d="M1046 -1782 q9 -8 18 0 q9 -8 18 0" />
+      </g>
+
+      <!-- One shooting star, timed to the descent rather than looping -->
+      <g class="night-only">
+        <path class="sky-high__shoot" d="M1560 -1880 l150 84" stroke="var(--star)"
+              stroke-width="2.6" stroke-linecap="round" fill="none" />
+      </g>
+    </g>
+  </g>
+
   <g class="night-only">
     <circle class="star" cx="140"  cy="120" r="2.2" fill="var(--star)" />
     <circle class="star" cx="300"  cy="230" r="1.5" fill="var(--star)" />

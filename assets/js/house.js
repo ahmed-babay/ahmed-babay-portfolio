@@ -139,6 +139,10 @@
 
   var cam = null, want = null;
 
+  /* True only while the arrival is flying the camera. Everything else that
+     writes to the camera or the parallax stands down for the duration. */
+  var flying = false;
+
   function paint(b) {
     svg.setAttribute('viewBox',
       b.x.toFixed(2) + ' ' + b.y.toFixed(2) + ' ' + b.w.toFixed(2) + ' ' + b.h.toFixed(2));
@@ -186,7 +190,7 @@
   var ticking = false;
 
   function onScroll() {
-    if (ticking) return;
+    if (flying || ticking) return;
     ticking = true;
     requestAnimationFrame(function () {
       ticking = false;
@@ -205,7 +209,7 @@
   }
 
   function loop() {
-    if (want) {
+    if (want && !flying) {
       if (!cam) cam = want;
       var e = 0.16;
       cam = {
@@ -307,7 +311,7 @@
   if (!reduce && window.matchMedia('(hover: hover)').matches) {
     var praf = 0;
     window.addEventListener('pointermove', function (e) {
-      if (praf) return;
+      if (praf || flying) return;
       praf = requestAnimationFrame(function () {
         praf = 0;
         var r = world.getBoundingClientRect();
@@ -328,6 +332,7 @@
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function () {
       measure();
+      if (flying) return;
       var r = resolve(window.scrollY);
       want = cam = r.box;
       paint(cam);
@@ -347,26 +352,201 @@
   var pctEl = $('[data-boot-pct]');
   var lines = $$('[data-boot-line]');
 
-  function start() {
-    measure();
+  /* ------------------------------------------------------------------------
+     The arrival.
 
-    var first = (location.hash || '').replace('#', '');
-    if (ROOMS[first] && first !== 'exterior') jump(first, true);
+     Rather than cutting straight to the front path, the camera starts parked
+     in open sky above the roof and falls to it. It is the same camera and the
+     same viewBox the scrollbar drives — the flight just borrows it for two
+     seconds before handing it over, so there is no second scene and nothing
+     to load.
+     ------------------------------------------------------------------------ */
 
-    var r = resolve(window.scrollY);
-    cam = want = r.box;
+  var DIVE_MS = 2300;
+  var CUT_MS  = 360;
+
+  /* Where the fall begins: the exterior framing, pulled back a little and
+     lifted clear of the roof, so there is nothing in frame but sky. */
+  function skyBox(base) {
+    var zoom = 1.18;
+    var w = base.w * zoom;
+    var h = base.h * zoom;
+
+    return {
+      x: base.x - (w - base.w) / 2,
+      y: base.y - (h - base.h) / 2 - base.h * 1.26,
+      w: w,
+      h: h
+    };
+  }
+
+  /* Barely moves for the first fifth — the sky is still being revealed under
+     the boot screen — then accelerates, then brakes long rather than stopping
+     dead. The tail is deliberately slower than a plain cubic so the last few
+     hundred units feel like weight settling. */
+  function diveEase(t) {
+    return t < 0.5
+      ? 4 * t * t * t
+      : 1 - Math.pow(-2 * t + 2, 3.4) / 2;
+  }
+
+  var dived = 0;
+
+  function setDive(v) {
+    dived = v;
+    world.style.setProperty('--dive', v.toFixed(4));
+  }
+
+  function dive(base, done, nearly) {
+    var from = skyBox(base);
+    var cutBox  = null;
+    var cutT0   = 0;
+    var cutDive = 0;
+    var cutSway = 0;
+    var t0 = null;
+    var announced = false;
+    var sway = 0;
+
+    flying = true;
+    document.documentElement.classList.add('is-diving', 'is-airborne');
+
+    cam = want = from;
     paint(cam);
-    setRoom(r.room);
+    setDive(0);
 
-    if (boot) boot.classList.add('is-done');
-    if (!reduce) loop();
+    /* Any deliberate input means "get on with it". The camera still travels
+       the rest of the way rather than snapping, because a hard cut reads as
+       the page having broken. */
+    function cut() {
+      if (cutBox || !flying) return;
+      /* Freeze where the flight actually is — position, parallax and drift —
+         so the shortcut continues from here instead of rewinding. */
+      cutBox  = cam;
+      cutDive = dived;
+      cutSway = sway;
+      cutT0   = performance.now();
+    }
 
+    var CUTS = ['wheel', 'touchstart', 'pointerdown', 'keydown'];
+    CUTS.forEach(function (ev) {
+      window.addEventListener(ev, cut, { passive: true });
+    });
+
+    /* Hand the page back its chrome and its reveals while the camera is still
+       braking, so the headline is wiping in as the house settles. */
+    function arrive() {
+      document.documentElement.classList.remove('is-airborne');
+      nearly();
+    }
+
+    function finish() {
+      if (!announced) { announced = true; arrive(); }
+      flying = false;
+      CUTS.forEach(function (ev) { window.removeEventListener(ev, cut); });
+      document.documentElement.classList.remove('is-diving', 'is-airborne');
+      svg.style.setProperty('--px', '0px');
+      svg.style.setProperty('--py', '0px');
+      setDive(1);
+      done();
+    }
+
+    requestAnimationFrame(function step(now) {
+      if (t0 === null) t0 = now;
+
+      var box, e;
+
+      if (cutBox) {
+        e = smooth(clamp01((now - cutT0) / CUT_MS));
+        box = lerpBox(cutBox, base, e);
+        /* Carry the parallax on from where it was, not from zero. */
+        dived = cutDive + (1 - cutDive) * e;
+        sway  = cutSway * (1 - e);
+      } else {
+        var p = clamp01((now - t0) / DIVE_MS);
+        e = diveEase(p);
+        box = lerpBox(from, base, e);
+        dived = e;
+        /* A breath of sideways drift that unwinds into the landing, on the
+           same channel the pointer parallax uses once the scene is live. */
+        sway = Math.sin(p * Math.PI) * 15 * (1 - p);
+      }
+
+      cam = want = box;
+      paint(cam);
+      setDive(dived);
+      svg.style.setProperty('--px', sway.toFixed(2) + 'px');
+
+      if (!announced && dived >= 0.82) { announced = true; arrive(); }
+
+      if (e >= 1) { finish(); return; }
+      requestAnimationFrame(step);
+    });
+  }
+
+  function lockScroll() {
+    try { history.scrollRestoration = 'manual'; } catch (e) { /* file:// */ }
+    window.scrollTo(0, 0);
+    document.documentElement.classList.add('is-locked');
+  }
+
+  function unlockScroll() {
+    document.documentElement.classList.remove('is-locked');
+    try { history.scrollRestoration = 'auto'; } catch (e) { /* file:// */ }
+  }
+
+  /* Panels in, headlines wiped, measurements refreshed. */
+  function settle(delay) {
     setTimeout(function () {
       document.documentElement.classList.add('is-live');
       $$('.mask-lines').forEach(function (m) { m.classList.add('is-in'); });
       measure();
       onScroll();
-    }, 360);
+    }, delay);
+  }
+
+  function start() {
+    measure();
+
+    var first = (location.hash || '').replace('#', '');
+    var deep  = !!(ROOMS[first] && first !== 'exterior');
+    if (deep) jump(first, true);
+
+    var r = resolve(window.scrollY);
+    setRoom(r.room);
+
+    if (boot) boot.classList.add('is-done');
+
+    /* A deep link asked to be somewhere specific — do not fly them to the
+       front door first. Reduced motion sits the flight out entirely. */
+    if (reduce || deep) {
+      setDive(1);
+      cam = want = r.box;
+      paint(cam);
+      if (!reduce) loop();
+      settle(360);
+      return;
+    }
+
+    /* Park at the top before working out where we are flying to — otherwise a
+       restored scroll position would aim the landing at the wrong room. */
+    lockScroll();
+    measure();
+
+    var target = resolve(window.scrollY);
+    setRoom(target.room);
+
+    dive(target.box, function () {
+      unlockScroll();
+      cam = want = resolve(window.scrollY).box;
+      paint(cam);
+      loop();
+      /* settle() ran mid-flight, when onScroll was still standing down, and
+         showing the panels changed their heights. Re-measure now it is over. */
+      measure();
+      onScroll();
+    }, function () {
+      settle(0);
+    });
   }
 
   if (boot && !reduce) {

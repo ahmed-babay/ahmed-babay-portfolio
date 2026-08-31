@@ -249,6 +249,57 @@
   50%      { opacity: var(--star-op); }
 }
 
+/* --------------------------------------------------------------------------
+   4b. The arrival — falling out of the sky onto the front path
+
+   house.js parks the camera high above the roof, then flies it down to the
+   exterior framing. --dive runs 0 (up in the sky) to 1 (landed) for the whole
+   of that move, and is left at 1 afterwards, so everything below rests in its
+   landed position whenever the flight does not run at all.
+   -------------------------------------------------------------------------- */
+
+/* Parallax. The near band travels further against the camera than the far
+   band, which is the whole reason the fall reads as depth rather than as a
+   picture sliding upward. */
+.sky-high__far  { transform: translateY(calc((1 - var(--dive, 1)) * 90px)); }
+.sky-high__near { transform: translateY(calc((1 - var(--dive, 1)) * 320px)); }
+
+.sky-high__birds { animation: skein 9s linear infinite; }
+
+@keyframes skein {
+  from { transform: translateX(-120px); }
+  to   { transform: translateX(760px); }
+}
+
+/* Fires once, on the way down, rather than looping in a sky nobody is looking
+   at. Scoped to the flight so it cannot go off mid-scroll later. */
+.sky-high__shoot { opacity: 0; }
+
+html.is-diving .sky-high__shoot {
+  animation: shoot 1.5s cubic-bezier(0.3, 0, 0.2, 1) 0.5s both;
+}
+
+@keyframes shoot {
+  0%   { opacity: 0; transform: translate(-260px, -150px); }
+  22%  { opacity: calc(var(--star-op) * 0.95); }
+  100% { opacity: 0; transform: translate(320px, 184px); }
+}
+
+/* The scene's transform channel is normally an easing follow for the pointer
+   parallax. During the fall it is driven every frame, so the lag has to go. */
+html.is-diving .world__svg { transition: none; }
+
+/* Nothing scrolls until the camera has landed. */
+html.is-locked,
+html.is-locked body { overflow: hidden; }
+
+/* The vignette opens up as you drop out of the empty sky into the scene. */
+html.is-diving .world::after { opacity: calc((.24 + var(--night-op) * .36) * (0.45 + var(--dive, 1) * 0.55)); }
+
+@media (prefers-reduced-motion: reduce) {
+  .sky-high__birds, html.is-diving .sky-high__shoot { animation: none; }
+}
+
 /* fill-box, or the scale() pivots on the centre of the whole world and the
    puffs sail off across the sky instead of leaving the chimney. */
 .smoke {
@@ -1324,4 +1375,39 @@ html:not(.js) .panel {
   transform: none;
   max-width: var(--measure);
   margin: 0 auto;
+}
+
+
+/* --------------------------------------------------------------------------
+   11. Camera states
+
+   is-diving   — the arrival is flying the camera in from the sky.
+   is-travelling — a floor-plan click is zooming into a room.
+
+   Both are set by house.js only, and only while a flight is actually running.
+   -------------------------------------------------------------------------- */
+
+/* Nothing but sky while you are still in the air. The reading column, the HUD
+   and the compass all belong to the house, so they arrive with it. Opacity
+   rather than display: the acts must keep their heights or the camera would
+   have nothing to measure on landing.
+
+   is-airborne is dropped before is-diving is — the chrome has to be back on
+   screen while the camera is still braking, or the headline would do its
+   masked wipe behind an invisible column and simply appear afterwards. */
+.hud, .compass, .acts, .stages { transition: opacity .75s var(--ease); }
+
+html.is-airborne .hud,
+html.is-airborne .compass,
+html.is-airborne .acts,
+html.is-airborne .stages {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Arriving text waits out the zoom, so the room is shown and then read —
+   not both at once. */
+html.is-travelling .panel {
+  opacity: 0;
+  transform: translateY(26px);
 }
