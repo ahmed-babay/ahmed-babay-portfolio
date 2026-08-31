@@ -1403,6 +1403,10 @@ html.is-airborne .acts,
 html.is-airborne .stages {
   opacity: 0;
   pointer-events: none;
+  /* One-directional. Transitioning *into* hidden means the column is painted
+     and then visibly fades away; it has to be gone on the first frame and
+     only animate on the way back. */
+  transition: none;
 }
 
 /* Arriving text waits out the zoom, so the room is shown and then read —

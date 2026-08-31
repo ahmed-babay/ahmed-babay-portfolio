@@ -49,6 +49,34 @@
       document.documentElement.dataset.theme = 'dark';
     }
   })();
+
+  // The arrival flies the camera in from the sky, and nothing but sky should
+  // be on screen while it does. house.js sets this too, but not until it runs
+  // — by which time the column has already been painted once and would be
+  // seen blinking out. Decided here so it is true from the very first frame.
+  (function () {
+    var root = document.documentElement;
+
+    try {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      // A deep link to a room skips the arrival, so it must not hide anything.
+      // This list has to agree with ROOMS in house.js, or the column could be
+      // hidden by a flight that then never runs to un-hide it.
+      var hash = (window.location.hash || '').replace('#', '');
+      var deep = ' house hall studio office kitchen attic living yard mail ';
+      if (hash && deep.indexOf(' ' + hash + ' ') > -1) return;
+
+      root.classList.add('is-airborne');
+
+      // Failsafe: never leave the page invisible if house.js does not arrive.
+      window.setTimeout(function () {
+        root.classList.remove('is-airborne');
+      }, 9000);
+    } catch (e) {
+      root.classList.remove('is-airborne');
+    }
+  })();
 </script>
 
 <script type="application/ld+json">
