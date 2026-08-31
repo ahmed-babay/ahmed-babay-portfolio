@@ -270,20 +270,103 @@
      do the same ordinary thing — scroll to a section.
      ------------------------------------------------------------------------ */
 
+  var JUMP_MS = 950;
+  var travelRaf = 0;
+
+  /* Interpolating a viewBox linearly looks wrong across a large zoom: the
+     move appears to race at the start and crawl at the end, because what the
+     eye reads is the *rate of change of scale*, not of width. Stepping the
+     size geometrically holds that rate constant, and putting the centre on
+     the same clock keeps the destination anchored, so it reads as flying into
+     the room rather than sliding across to it. */
+  function zoomBox(a, b, t) {
+    var ratio = b.w / a.w;
+    var s = Math.pow(ratio, t);
+
+    var w = a.w * s;
+    var h = a.h * s;
+
+    var acx = a.x + a.w / 2, acy = a.y + a.h / 2;
+    var bcx = b.x + b.w / 2, bcy = b.y + b.h / 2;
+
+    /* Same curve for the pan. Without this the camera finishes travelling
+       before it finishes zooming, and the last half is a flat push-in. */
+    var u = Math.abs(ratio - 1) < 1e-4 ? t : (s - 1) / (ratio - 1);
+
+    var cx = acx + (bcx - acx) * u;
+    var cy = acy + (bcy - acy) * u;
+
+    return { x: cx - w / 2, y: cy - h / 2, w: w, h: h };
+  }
+
+  /* Smootherstep — eases in and out harder than smooth(), which is what makes
+     the push-in feel deliberate rather than mechanical. */
+  function smoother(t) { return t * t * t * (t * (6 * t - 15) + 10); }
+
+  function travel(from, to, ms) {
+    if (travelRaf) cancelAnimationFrame(travelRaf);
+
+    flying = true;
+    document.documentElement.classList.add('is-travelling');
+
+    var t0 = null;
+
+    function land() {
+      if (!travelRaf && t0 !== null) return;
+      travelRaf = 0;
+      flying = false;
+      document.documentElement.classList.remove('is-travelling');
+      window.removeEventListener('wheel', land);
+      window.removeEventListener('touchstart', land);
+
+      cam = want = to;
+      paint(cam);
+      /* Revealing the panel changes the act's height. */
+      measure();
+      onScroll();
+    }
+
+    /* Reaching for the scrollbar mid-zoom means you want control back. */
+    window.addEventListener('wheel', land, { passive: true });
+    window.addEventListener('touchstart', land, { passive: true });
+
+    travelRaf = requestAnimationFrame(function step(now) {
+      if (t0 === null) t0 = now;
+      if (!flying) return;
+
+      var e = clamp01((now - t0) / ms);
+      cam = want = zoomBox(from, to, smoother(e));
+      paint(cam);
+
+      if (e >= 1) { land(); return; }
+      travelRaf = requestAnimationFrame(step);
+    });
+  }
+
+  /* A floor-plan click scrolls straight to the section — so none of the rooms
+     in between are ever built or drawn — but the camera zooms in rather than
+     cutting, so you can see which part of the house you are being taken to.
+     The panel is held back until it lands: the room is shown, then read. */
   function jump(room, instant) {
     var act = acts.filter(function (a) { return a.room === room; })[0];
     if (!act) return;
     measure();
 
-    /* Instant, so none of the rooms in between are ever built or drawn, and
-       the camera is placed rather than animated — a click that replays a
-       fly-in reads as the room re-rendering itself. */
+    var from = cam;
+
     window.scrollTo({ top: act.top + 2, left: 0, behavior: 'instant' });
-    onScroll();
 
     var r = resolve(window.scrollY);
-    cam = want = r.box;
-    paint(cam);
+    setRoom(r.room);
+
+    if (instant || reduce || !from) {
+      cam = want = r.box;
+      paint(cam);
+      onScroll();
+      return;
+    }
+
+    travel(from, r.box, JUMP_MS);
   }
 
   window.houseGo = jump;
