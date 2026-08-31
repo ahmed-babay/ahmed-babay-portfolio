@@ -357,7 +357,6 @@
       <rect x="1268" y="256" width="52" height="36" rx="3" fill="var(--wood)" />
       <rect x="1268" y="268" width="52" height="4" fill="var(--wood-2)" />
       <!-- attic light pool -->
-      <ellipse cx="1020" cy="292" rx="230" ry="30" fill="var(--pool)" />
     </g>
 
     <!-- Floor slabs ---------------------------------------------------------->
@@ -415,11 +414,13 @@
       <rect x="940" y="516" width="14" height="60" rx="6" fill="var(--metal)" />
       <rect x="920" y="480" width="52" height="42" rx="10" fill="var(--fabric)" />
       <rect x="912" y="566" width="70" height="10" rx="5" fill="var(--metal-2)" />
-      <!-- desk lamp -->
+      <!-- desk lamp: shade flares downward, and it stands on the desk rather
+           than floating above it -->
       <g>
-        <rect x="670" y="500" width="6" height="38" fill="var(--metal)" />
-        <path d="M660 494 h34 l-8 14 h-18 Z" fill="var(--metal-2)" />
-        <ellipse cx="677" cy="560" rx="88" ry="34" fill="var(--pool)" />
+        <rect x="662" y="530" width="18" height="6" rx="2" fill="var(--metal-2)" />
+        <rect x="668" y="498" width="6"  height="32" fill="var(--metal)" />
+        <path d="M660 498 h22 l-5 -14 h-12 Z" fill="var(--metal-2)" />
+        <circle cx="671" cy="496" r="2.6" fill="var(--lamp)" opacity="var(--night-op)" />
       </g>
       <!-- plant -->
       <rect x="1030" y="562" width="30" height="34" rx="4" fill="var(--wood)" />
@@ -428,7 +429,6 @@
         <ellipse cx="1052" cy="544" rx="11" ry="22" transform="rotate(18 1052 544)" />
         <ellipse cx="1045" cy="534" rx="9"  ry="18" />
       </g>
-      <ellipse cx="856" cy="600" rx="200" ry="26" fill="var(--pool)" />
       <polygon class="shaft" points="700,318 780,318 860,596 640,596" fill="url(#g-shaft)" />
     </g>
 
@@ -487,7 +487,6 @@
         <rect x="1362" y="495" width="12" height="3" /><rect x="1362" y="535" width="12" height="3" />
         <rect x="1362" y="573" width="12" height="3" />
       </g>
-      <ellipse cx="1230" cy="600" rx="140" ry="24" fill="var(--pool)" />
       <polygon class="shaft" points="1180,318 1250,318 1320,596 1130,596" fill="url(#g-shaft)" />
     </g>
 
@@ -530,7 +529,6 @@
       <rect x="682" y="889" width="7" height="42" fill="var(--wood)" />
       <rect x="734" y="889" width="7" height="42" fill="var(--wood)" />
       <rect x="646" y="962" width="86" height="16" rx="4" fill="var(--fabric)" opacity=".7" />
-      <ellipse cx="720" cy="946" rx="94" ry="24" fill="var(--pool)" />
       <!-- pendant light -->
       <line x1="720" y1="662" x2="720" y2="710" stroke="var(--metal)" stroke-width="3" />
       <path d="M704 710 h32 l-8 16 h-16 Z" fill="var(--metal-2)" />
@@ -596,7 +594,6 @@
         <ellipse cx="1132" cy="928" rx="10" ry="20" transform="rotate(-24 1132 928)" />
         <ellipse cx="1148" cy="924" rx="9"  ry="22" transform="rotate(20 1148 924)" />
       </g>
-      <ellipse cx="1000" cy="958" rx="150" ry="24" fill="var(--pool)" />
       <polygon class="shaft" points="900,664 990,664 1060,930 830,930" fill="url(#g-shaft)" />
     </g>
 
@@ -656,7 +653,6 @@
         <circle cx="1244" cy="726" r="6" fill="var(--lamp)" opacity="var(--night-op)" />
       </g>
       <ellipse class="halo" cx="1244" cy="800" rx="86" ry="110" fill="url(#g-lamp)" />
-      <ellipse cx="1290" cy="956" rx="120" ry="22" fill="var(--pool)" />
       <polygon class="shaft" points="1250,664 1340,664 1396,930 1200,930" fill="url(#g-shaft)" />
     </g>
 
