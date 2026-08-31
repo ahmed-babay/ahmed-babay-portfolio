@@ -270,7 +270,7 @@
      do the same ordinary thing — scroll to a section.
      ------------------------------------------------------------------------ */
 
-  var JUMP_MS = 950;
+  var JUMP_MS = 640;
   var travelRaf = 0;
 
   /* Interpolating a viewBox linearly looks wrong across a large zoom: the
@@ -303,19 +303,26 @@
      the push-in feel deliberate rather than mechanical. */
   function smoother(t) { return t * t * t * (t * (6 * t - 15) + 10); }
 
-  function travel(from, to, ms) {
+  function travel(from, to, ms, fromRoom, toRoom) {
     if (travelRaf) cancelAnimationFrame(travelRaf);
 
     flying = true;
     document.documentElement.classList.add('is-travelling');
 
     var t0 = null;
+    var freed = false;
+
+    function free() {
+      if (freed) return;
+      freed = true;
+      document.documentElement.classList.remove('is-travelling');
+    }
 
     function land() {
       if (!travelRaf && t0 !== null) return;
       travelRaf = 0;
       flying = false;
-      document.documentElement.classList.remove('is-travelling');
+      free();
       window.removeEventListener('wheel', land);
       window.removeEventListener('touchstart', land);
 
@@ -335,8 +342,23 @@
       if (!flying) return;
 
       var e = clamp01((now - t0) / ms);
-      cam = want = zoomBox(from, to, smoother(e));
+      var k = smoother(e);
+
+      cam = want = zoomBox(from, to, k);
       paint(cam);
+
+      /* The interiors normally cross-dissolve on the scrollbar, and onScroll
+         is standing down for the duration — so drive them from here instead.
+         Without this the stage only appears once the camera has stopped, and
+         the zoom you just sat through was of a cutaway you were never meant
+         to be looking at. */
+      window.dispatchEvent(new CustomEvent('roomtravel', {
+        detail: { from: fromRoom, to: toRoom, blend: k }
+      }));
+
+      /* The panel comes back before the camera has finished settling, so the
+         room resolves and reads as one move rather than two. */
+      if (!freed && e >= 0.5) free();
 
       if (e >= 1) { land(); return; }
       travelRaf = requestAnimationFrame(step);
@@ -353,20 +375,21 @@
     measure();
 
     var from = cam;
+    var fromRoom = current;
 
     window.scrollTo({ top: act.top + 2, left: 0, behavior: 'instant' });
 
     var r = resolve(window.scrollY);
     setRoom(r.room);
 
-    if (instant || reduce || !from) {
+    if (instant || reduce || !from || fromRoom === r.room) {
       cam = want = r.box;
       paint(cam);
       onScroll();
       return;
     }
 
-    travel(from, r.box, JUMP_MS);
+    travel(from, r.box, JUMP_MS, fromRoom, r.room);
   }
 
   window.houseGo = jump;
